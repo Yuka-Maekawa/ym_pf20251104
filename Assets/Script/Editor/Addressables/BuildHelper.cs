@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class BuildHelper
 {
-    public enum BuildType
-    {
-        Develop,
-        Release,
-    }
-
     private static readonly string _scenePath = "Assets/_Res/Scene/Test/TestScene.unity";
+    private static readonly string _dateTimeFormat = "yyyyMMddHHmm";
 
     /// <summary>
     /// リリースROM作成
@@ -18,7 +13,7 @@ public class BuildHelper
     [MenuItem("MyProject/Build/Rom/Release", priority = 10)]
     public static void BuildRelease()
     {
-        Build(BuildOptions.None, BuildType.Release);
+        Build(BuildOptions.None);
 
         SetBuildSettings(true, false, false, true, false);
         SetPlayerSettingLoggingAll(StackTraceLogType.ScriptOnly);
@@ -30,7 +25,7 @@ public class BuildHelper
     [MenuItem("MyProject/Build/Rom/Development(Default)", priority = 11)]
     public static void BuildDevelopment()
     {
-        Build(BuildOptions.Development, BuildType.Develop);
+        Build(BuildOptions.Development);
     }
 
     /// <summary>
@@ -39,7 +34,7 @@ public class BuildHelper
     [MenuItem("MyProject/Build/Rom/Development(Deep Profiling)", priority = 12)]
     public static void BuildDevelopmentDeepProfiling()
     {
-        Build(BuildOptions.Development | BuildOptions.EnableDeepProfilingSupport, BuildType.Develop);
+        Build(BuildOptions.Development | BuildOptions.EnableDeepProfilingSupport);
     }
 
     /// <summary>
@@ -48,17 +43,15 @@ public class BuildHelper
     [MenuItem("MyProject/Build/Rom/Development(Script Debugging)", priority = 13)]
     public static void BuildDevelopmentScriptDebugging()
     {
-        Build(BuildOptions.Development | BuildOptions.AllowDebugging, BuildType.Develop);
+        Build(BuildOptions.Development | BuildOptions.AllowDebugging);
     }
 
     /// <summary>
     /// ビルド
     /// </summary>
     /// <param name="buildOption">Unityプロジェクトのビルドオプション</param>
-    /// <param name="buildType">ビルドのタイプ</param>
-    public static void Build(BuildOptions buildOption, BuildType buildType)
+    public static void Build(BuildOptions buildOption)
     {
-        var dateTimeStr = System.DateTime.Now.ToString("yyyyMMddHHmm");
         var isDevelopment = (buildOption & BuildOptions.Development) > 0;
 
         // ビルドの設定
@@ -88,19 +81,16 @@ public class BuildHelper
     /// <returns>出力パス文字列</returns>
     public static string CreateRomPath(bool isDevelopment)
     {
-        var dateTimeStr = System.DateTime.Now.ToString("yyyyMMddHHmm");
-
-        var romDir = "Builds/";
-
         var buildType = isDevelopment ? "Development" : "Release";
 
-        romDir += buildType;
+        var romDir = $"Builds/{buildType}";
 
         if (System.IO.File.Exists(romDir) == false)
         {
             System.IO.Directory.CreateDirectory(romDir);
         }
 
+        var dateTimeStr = System.DateTime.Now.ToString(_dateTimeFormat);
         return $"{romDir}/Portfolio_{dateTimeStr}_{buildType}.exe";
     }
 
