@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad1051d299582fa43a332587f832628a, type: 3}
+  m_Name: LineupSpecialSuperRare
+  m_EditorClassIdentifier: 
+  Table:
+  - Id: 1
+    Name: "\u30B1\u30FC\u30AD"
+    Probability: 20
+  - Id: 2
+    Name: "\u30AF\u30C3\u30AD\u30FC"
+    Probability: 20
+  - Id: 3
+    Name: "\u3088\u3046\u304B\u3093"
+    Probability: 20
+  - Id: 4
+    Name: "\u304F\u305A\u3082\u3061"
+    Probability: 20
+  - Id: 5
+    Name: "\u30D7\u30EA\u30F3"
+    Probability: 20
