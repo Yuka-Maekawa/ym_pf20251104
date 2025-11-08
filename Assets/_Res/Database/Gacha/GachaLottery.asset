@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: GachaLottery
   m_EditorClassIdentifier: 
   Table:
-  - Name: Rare
+  - Rarity: 0
     Probability: 82
-  - Name: SuperRare
+  - Rarity: 1
     Probability: 15
-  - Name: SpecialSuperRare
+  - Rarity: 2
     Probability: 3

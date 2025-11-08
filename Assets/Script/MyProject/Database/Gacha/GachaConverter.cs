@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using MyProject.Gacha.Lottery;
+using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -19,7 +21,7 @@ namespace MyProject.Database.Gacha
         private enum Lottery
         {
             SkipCharacter = 0,
-            Name,
+            Rarity,
             Probability
         }
 
@@ -108,7 +110,7 @@ namespace MyProject.Database.Gacha
                 var line = csvLine[i];
 
                 var data = new LotteryInfo();
-                data.Name = line[(int)Lottery.Name];
+                data.Rarity = (GachaRarityLottery.Rarity)Enum.Parse(typeof(GachaRarityLottery.Rarity), line[(int)Lottery.Rarity]);
 
                 if (float.TryParse(line[(int)Lottery.Probability], out float probability))
                 {

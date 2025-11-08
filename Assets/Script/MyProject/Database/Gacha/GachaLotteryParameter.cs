@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyProject.Gacha.Lottery;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace MyProject.Database.Gacha
     [Serializable]
     public class LotteryInfo
     {
-        public string Name = string.Empty;
+        public GachaRarityLottery.Rarity Rarity = GachaRarityLottery.Rarity.Rare;
         public float Probability = 0f;
     }
 }
