@@ -1,5 +1,5 @@
 using UnityEngine;
-using MyProject.Gacha.Lottery;
+using MyProject.Common.Lottery;
 
 public class TestGacha : MonoBehaviour
 {
