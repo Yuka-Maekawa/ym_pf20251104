@@ -1,4 +1,4 @@
-using MyProject.Database.Gacha;
+ï»¿using MyProject.Database.Gacha;
 
 namespace MyProject.Gacha.Lottery
 {
@@ -15,9 +15,9 @@ namespace MyProject.Gacha.Lottery
         private GachaLotteryParameter _lotteryParameter = null;
 
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
-        /// <param name="lotteryParameter">ƒŒƒAƒŠƒeƒB‚Ìî•ñ</param>
+        /// <param name="lotteryParameter">ãƒ¬ã‚¢ãƒªãƒ†ã‚£ã®æƒ…å ±</param>
         public void Initialize(GachaLotteryParameter lotteryParameter)
         {
             base.Initialize();
@@ -26,7 +26,7 @@ namespace MyProject.Gacha.Lottery
         }
 
         /// <summary>
-        /// ‰ğ•ú
+        /// è§£æ”¾
         /// </summary>
         public override void Release()
         {
@@ -35,9 +35,9 @@ namespace MyProject.Gacha.Lottery
         }
 
         /// <summary>
-        /// ’Š‘IŒ‹‰Ê‚ğæ“¾
+        /// æŠ½é¸çµæœã‚’å–å¾—
         /// </summary>
-        /// <returns>’Š‘IŒ‹‰Ê</returns>
+        /// <returns>æŠ½é¸çµæœ</returns>
         public Rarity GetLotteryResult()
         {
             var table = _lotteryParameter.Table;
@@ -55,10 +55,10 @@ namespace MyProject.Gacha.Lottery
         }
 
         /// <summary>
-        /// ƒŒƒAƒŠƒeƒB‚ğæ“¾
+        /// ãƒ¬ã‚¢ãƒªãƒ†ã‚£ã‚’å–å¾—
         /// </summary>
-        /// <param name="index">ƒf[ƒ^ƒx[ƒX‚ÌƒCƒ“ƒfƒbƒNƒX’l</param>
-        /// <returns>ƒŒƒAƒŠƒeƒB</returns>
+        /// <param name="index">ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹å€¤</param>
+        /// <returns>ãƒ¬ã‚¢ãƒªãƒ†ã‚£</returns>
         private Rarity GetRarity(int index)
         {
             return index switch

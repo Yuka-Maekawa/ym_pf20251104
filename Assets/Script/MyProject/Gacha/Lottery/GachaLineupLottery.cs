@@ -1,4 +1,4 @@
-using MyProject.Database.Gacha;
+ï»¿using MyProject.Database.Gacha;
 
 namespace MyProject.Gacha.Lottery
 {
@@ -7,9 +7,9 @@ namespace MyProject.Gacha.Lottery
         private GachaLineupParameter _lineupParameter = null;
 
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
-        /// <param name="lotteryParameter">ƒŒƒAƒŠƒeƒB‚Ìî•ñ</param>
+        /// <param name="lotteryParameter">ãƒ¬ã‚¢ãƒªãƒ†ã‚£ã®æƒ…å ±</param>
         public void Initialize(GachaLineupParameter lineupParameter)
         {
             base.Initialize();
@@ -18,7 +18,7 @@ namespace MyProject.Gacha.Lottery
         }
 
         /// <summary>
-        /// ‰ğ•ú
+        /// è§£æ”¾
         /// </summary>
         public override void Release()
         {
@@ -27,9 +27,9 @@ namespace MyProject.Gacha.Lottery
         }
 
         /// <summary>
-        /// ’Š‘IŒ‹‰Ê‚ğæ“¾
+        /// æŠ½é¸çµæœã‚’å–å¾—
         /// </summary>
-        /// <returns>’Š‘IŒ‹‰Ê</returns>
+        /// <returns>æŠ½é¸çµæœ</returns>
         public int GetLotteryResult()
         {
             var table = _lineupParameter.Table;
