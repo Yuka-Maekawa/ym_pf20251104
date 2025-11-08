@@ -4,15 +4,17 @@ using UnityEngine;
 
 namespace MyProject.Database.Gacha
 {
-    public class LotteryParameter : ScriptableObject
+    public class GachaLineupParameter : ScriptableObject
     {
-        public List<LotteryInfo> Table = null;
+        public List<LineupInfo> Table = null;
     }
 
     [Serializable]
-    public class LotteryInfo
+    public class LineupInfo
     {
+        public int Id = 0;
         public string Name = string.Empty;
         public float Probability = 0f;
     }
 }
+
