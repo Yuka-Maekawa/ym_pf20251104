@@ -6,6 +6,16 @@ namespace MyProject.Database.Gacha
 {
     public class GachaConverter : CsvConverterBase
     {
+        private enum GachaInfoIndex
+        {
+            SkipCharacter = 0,
+            Id,
+            LotteryFilePath,
+            RareLineupFilePath,
+            SuperRareLineupFilePath,
+            SpecialSuperRareLineupFilePath
+        }
+
         private enum Lottery
         {
             SkipCharacter = 0,
@@ -31,6 +41,7 @@ namespace MyProject.Database.Gacha
         public static void ConvertGachaData()
         {
             var csvLoader = new CsvLoader();
+            GachaInfoConverter(csvLoader, $"GachaInfo");
             LotteryConverter(csvLoader, $"GachaLottery");
             LineupConverter(csvLoader, "LineupRare");
             LineupConverter(csvLoader, "LineupSuperRare");
@@ -41,7 +52,45 @@ namespace MyProject.Database.Gacha
         /// 抽選データを取得
         /// </summary>
         /// <param name="csvLoader">CsvLoader</param>
-        /// <param name="filePath">ファイルパス</param>
+        /// <param name="fileName">ファイル名</param>
+        private static void GachaInfoConverter(CsvLoader csvLoader, string fileName)
+        {
+            var csvLine = csvLoader.LoadCSV(GetCsvFilePath(fileName));
+
+            if (csvLine == null) { return; }
+
+            int count = csvLine.Count;
+
+            var database = ScriptableObject.CreateInstance<GachaInfoParameter>();
+            database.Table = new List<GachaInfo>(count);
+
+            for (int i = 0; i < count; ++i)
+            {
+                var line = csvLine[i];
+
+                var data = new GachaInfo();
+
+                if (int.TryParse(line[(int)GachaInfoIndex.Id], out int id))
+                {
+                    data.Id = id;
+                }
+
+                data.LotteryFilePath = line[(int)GachaInfoIndex.LotteryFilePath];
+
+                data.RareLineupFilePath = line[(int)GachaInfoIndex.RareLineupFilePath];
+                data.SuperRareLineupFilePath = line[(int)GachaInfoIndex.SuperRareLineupFilePath];
+                data.SpecialSuperRareLineupFilePath= line[(int)GachaInfoIndex.SpecialSuperRareLineupFilePath];
+
+                database.Table.Add(data);
+            }
+
+            CreateScriptableObject<GachaInfoParameter>(database, GetScriptableObjectFilePath(fileName));
+        }
+
+        /// <summary>
+        /// 抽選データを取得
+        /// </summary>
+        /// <param name="csvLoader">CsvLoader</param>
         /// <param name="fileName">ファイル名</param>
         private static void LotteryConverter(CsvLoader csvLoader, string fileName)
         {
