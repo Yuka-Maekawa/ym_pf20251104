@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MyProject.Gacha.Lottery
+namespace MyProject.Common.Lottery
 {
     public class WeightRandomLottery
     {
