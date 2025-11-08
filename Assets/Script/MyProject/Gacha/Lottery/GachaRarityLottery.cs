@@ -6,9 +6,9 @@ namespace MyProject.Gacha.Lottery
     {
         public enum Rarity
         {
-            R = 0,
-            SR,
-            SSR
+            Rare = 0,
+            SuperRare,
+            SpecialSuperRare
         }
 
 
@@ -63,10 +63,10 @@ namespace MyProject.Gacha.Lottery
         {
             return index switch
             {
-                0 => Rarity.R,
-                1 => Rarity.SR,
-                2 => Rarity.SSR,
-                _ => Rarity.R,
+                0 => Rarity.Rare,
+                1 => Rarity.SuperRare,
+                2 => Rarity.SpecialSuperRare,
+                _ => Rarity.Rare,
             };
         }
     }
