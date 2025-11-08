@@ -55,7 +55,7 @@ public class TestLotteryGacha : MonoBehaviour
 
         for(int i = 0; i < 10000; ++i )
         {
-            var result = _wightRandomLottery.LotteryResults(weight);
+            var result = _wightRandomLottery.GetLotteryResults(weight);
             Debug.Log($"抽選結果:{_testLineup[result].Name}");
         }
     }

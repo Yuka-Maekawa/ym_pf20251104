@@ -9,7 +9,7 @@ namespace MyProject.Common.Lottery
         /// </summary>
         /// <param name="weights">重み</param>
         /// <returns>抽選結果</returns>
-        public int LotteryResults(float[] weights)
+        public int GetLotteryResults(float[] weights)
         {
             if(weights == null ) { return -1; }
 

@@ -1,20 +1,57 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using MyProject.Database.Gacha;
+using MyProject.Gacha.Lottery;
+using MyProject.Systems.Resource;
+using UnityEngine;
 
 public class TestGacha : MonoBehaviour
 {
+    private static readonly string _lotteryFilePath = "Database/Gacha/GachaLottery";
+
+    private GachaRarityLottery _rarityLottery = null;
+    private GachaLotteryParameter _lotteryParameters = null;
+
     /// <summary>
-    /// 初期化の終了確認
+    /// 初期化
     /// </summary>
-    public void TestInitialize()
+    public void Initialize()
     {
-        Debug.Log("シーンの初期化が終わったよ！");
+        _rarityLottery = new GachaRarityLottery();
+
+        InitializeAsync().Forget();
     }
 
     /// <summary>
-    /// 解放の終了確認
+    /// 初期化(非同期)
     /// </summary>
-    public void TestRelease()
+    public async UniTask InitializeAsync()
     {
-        Debug.Log("シーンの開放が終わったよ！");
+        await ResourceManager.Local.LoadAssetAsync<GachaLotteryParameter>(_lotteryFilePath);
+        _lotteryParameters = ResourceManager.Local.GetAsset<GachaLotteryParameter>(_lotteryFilePath);
+
+        _rarityLottery.Initialize(_lotteryParameters);
+
+        for(int i = 0; i < 1000; ++i)
+        {
+            LotteryRarity();
+        }
+    }
+
+    /// <summary>
+    /// 解放
+    /// </summary>
+    public void Release()
+    {
+        _lotteryParameters = null;
+        ResourceManager.Local.UnloadAssets(_lotteryFilePath);
+    }
+
+    /// <summary>
+    /// レアリティの抽選結果
+    /// </summary>
+    private void LotteryRarity()
+    {
+        var rarity = _rarityLottery.GetLotteryResult();
+        Debug.Log($"{rarity}");
     }
 }
