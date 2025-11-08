@@ -15,8 +15,28 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: cb3164ca805b910488a58ee3c16fbf1f
   m_SerializeEntries:
+  - m_GUID: 4fdac0d7d203bcb449047aa80a4b82c6
+    m_Address: Database/Gacha/GachaLottery
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cc09b3c3b66e40f4ea8218d381019329
     m_Address: UI/Test/AddressablesTest
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ee65186051b495b47aa878022fe208fa
+    m_Address: Database/Gacha/LineupRare
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: efc0bf3b477521e4aa34efee40553c84
+    m_Address: Database/Gacha/LineupSuperRare
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f6c0c68c9b77c1345b7bcd5f71050496
+    m_Address: Database/Gacha/LineupSpecialSuperRare
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
