@@ -51,7 +51,7 @@ namespace MyProject.Database.Gacha
 
             int count = csvLine.Count;
 
-            var database = ScriptableObject.CreateInstance<LotteryParameter>();
+            var database = ScriptableObject.CreateInstance<GachaLotteryParameter>();
             database.Table = new List<LotteryInfo>(count);
 
             for (int i = 0; i < count; ++i)
@@ -69,7 +69,7 @@ namespace MyProject.Database.Gacha
                 database.Table.Add(data);
             }
 
-            CreateScriptableObject<LotteryParameter>(database, GetScriptableObjectFilePath(fileName));
+            CreateScriptableObject<GachaLotteryParameter>(database, GetScriptableObjectFilePath(fileName));
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace MyProject.Database.Gacha
 
             int count = csvLine.Count;
 
-            var database = ScriptableObject.CreateInstance<LineupParameter>();
+            var database = ScriptableObject.CreateInstance<GachaLineupParameter>();
             database.Table = new List<LineupInfo>(csvLine.Count);
 
             for (int i = 0; i < count; ++i)
@@ -109,7 +109,7 @@ namespace MyProject.Database.Gacha
                 database.Table.Add(data);
             }
 
-            CreateScriptableObject<LineupParameter>(database, GetScriptableObjectFilePath(fileName));
+            CreateScriptableObject<GachaLineupParameter>(database, GetScriptableObjectFilePath(fileName));
         }
 
         /// <summary>
