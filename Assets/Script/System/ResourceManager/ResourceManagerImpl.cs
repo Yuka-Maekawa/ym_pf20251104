@@ -78,9 +78,14 @@ namespace MyProject.Systems.Resource
             /// <returns>アセット</returns>
             public T GetAsset<T>(string path) where T : Object
             {
+                return GetAsset<T>(path);
+            }
+
+            public T GetAsset<T>(string path, Transform parent) where T : Object
+            {
                 if (_loadedAssets.ContainsKey(path))
                 {
-                    return Instantiate((T)_loadedAssets[path].Result);
+                    return Instantiate((T)_loadedAssets[path].Result, parent);
                 }
 
                 return null;

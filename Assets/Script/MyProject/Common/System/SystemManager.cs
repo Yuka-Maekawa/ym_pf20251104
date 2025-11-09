@@ -29,6 +29,17 @@ public class SystemManager
 
         await _gameSystem.InitializeAsync();
 
+        EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+
         _isInitialized = true;
+    }
+
+    private static void OnPlayModeStateChanged(PlayModeStateChange state)
+    {
+        // 再生終了直前に呼ばれる
+        if (state == PlayModeStateChange.ExitingPlayMode)
+        {
+            _gameSystem.Release();
+        }
     }
 }

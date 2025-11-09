@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 59fb57249adac184dadcb6e250041f3e
+    m_Address: Common/MyProjectEventSystem
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 700c1179b6c13b34291f33e89b44b6ff
     m_Address: Database/Gacha/GachaInfo
     m_ReadOnly: 0
