@@ -16,11 +16,6 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : SingletonMonoBe
         }
     }
 
-    private void OnDestroy()
-    {
-        DestroyInstance();
-    }
-
     protected virtual UniTask Initialize() => UniTask.CompletedTask;
 
     /// <summary>

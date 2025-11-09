@@ -9,8 +9,10 @@ namespace MyProject.Systems.Resource
         private static readonly System.Type _gameObjectType = typeof(GameObject);
         private static readonly System.Type _monoBehaviourType = typeof(MonoBehaviour);
 
+        private Loader _globalInstance = null;
         private Loader _localInstance = null;
 
+        public static Loader Global=> Instance._globalInstance;
         public static Loader Local => Instance._localInstance;
 
         /// <summary>
@@ -20,6 +22,7 @@ namespace MyProject.Systems.Resource
         {
             await Addressables.InitializeAsync(true).ToUniTask();
 
+            _globalInstance = new Loader();
             _localInstance = new Loader();
         }
 
@@ -30,6 +33,9 @@ namespace MyProject.Systems.Resource
         {
             _localInstance.Release();
             _localInstance = null;
+
+            _globalInstance.Release();
+            _globalInstance = null;
         }
 
         /// <summary>
