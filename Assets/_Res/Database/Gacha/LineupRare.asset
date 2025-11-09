@@ -14,17 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Table:
   - Id: 1
-    Name: "\u3075\u304C\u3057"
+    Name: "\u30B0\u30DF"
     Probability: 20
+    ThumbnailName: Gumi
   - Id: 2
-    Name: "\u306D\u308A\u3082\u3061"
+    Name: "\u30DD\u30C3\u30D7\u30B3\u30FC\u30F3"
     Probability: 20
+    ThumbnailName: Popcorn
   - Id: 3
-    Name: "\u30E9\u30E0\u30CD"
+    Name: "\u30AB\u30C3\u30D7\u30B1\u30FC\u30AD"
     Probability: 20
+    ThumbnailName: Cupcake
   - Id: 4
-    Name: "\u3042\u3081"
+    Name: "\u7518\u7D0D\u8C46"
     Probability: 20
+    ThumbnailName: Amanattou
   - Id: 5
-    Name: "\u30AC\u30E0"
+    Name: "\u30C1\u30E7\u30B3\u30EC\u30FC\u30C8"
     Probability: 20
+    ThumbnailName: Chocolate
