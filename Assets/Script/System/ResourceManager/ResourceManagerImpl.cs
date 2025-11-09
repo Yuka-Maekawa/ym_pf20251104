@@ -26,7 +26,6 @@ namespace MyProject.Systems.Resource
             /// </summary>
             public void Release()
             {
-                UnloadAllAssets();
             }
 
             /// <summary>
