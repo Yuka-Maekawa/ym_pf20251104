@@ -1,4 +1,6 @@
-﻿using MyProject.Database.Gacha;
+﻿using Cysharp.Threading.Tasks;
+using MyProject.Database.Gacha;
+using MyProject.Systems.Resource;
 
 namespace MyProject.Gacha.Lottery
 {
@@ -11,18 +13,22 @@ namespace MyProject.Gacha.Lottery
             SpecialSuperRare
         }
 
-
         private GachaLotteryParameter _lotteryParameter = null;
 
+        private string _filePath = string.Empty;
+
         /// <summary>
-        /// 初期化
+        /// 初期化(非同期)
         /// </summary>
-        /// <param name="lotteryParameter">レアリティの情報</param>
-        public void Initialize(GachaLotteryParameter lotteryParameter)
+        /// <param name="filePath">ファイルパス</param>
+        public async UniTask InitializeAsync(string filePath)
         {
             base.Initialize();
 
-            _lotteryParameter = lotteryParameter;
+            _filePath = filePath;
+
+            await ResourceManager.Local.LoadAssetAsync<GachaLotteryParameter>(_filePath);
+            _lotteryParameter = ResourceManager.Local.GetAsset<GachaLotteryParameter>(_filePath);
         }
 
         /// <summary>
@@ -31,6 +37,10 @@ namespace MyProject.Gacha.Lottery
         public override void Release()
         {
             _lotteryParameter = null;
+
+            ResourceManager.Local.UnloadAssets(_filePath);
+            _filePath = string.Empty;
+
             base.Release();
         }
 
