@@ -16,6 +16,7 @@ public class GameSystem : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         
         await ResourceManager.CreateInstance(this.gameObject);
+        await SceneLoader.CreateInstance(this.gameObject);
         await ResourceManager.Global.LoadAssetAsync<GameObject>(_eventSystemFilePath);
         _eventSystemObj = ResourceManager.Global.GetAsset<GameObject>(_eventSystemFilePath, this.gameObject.transform);
     }

@@ -30,6 +30,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: af60a73c414ba0749adbf4caaec9590e
+    m_Address: Assets/_Res/Scene/Gacha/GachaOneceResult.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cc09b3c3b66e40f4ea8218d381019329
     m_Address: UI/Test/AddressablesTest
     m_ReadOnly: 0
@@ -47,6 +52,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f6c0c68c9b77c1345b7bcd5f71050496
     m_Address: Database/Gacha/LineupSpecialSuperRare
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff831a53a1a0ac44784c75695e1d6529
+    m_Address: Scene/Gacha/GachaMenu
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

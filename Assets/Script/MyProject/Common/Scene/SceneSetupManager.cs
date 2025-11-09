@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SceneManager : MonoBehaviour
+public class SceneSetupManager : MonoBehaviour
 {
     [SerializeField] private UnityEvent OnInitialize = null;
     [SerializeField] private UnityEvent OnRelease = null;
