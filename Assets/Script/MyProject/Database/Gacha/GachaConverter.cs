@@ -30,7 +30,8 @@ namespace MyProject.Database.Gacha
             SkipCharacter = 0,
             Id,
             Name,
-            Probability
+            Probability,
+            ThumbnailName
         }
 
         private static readonly string _gachaFilePath = $"{_databaseFilePath}Gacha/";
@@ -156,6 +157,8 @@ namespace MyProject.Database.Gacha
                 {
                     data.Probability = probability;
                 }
+
+                data.ThumbnailName = line[(int)Lineup.ThumbnailName];
 
                 database.Table.Add(data);
             }

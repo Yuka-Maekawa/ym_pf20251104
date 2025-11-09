@@ -14,17 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Table:
   - Id: 1
-    Name: "\u30B1\u30FC\u30AD"
-    Probability: 20
+    Name: "\u30BF\u30EB\u30C8"
+    Probability: 25
+    ThumbnailName: Tarte
   - Id: 2
-    Name: "\u30AF\u30C3\u30AD\u30FC"
-    Probability: 20
+    Name: "\u30D1\u30D5\u30A7"
+    Probability: 25
+    ThumbnailName: Pafe
   - Id: 3
-    Name: "\u3088\u3046\u304B\u3093"
-    Probability: 20
+    Name: "\u30CF\u30CB\u30FC\u30C8\u30FC\u30B9\u30C8"
+    Probability: 25
+    ThumbnailName: HoneyToast
   - Id: 4
-    Name: "\u304F\u305A\u3082\u3061"
-    Probability: 20
-  - Id: 5
-    Name: "\u30D7\u30EA\u30F3"
-    Probability: 20
+    Name: "\u30B1\u30FC\u30AD"
+    Probability: 25
+    ThumbnailName: Shortcake

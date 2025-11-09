@@ -15,8 +15,43 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: cb3164ca805b910488a58ee3c16fbf1f
   m_SerializeEntries:
+  - m_GUID: 079d09a5edce69546bfeac432d4d9b93
+    m_Address: UI/Gacha/GachaResult/Texture/Tarte
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0b11c19543b53bf489675ce97dccacd4
+    m_Address: UI/Gacha/GachaResult/Texture/Mitsumame
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 100790196932eb749a661b5555e131fc
+    m_Address: UI/Gacha/GachaResult/Texture/Pafe
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 281c65790814b0449a3c4a5256291452
+    m_Address: UI/Gacha/GachaResult/Texture/Oshiruko
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 42889bc586a100e4580a821ce7e209ee
+    m_Address: UI/Gacha/GachaResult/Texture/Amanattou
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 474c87bf628ed9d42ab91566b597c97f
+    m_Address: UI/Gacha/GachaResult/Texture/Doughnut
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4fdac0d7d203bcb449047aa80a4b82c6
     m_Address: Database/Gacha/GachaLottery
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 506f54cddc6668449afb4c87d65f975d
+    m_Address: UI/Gacha/GachaResult/Texture/Gumi
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -25,8 +60,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6baaa8f0751eebc459b4f5a49d2c56c0
+    m_Address: UI/Gacha/GachaResult/Texture/Popcorn
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 700c1179b6c13b34291f33e89b44b6ff
     m_Address: Database/Gacha/GachaInfo
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 80170b107ec70324d9ff5b6c59a22f4a
+    m_Address: UI/Gacha/GachaResult/Texture/Cupcake
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -35,8 +80,38 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b8a87fb976c3d00458b6b0f3392c0dc8
+    m_Address: UI/Gacha/GachaResult/Item.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba68b5b62afe1db46b53364cf8865484
+    m_Address: UI/Gacha/GachaResult/Texture/HoneyToast
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cc09b3c3b66e40f4ea8218d381019329
     m_Address: UI/Test/AddressablesTest
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d271b4868f61d6942b5dfe9b600d7786
+    m_Address: UI/Gacha/GachaResult/Texture/Icecandy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d493381017f74c94d8ad52710f7ea7ef
+    m_Address: UI/Gacha/GachaResult/Texture/Purin
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d760b2d26485de04daf879f28d82f8da
+    m_Address: UI/Gacha/GachaResult/Texture/Shortcake
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e0827fb1509b1784d8d08731444603d0
+    m_Address: UI/Gacha/GachaResult/Texture/Chocolate
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

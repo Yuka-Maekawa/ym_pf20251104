@@ -15,6 +15,7 @@ namespace MyProject.Database.Gacha
         public int Id = 0;
         public string Name = string.Empty;
         public float Probability = 0f;
+        public string ThumbnailName = string.Empty;
     }
 }
 
