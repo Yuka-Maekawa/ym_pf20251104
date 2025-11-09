@@ -1,22 +1,19 @@
 ﻿using Cysharp.Threading.Tasks;
-using MyProject.Database.Gacha;
 using MyProject.Gacha.Lottery;
-using MyProject.Systems.Resource;
 using UnityEngine;
 
 public class TestGacha : MonoBehaviour
 {
-    private static readonly string _lotteryFilePath = "Database/Gacha/GachaLottery";
+    private static readonly int _useId = 1;
 
-    private GachaRarityLottery _rarityLottery = null;
-    private GachaLotteryParameter _lotteryParameters = null;
+    private GachaLotteryController _gachaLottery = null;
 
     /// <summary>
     /// 初期化
     /// </summary>
     public void Initialize()
     {
-        _rarityLottery = new GachaRarityLottery();
+        _gachaLottery = new GachaLotteryController();
 
         InitializeAsync().Forget();
     }
@@ -26,10 +23,7 @@ public class TestGacha : MonoBehaviour
     /// </summary>
     public async UniTask InitializeAsync()
     {
-        await ResourceManager.Local.LoadAssetAsync<GachaLotteryParameter>(_lotteryFilePath);
-        _lotteryParameters = ResourceManager.Local.GetAsset<GachaLotteryParameter>(_lotteryFilePath);
-
-        _rarityLottery.Initialize(_lotteryParameters);
+        await _gachaLottery.InitializeAsync(_useId);
 
         for(int i = 0; i < 1000; ++i)
         {
@@ -42,16 +36,16 @@ public class TestGacha : MonoBehaviour
     /// </summary>
     public void Release()
     {
-        _lotteryParameters = null;
-        ResourceManager.Local.UnloadAssets(_lotteryFilePath);
+        _gachaLottery?.Release();
+        _gachaLottery = null;
     }
 
     /// <summary>
-    /// レアリティの抽選結果
+    /// 抽選結果
     /// </summary>
     private void LotteryRarity()
     {
-        var rarity = _rarityLottery.GetLotteryResult();
-        Debug.Log($"{rarity}");
+        var data = _gachaLottery.GetLotteryResult();
+        Debug.Log($"{data.Rarity}： {data.Item.Name}");
     }
 }
