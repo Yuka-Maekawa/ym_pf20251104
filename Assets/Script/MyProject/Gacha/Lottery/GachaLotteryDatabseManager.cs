@@ -10,10 +10,12 @@ namespace MyProject.Gacha.Lottery
 
         // データベース
         private GachaInfo _gachaInfo = null;
-        private GachaLotteryParameter _rarityLottery = null;
-        private GachaLineupParameter _rareLineupLottery = null;
-        private GachaLineupParameter _superRareLineupLottery = null;
-        private GachaLineupParameter _specialSuperRareLineupLottery = null;
+        private GachaLineupParameter _rareLineupLotteryParameter = null;
+        private GachaLineupParameter _superRareLineupLotteryParameter = null;
+        private GachaLineupParameter _specialSuperRareLineupLotteryParameter = null;
+
+        private GachaLotteryParameter _rarityLotteryParameter = null;
+        public GachaLotteryParameter RarityLotteryParameter { get { return _rarityLotteryParameter ; } }
 
         /// <summary>
         /// 初期化(非同期)
@@ -33,10 +35,10 @@ namespace MyProject.Gacha.Lottery
 
             await UniTask.WhenAll(lotteryTask, rareTask, superRareTask, specialSuperRareTask);
 
-            _rarityLottery = ResourceManager.Local.GetAsset<GachaLotteryParameter>(_gachaInfo.LotteryFilePath);
-            _rareLineupLottery = ResourceManager.Local.GetAsset<GachaLineupParameter>(_gachaInfo.RareLineupFilePath);
-            _superRareLineupLottery = ResourceManager.Local.GetAsset<GachaLineupParameter>(_gachaInfo.SuperRareLineupFilePath);
-            _specialSuperRareLineupLottery = ResourceManager.Local.GetAsset<GachaLineupParameter>(_gachaInfo.SpecialSuperRareLineupFilePath);
+            _rarityLotteryParameter  = ResourceManager.Local.GetAsset<GachaLotteryParameter>(_gachaInfo.LotteryFilePath);
+            _rareLineupLotteryParameter = ResourceManager.Local.GetAsset<GachaLineupParameter>(_gachaInfo.RareLineupFilePath);
+            _superRareLineupLotteryParameter = ResourceManager.Local.GetAsset<GachaLineupParameter>(_gachaInfo.SuperRareLineupFilePath);
+            _specialSuperRareLineupLotteryParameter = ResourceManager.Local.GetAsset<GachaLineupParameter>(_gachaInfo.SpecialSuperRareLineupFilePath);
         }
 
         /// <summary>
@@ -44,10 +46,10 @@ namespace MyProject.Gacha.Lottery
         /// </summary>
         public void Release()
         {
-            _specialSuperRareLineupLottery = null;
-            _superRareLineupLottery = null;
-            _rareLineupLottery = null;
-            _rarityLottery = null;
+            _specialSuperRareLineupLotteryParameter = null;
+            _superRareLineupLotteryParameter = null;
+            _rareLineupLotteryParameter = null;
+            _rarityLotteryParameter  = null;
 
             ResourceManager.Local.UnloadAssets(_gachaInfo.LotteryFilePath);
             ResourceManager.Local.UnloadAssets(_gachaInfo.RareLineupFilePath);
@@ -87,7 +89,7 @@ namespace MyProject.Gacha.Lottery
         /// <returns>重みの配列</returns>
         public float[] GetGachaLotteryWeights()
         {
-            var table = _rarityLottery.Table;
+            var table = _rarityLotteryParameter .Table;
             int count = table.Count;
 
             var weights = new float[count];
@@ -129,9 +131,9 @@ namespace MyProject.Gacha.Lottery
         {
             return rarity switch
             {
-                GachaRarityLottery.Rarity.Rare => _rareLineupLottery,
-                GachaRarityLottery.Rarity.SuperRare => _superRareLineupLottery,
-                GachaRarityLottery.Rarity.SpecialSuperRare => _specialSuperRareLineupLottery,
+                GachaRarityLottery.Rarity.Rare => _rareLineupLotteryParameter,
+                GachaRarityLottery.Rarity.SuperRare => _superRareLineupLotteryParameter,
+                GachaRarityLottery.Rarity.SpecialSuperRare => _specialSuperRareLineupLotteryParameter,
                 _ => null
             };
         }
