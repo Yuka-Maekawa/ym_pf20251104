@@ -76,7 +76,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: af60a73c414ba0749adbf4caaec9590e
-    m_Address: Assets/_Res/Scene/Gacha/GachaOneceResult.unity
+    m_Address: Scene/Gacha/GachaOneceResult
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

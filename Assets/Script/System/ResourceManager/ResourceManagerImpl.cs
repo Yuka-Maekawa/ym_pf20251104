@@ -78,7 +78,7 @@ namespace MyProject.Systems.Resource
             /// <returns>アセット</returns>
             public T GetAsset<T>(string path) where T : Object
             {
-                return GetAsset<T>(path);
+                return GetAsset<T>(path, null);
             }
 
             public T GetAsset<T>(string path, Transform parent) where T : Object

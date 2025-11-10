@@ -21,7 +21,10 @@ public class SceneSetupManager : MonoBehaviour
         OnInitialize?.Invoke();
     }
 
-    private void OnDestroy()
+    /// <summary>
+    /// 解放処理
+    /// </summary>
+    public void Release()
     {
         OnRelease?.Invoke();
     }
