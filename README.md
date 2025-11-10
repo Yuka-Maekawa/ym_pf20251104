@@ -61,7 +61,6 @@ Assets/
 │ │ ├─ Gacha/
 │ │ └─ Test/
 │ ├─ System/
-│ │ └─ Prefab/
 │ └─ UI/
 │   ├─ Gacha/
 │   │ └─ GachaResult/
@@ -102,8 +101,10 @@ Assets/
 ---
 
 ## 実行方法
-1. Unity 6000.0.62f1 でプロジェクトを開く  
-2. Addressables → Build → New Build → Default Build Script を実行  
+1. Unity 6000.0.62f1 でPortfolioProjectを開く
+2. UnityEditorメニューにある MyProject → Build → Resource → Addressable(○○) を選択
+3. 2.完了後、同様にUnityEditorメニューにある MyProject → Build → ROM → Release を選択
+4.  個人のプロジェクトフォルダ\Builds\Releaseにある「Portfolio_○○_Release」を実行
 
 ---
 
