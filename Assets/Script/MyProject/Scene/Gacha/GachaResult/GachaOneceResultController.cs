@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using MyProject.Common;
 using MyProject.Gacha.Lottery;
 using UnityEngine;
@@ -15,7 +15,10 @@ namespace MyProject.Gacha.Result
             ViewUI
         }
 
+        [SerializeField] private GachaResultUIController _uIController = null;
+
         private static readonly int _useId = 1;
+        private static readonly int _ceateItemNum = 1;
 
         private GachaLotteryController _gachaLottery = null;
         private GachaLotteryController.ItemInfo _item = null;
@@ -23,7 +26,7 @@ namespace MyProject.Gacha.Result
         private StateMachine<State> _stateMachine = null;
 
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
         public void Initialize()
         {
@@ -34,23 +37,27 @@ namespace MyProject.Gacha.Result
 
             _gachaLottery = new GachaLotteryController();
 
+            _uIController.Initialize(_ceateItemNum);
             InitializeAsync().Forget();
         }
 
         /// <summary>
-        /// ‰Šú‰»i”ñ“¯Šúj
+        /// åˆæœŸåŒ–ï¼ˆéåŒæœŸï¼‰
         /// </summary>
         public async UniTask InitializeAsync()
         {
             await _gachaLottery.InitializeAsync(_useId);
+
             _stateMachine.MoveState(State.Lottery);
         }
 
         /// <summary>
-        /// ‰ğ•ú
+        /// è§£æ”¾
         /// </summary>
         public void Release()
         {
+            _uIController.ReleaseAsync().Forget();
+
             _gachaLottery?.Release();
             _gachaLottery = null;
 
@@ -63,32 +70,43 @@ namespace MyProject.Gacha.Result
         }
 
         /// <summary>
-        /// ƒXƒe[ƒgF’Š‘I
+        /// ã‚¹ãƒ†ãƒ¼ãƒˆï¼šæŠ½é¸
         /// </summary>
         private void StateLottery()
         {
             if (_stateMachine.FirstTime)
             {
                 _item = _gachaLottery.GetLotteryResult();
-                Debug.Log($"{_item.Rarity}F {_item.Item.Name}");
+                Debug.Log($"{_item.Rarity}ï¼š {_item.Item.Name}");
                 _stateMachine.MoveState(State.SetupUI);
             }
         }
 
         /// <summary>
-        /// ƒXƒe[ƒgFUI‚Ìİ’è
+        /// ã‚¹ãƒ†ãƒ¼ãƒˆï¼šUIã®è¨­å®š
         /// </summary>
         private void StateSetupUI()
         {
+            if (_stateMachine.FirstTime)
+            {
+                _uIController.SetupItemsAsync(_item, 0).Forget();
+            }
 
+            if (!_uIController.IsMenuItemsSetting())
+            {
+                _stateMachine.MoveState(State.ViewUI);
+            }
         }
 
         /// <summary>
-        /// ƒXƒe[ƒgFUI‚ğ•\¦
+        /// ã‚¹ãƒ†ãƒ¼ãƒˆï¼šUIã‚’è¡¨ç¤º
         /// </summary>
         private void StateViewUI()
         {
-
+            if (_stateMachine.FirstTime)
+            {
+                _uIController.ViewAllItem();
+            }
         }
     }
 }
