@@ -186,7 +186,7 @@ PrefabInstance:
     - target: {fileID: 6097710735260063663, guid: 3d5067e03516079439011c12f32b77ad, type: 3}
       propertyPath: OnRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2021775062}
+      objectReference: {fileID: 2021775063}
     - target: {fileID: 6097710735260063663, guid: 3d5067e03516079439011c12f32b77ad, type: 3}
       propertyPath: OnInitialize.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
@@ -194,7 +194,7 @@ PrefabInstance:
     - target: {fileID: 6097710735260063663, guid: 3d5067e03516079439011c12f32b77ad, type: 3}
       propertyPath: OnInitialize.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2021775062}
+      objectReference: {fileID: 2021775063}
     - target: {fileID: 6097710735260063663, guid: 3d5067e03516079439011c12f32b77ad, type: 3}
       propertyPath: OnRelease.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -213,11 +213,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6097710735260063663, guid: 3d5067e03516079439011c12f32b77ad, type: 3}
       propertyPath: OnRelease.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MyProject.Gacha.Result.GachaMultipleTimesResultController, Assembly-CSharp
+      value: MyProject.Gacha.Result.GachaResultMultipleTimesController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6097710735260063663, guid: 3d5067e03516079439011c12f32b77ad, type: 3}
       propertyPath: OnInitialize.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MyProject.Gacha.Result.GachaMultipleTimesResultController, Assembly-CSharp
+      value: MyProject.Gacha.Result.GachaResultMultipleTimesController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6097710735260063663, guid: 3d5067e03516079439011c12f32b77ad, type: 3}
       propertyPath: OnRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -559,7 +559,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2021775061}
-  - component: {fileID: 2021775062}
+  - component: {fileID: 2021775063}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -582,7 +582,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2021775062
+--- !u!114 &2021775063
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -591,7 +591,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2021775060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9be6b9fdd98e82d45a48d98b87fe1aa0, type: 3}
+  m_Script: {fileID: 11500000, guid: 12f2648846d891d41994ac6834e49b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _uIController: {fileID: 881637085}

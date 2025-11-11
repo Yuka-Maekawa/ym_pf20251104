@@ -4,7 +4,7 @@ using MyProject.Systems.Resource;
 
 namespace MyProject.Gacha.Lottery
 {
-    public class GachaLotteryController
+    public class GachaLotteryControllerBase
     {
         public class ItemInfo
         {
@@ -20,15 +20,15 @@ namespace MyProject.Gacha.Lottery
 
         private static readonly string _gachaInfoFilePath = "Database/Gacha/GachaInfo";
 
-        private GachaInfo _gachaInfo = null;
-        private GachaRarityLottery _rarityLottery = null;
+        protected GachaInfo _gachaInfo = null;
+        protected GachaRarityLottery _defaultRarityLottery = null;
         private GachaLineupLottery _lineupLottery = null;
 
         /// <summary>
         /// 初期化(非同期)
         /// </summary>
         /// <param name="gachaInfoParameterId">GachaInfoParameterのId</param>
-        public async UniTask InitializeAsync(int gachaInfoParameterId)
+        public virtual async UniTask InitializeAsync(int gachaInfoParameterId)
         {
             // 使用するガチャのデータベースの情報まとめ
             await ResourceManager.Local.LoadAssetAsync<GachaInfoParameter>(_gachaInfoFilePath);
@@ -36,8 +36,8 @@ namespace MyProject.Gacha.Lottery
             _gachaInfo = FindGachaInfoById(gachaInfoParameter, gachaInfoParameterId);
 
             // 抽選管理
-            _rarityLottery = new GachaRarityLottery();
-            await _rarityLottery.InitializeAsync(_gachaInfo.LotteryFilePath);
+            _defaultRarityLottery = new GachaRarityLottery();
+            await _defaultRarityLottery.InitializeAsync(_gachaInfo.LotteryFilePath);
 
             _lineupLottery = new GachaLineupLottery();
             await _lineupLottery.InitializeAsync(_gachaInfo);
@@ -46,13 +46,13 @@ namespace MyProject.Gacha.Lottery
         /// <summary>
         /// 解放
         /// </summary>
-        public void Release()
+        public virtual void Release()
         {
             _lineupLottery?.Release();
             _lineupLottery = null;
 
-            _rarityLottery?.Release();
-            _rarityLottery = null;
+            _defaultRarityLottery?.Release();
+            _defaultRarityLottery = null;
 
             _gachaInfo = null;
             ResourceManager.Local.UnloadAssets(_gachaInfoFilePath);
@@ -84,12 +84,22 @@ namespace MyProject.Gacha.Lottery
         /// <summary>
         /// 抽選結果を取得
         /// </summary>
-        public ItemInfo GetLotteryResult()
+        public ItemInfo GetDefaultLotteryResult()
         {
             // 1. レアリティ抽選
-            var rarity = _rarityLottery.GetLotteryResult();
+            var rarity = _defaultRarityLottery.GetLotteryResult();
 
             // 2. アイテム抽選
+            return GetLotteryLineupItem(rarity);
+        }
+
+        /// <summary>
+        /// ラインナップの抽選結果を取得
+        /// </summary>
+        /// <param name="rarity">GachaRarityLottery.Rarity</param>
+        /// <returns>抽選結果</returns>
+        protected ItemInfo GetLotteryLineupItem(GachaRarityLottery.Rarity rarity)
+        {
             var item = _lineupLottery.GetLotteryResult(rarity);
 
             return new ItemInfo(rarity, item);

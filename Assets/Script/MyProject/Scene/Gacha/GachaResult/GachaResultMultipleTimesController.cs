@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace MyProject.Gacha.Result
 {
-    public class GachaResultController : GachaResultControllerBase
+    public class GachaResultMultipleTimesController : GachaResultControllerBase
     {
-        private GachaLotteryControllerBase _gachaLottery = null;
+        private GachaLotteryMultipleTimeController _gachaLottery = null;
 
         /// <summary>
         /// 初期化
@@ -15,7 +15,7 @@ namespace MyProject.Gacha.Result
         {
             base.Initialize();
 
-            _gachaLottery = new GachaLotteryControllerBase();
+            _gachaLottery = new GachaLotteryMultipleTimeController();
 
             _stateMachine.AddState(State.Lottery, StateLottery);
             _stateMachine.AddState(State.ViewUI, StateViewUI);
@@ -55,11 +55,16 @@ namespace MyProject.Gacha.Result
         {
             if (_stateMachine.FirstTime)
             {
-                for (int i = 0; i < _playCount; ++i)
+                int count = (int)_playCount - 1;
+                for (int i = 0; i < count; ++i)
                 {
                     _items[i] = _gachaLottery.GetDefaultLotteryResult();
                     Debug.Log($"{_items[i].Rarity}： {_items[i].Item.Name}");
                 }
+
+                var item = _gachaLottery.GetLastLotteryResult();
+                _items[_playCount - 1] = item;
+                Debug.Log($"{item.Rarity}： {item.Item.Name}");
 
                 StateLotteryAsync().Forget();
             }
