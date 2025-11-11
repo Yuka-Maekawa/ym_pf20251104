@@ -93,5 +93,22 @@ namespace MyProject.Gacha.Result
                 _uIController.ViewAllItem();
             }
         }
+
+        /// <summary>
+        /// メニューに戻る
+        /// </summary>
+        public void PushBackSceneButton()
+        {
+            PushBackSceneButtonAsync().Forget();
+        }
+
+        /// <summary>
+        /// メニューに戻る（非同期）
+        /// </summary>
+        private async UniTask PushBackSceneButtonAsync()
+        {
+            await _uIController.ReleaseAsync();
+            await NextSceneAsync();
+        }
     }
 }
