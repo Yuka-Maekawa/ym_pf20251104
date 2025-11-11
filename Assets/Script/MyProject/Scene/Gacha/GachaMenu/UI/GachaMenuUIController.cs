@@ -1,7 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using MyProject.Systems.Resource;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace MyProject.Gacha.Menu
 {
@@ -27,6 +26,14 @@ namespace MyProject.Gacha.Menu
         public void PushOneGachaButton()
         {
             NextSceneAsync("Scene/Gacha/GachaOneceResult").Forget();
+        }
+
+        /// <summary>
+        /// 10回ボタンを押下
+        /// </summary>
+        public void PushTenTimeGachaButton()
+        {
+            NextSceneAsync("Scene/Gacha/GachaTenTimeResult").Forget();
         }
 
         /// <summary>
