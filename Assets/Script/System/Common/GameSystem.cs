@@ -2,7 +2,7 @@
 using MyProject.Systems.Resource;
 using UnityEngine;
 
-public class GameSystem : MonoBehaviour
+public class GameSystem : SingletonMonoBehaviour<GameSystem>
 {
     private static readonly string _eventSystemFilePath = "Common/MyProjectEventSystem";
 
@@ -14,7 +14,7 @@ public class GameSystem : MonoBehaviour
     public async UniTask InitializeAsync()
     {
         DontDestroyOnLoad(this.gameObject);
-        
+
         await ResourceManager.CreateInstance(this.gameObject);
         await SceneLoader.CreateInstance(this.gameObject);
         await ResourceManager.Global.LoadAssetAsync<GameObject>(_eventSystemFilePath);
@@ -24,7 +24,7 @@ public class GameSystem : MonoBehaviour
     /// <summary>
     /// 解放
     /// </summary>
-    public void Release()
+    protected override void Release()
     {
         Destroy(_eventSystemObj);
         ResourceManager.DestroyInstance();
