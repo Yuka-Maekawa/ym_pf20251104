@@ -42,6 +42,15 @@ namespace MyProject.Gacha.Result
         }
 
         /// <summary>
+        /// ウィンドウが開くアニメーションが終了しているか？
+        /// </summary>
+        /// <returns>true: 終了, false: 再生中</returns>
+        public bool IsEndOpenAnimation()
+        {
+            return _resultMenu.IsEndOpenAnimation();
+        }
+
+        /// <summary>
         /// アイテム設定
         /// </summary>
         public async UniTask SetupItemsAsync(GachaLotteryControllerBase.ItemInfo itemInfo, int index)
