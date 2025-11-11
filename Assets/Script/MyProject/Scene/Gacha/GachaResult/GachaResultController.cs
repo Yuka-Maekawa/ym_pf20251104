@@ -5,25 +5,23 @@ using UnityEngine;
 
 namespace MyProject.Gacha.Result
 {
-    public class GachaOneceResultController : MonoBehaviour
+    public class GachaResultController : MonoBehaviour
     {
         protected enum State
         {
             Idle,
             Lottery,
-            SetupUI,
             ViewUI
         }
 
-        [SerializeField] private GachaResultUIController _uIController = null;
+        [SerializeField] protected GachaResultUIController _uIController = null;
+        [SerializeField] protected uint _useId = 1;
+        [SerializeField] protected uint _playCount = 1;
 
-        private static readonly int _useId = 1;
-        private static readonly int _ceateItemNum = 1;
+        protected GachaLotteryController _gachaLottery = null;
+        private GachaLotteryController.ItemInfo[] _items = null;
 
-        private GachaLotteryController _gachaLottery = null;
-        private GachaLotteryController.ItemInfo _item = null;
-
-        private StateMachine<State> _stateMachine = null;
+        protected StateMachine<State> _stateMachine = null;
 
         /// <summary>
         /// 初期化
@@ -31,13 +29,14 @@ namespace MyProject.Gacha.Result
         public void Initialize()
         {
             _stateMachine = new StateMachine<State>(State.Idle);
+            _gachaLottery = new GachaLotteryController();
+            _items = new GachaLotteryController.ItemInfo[_playCount];
+
+            _uIController.Initialize((int)_playCount);
+
             _stateMachine.AddState(State.Lottery, StateLottery);
-            _stateMachine.AddState(State.SetupUI, StateSetupUI);
             _stateMachine.AddState(State.ViewUI, StateViewUI);
 
-            _gachaLottery = new GachaLotteryController();
-
-            _uIController.Initialize(_ceateItemNum);
             InitializeAsync().Forget();
         }
 
@@ -46,8 +45,7 @@ namespace MyProject.Gacha.Result
         /// </summary>
         public async UniTask InitializeAsync()
         {
-            await _gachaLottery.InitializeAsync(_useId);
-
+            await _gachaLottery.InitializeAsync((int)_useId);
             _stateMachine.MoveState(State.Lottery);
         }
 
@@ -76,26 +74,27 @@ namespace MyProject.Gacha.Result
         {
             if (_stateMachine.FirstTime)
             {
-                _item = _gachaLottery.GetLotteryResult();
-                Debug.Log($"{_item.Rarity}： {_item.Item.Name}");
-                _stateMachine.MoveState(State.SetupUI);
+                for (int i = 0; i < _playCount; ++i)
+                {
+                    _items[i] = _gachaLottery.GetLotteryResult();
+                    Debug.Log($"{_items[i].Rarity}： {_items[i].Item.Name}");
+                }
+
+                StateLotteryAsync().Forget();
             }
         }
 
         /// <summary>
-        /// ステート：UIの設定
+        /// 抽選ステートの非同期処理
         /// </summary>
-        private void StateSetupUI()
+        private async UniTask StateLotteryAsync()
         {
-            if (_stateMachine.FirstTime)
+            for (int i = 0; i < _playCount; ++i)
             {
-                _uIController.SetupItemsAsync(_item, 0).Forget();
+                await _uIController.SetupItemsAsync(_items[i], i);
             }
 
-            if (!_uIController.IsMenuItemsSetting())
-            {
-                _stateMachine.MoveState(State.ViewUI);
-            }
+            _stateMachine.MoveState(State.ViewUI);
         }
 
         /// <summary>
