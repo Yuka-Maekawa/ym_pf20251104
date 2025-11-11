@@ -1,38 +1,16 @@
 ﻿using Cysharp.Threading.Tasks;
-using MyProject.Common;
-using MyProject.Gacha.Lottery;
 using UnityEngine;
 
 namespace MyProject.Gacha.Result
 {
-    public class GachaResultController : MonoBehaviour
+    public class GachaResultController : GachaResultControllerBase
     {
-        protected enum State
-        {
-            Idle,
-            Lottery,
-            ViewUI
-        }
-
-        [SerializeField] protected GachaResultUIController _uIController = null;
-        [SerializeField] protected uint _useId = 1;
-        [SerializeField] protected uint _playCount = 1;
-
-        protected GachaLotteryController _gachaLottery = null;
-        private GachaLotteryController.ItemInfo[] _items = null;
-
-        protected StateMachine<State> _stateMachine = null;
-
         /// <summary>
         /// 初期化
         /// </summary>
-        public void Initialize()
+        public override void Initialize()
         {
-            _stateMachine = new StateMachine<State>(State.Idle);
-            _gachaLottery = new GachaLotteryController();
-            _items = new GachaLotteryController.ItemInfo[_playCount];
-
-            _uIController.Initialize((int)_playCount);
+            base.Initialize();
 
             _stateMachine.AddState(State.Lottery, StateLottery);
             _stateMachine.AddState(State.ViewUI, StateViewUI);
@@ -43,28 +21,23 @@ namespace MyProject.Gacha.Result
         /// <summary>
         /// 初期化（非同期）
         /// </summary>
-        public async UniTask InitializeAsync()
+        public override async UniTask InitializeAsync()
         {
-            await _gachaLottery.InitializeAsync((int)_useId);
+            await _gachaLottery.InitializeAsync((int)_defaultLotteryId);
             _stateMachine.MoveState(State.Lottery);
         }
 
         /// <summary>
         /// 解放
         /// </summary>
-        public void Release()
+        public override void Release()
         {
-            _uIController.ReleaseAsync().Forget();
-
-            _gachaLottery?.Release();
-            _gachaLottery = null;
-
-            _stateMachine = null;
+            base.Release();
         }
 
         public void Update()
         {
-            _stateMachine?.Update();
+            base.UpdateSub();
         }
 
         /// <summary>
