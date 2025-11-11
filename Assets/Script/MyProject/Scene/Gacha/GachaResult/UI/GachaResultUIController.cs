@@ -1,6 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
 using MyProject.Gacha.Lottery;
-using MyProject.Systems.Resource;
 using UnityEngine;
 
 namespace MyProject.Gacha.Result
@@ -44,28 +43,11 @@ namespace MyProject.Gacha.Result
         }
 
         /// <summary>
-        /// 解放
+        /// 全てを表示
         /// </summary>
         public void ViewAllItem()
         {
             _resultMenu.ViewAllItem();
-        }
-
-        /// <summary>
-        /// 単発ボタンを押下
-        /// </summary>
-        public void PushOneGachaButton()
-        {
-            NextSceneAsync("Scene/Gacha/GachaMenu").Forget();
-        }
-
-        /// <summary>
-        /// 次のシーンへ移動
-        /// </summary>
-        /// <param name="nextScenePath">シーンのファイルパス</param>
-        private async UniTask NextSceneAsync(string nextScenePath)
-        {
-            await SceneLoader.SceneLoad.LoadSceneAsync(nextScenePath);
         }
     }
 }

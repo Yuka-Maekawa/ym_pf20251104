@@ -1,6 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using MyProject.Common;
 using MyProject.Gacha.Lottery;
+using MyProject.Systems.Resource;
 using UnityEngine;
 
 namespace MyProject.Gacha.Result
@@ -47,9 +48,6 @@ namespace MyProject.Gacha.Result
         public virtual void Release()
         {
             _items = null;
-
-            _uIController.ReleaseAsync().Forget();
-
             _stateMachine = null;
         }
 
@@ -59,6 +57,15 @@ namespace MyProject.Gacha.Result
         public void UpdateSub()
         {
             _stateMachine?.Update();
+        }
+
+        /// <summary>
+        /// 次のシーンへ移動
+        /// </summary>
+        /// <param name="nextScenePath">シーンのファイルパス</param>
+        protected async UniTask NextSceneAsync()
+        {
+            await SceneLoader.SceneLoad.LoadSceneAsync("Scene/Gacha/GachaMenu");
         }
     }
 }
