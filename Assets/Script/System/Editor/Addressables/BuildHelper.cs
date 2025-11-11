@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BuildHelper
 {
-    private static readonly string _scenePath = "Assets/_Res/Scene/Test/TestScene.unity";
+    private static readonly string _scenePath = "Assets/_Res/Scene/Gacha/GachaMenu.unity";
     private static readonly string _dateTimeFormat = "yyyyMMddHHmm";
 
     /// <summary>

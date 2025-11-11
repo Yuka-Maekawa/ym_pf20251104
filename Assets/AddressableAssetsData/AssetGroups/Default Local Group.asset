@@ -45,6 +45,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4cd9fd1c068dc3a43950709eb67f8df0
+    m_Address: UI/Gacha/GachaResult/Prefab/BackSceneButton
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4fdac0d7d203bcb449047aa80a4b82c6
     m_Address: Database/Gacha/GachaLottery
     m_ReadOnly: 0
@@ -52,6 +57,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 506f54cddc6668449afb4c87d65f975d
     m_Address: UI/Gacha/GachaResult/Texture/Gumi
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 554150c014987cd4eb8bcaacc54bc116
+    m_Address: Scene/Gacha/GachaTenTimeResult
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -70,8 +80,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 78fb918be974b0942bd9bce630762752
+    m_Address: UI/Gacha/GachaResult/Prefab/ResultMenu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 80170b107ec70324d9ff5b6c59a22f4a
     m_Address: UI/Gacha/GachaResult/Texture/Cupcake
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 944df2c2bd2f721469424615cba25e54
+    m_Address: UI/Gacha/GachaResult/Prefab/ResultTenTimeMenu.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -81,7 +101,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b8a87fb976c3d00458b6b0f3392c0dc8
-    m_Address: UI/Gacha/GachaResult/Item.prefab
+    m_Address: UI/Gacha/GachaResult/Item
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
