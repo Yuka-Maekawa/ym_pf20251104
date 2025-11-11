@@ -15,11 +15,10 @@ namespace MyProject.Gacha.Result
         }
 
         [SerializeField] protected GachaResultUIController _uIController = null;
-        [SerializeField] protected uint _defaultLotteryId = 1;
-        [SerializeField] protected uint _playCount = 1;
+        [SerializeField] protected int _defaultLotteryId = 1;
+        [SerializeField] protected int _playCount = 1;
 
-        protected GachaLotteryController _gachaLottery = null;
-        protected GachaLotteryController.ItemInfo[] _items = null;
+        protected GachaLotteryControllerBase.ItemInfo[] _items = null;
 
         protected StateMachine<State> _stateMachine = null;
 
@@ -29,8 +28,7 @@ namespace MyProject.Gacha.Result
         public virtual void Initialize()
         {
             _stateMachine = new StateMachine<State>(State.Idle);
-            _gachaLottery = new GachaLotteryController();
-            _items = new GachaLotteryController.ItemInfo[_playCount];
+            _items = new GachaLotteryControllerBase.ItemInfo[_playCount];
 
             _uIController.Initialize((int)_playCount);
         }
@@ -51,9 +49,6 @@ namespace MyProject.Gacha.Result
             _items = null;
 
             _uIController.ReleaseAsync().Forget();
-
-            _gachaLottery?.Release();
-            _gachaLottery = null;
 
             _stateMachine = null;
         }

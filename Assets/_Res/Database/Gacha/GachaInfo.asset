@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Table:
   - Id: 1
-    LotteryFilePath: Database/Gacha/GachaLottery
+    LotteryFilePath: Database/Gacha/DefaultLottery
+    LastLotteryFilePath: Database/Gacha/LastLottery
     RareLineupFilePath: Database/Gacha/LineupRare
     SuperRareLineupFilePath: Database/Gacha/LineupSuperRare
     SpecialSuperRareLineupFilePath: Database/Gacha/LineupSpecialSuperRare

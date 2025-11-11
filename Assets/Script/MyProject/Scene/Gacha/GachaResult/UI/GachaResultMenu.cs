@@ -66,7 +66,7 @@ namespace MyProject.Gacha.Result
         /// <summary>
         /// アイテム設定
         /// </summary>
-        public async UniTask SetupItemsAsync(GachaLotteryController.ItemInfo itemInfo, int index)
+        public async UniTask SetupItemsAsync(GachaLotteryControllerBase.ItemInfo itemInfo, int index)
         {
             var item = itemInfo.Item;
             await _items[index].SetupItemAsync(_bgColors[(int)itemInfo.Rarity], item.ThumbnailName, item.Name);

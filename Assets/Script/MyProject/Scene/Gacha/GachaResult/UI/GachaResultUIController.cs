@@ -29,7 +29,7 @@ namespace MyProject.Gacha.Result
         /// <summary>
         /// アイテム設定
         /// </summary>
-        public async UniTask SetupItemsAsync(GachaLotteryController.ItemInfo itemInfo, int index)
+        public async UniTask SetupItemsAsync(GachaLotteryControllerBase.ItemInfo itemInfo, int index)
         {
             await _resultMenu.SetupItemsAsync(itemInfo, index);
         }

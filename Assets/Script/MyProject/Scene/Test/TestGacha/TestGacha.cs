@@ -6,14 +6,14 @@ public class TestGacha : MonoBehaviour
 {
     private static readonly int _useId = 1;
 
-    private GachaLotteryController _gachaLottery = null;
+    private GachaLotteryControllerBase _gachaLottery = null;
 
     /// <summary>
     /// 初期化
     /// </summary>
     public void Initialize()
     {
-        _gachaLottery = new GachaLotteryController();
+        _gachaLottery = new GachaLotteryControllerBase();
 
         InitializeAsync().Forget();
     }
@@ -45,7 +45,7 @@ public class TestGacha : MonoBehaviour
     /// </summary>
     private void LotteryRarity()
     {
-        var data = _gachaLottery.GetLotteryResult();
+        var data = _gachaLottery.GetDefaultLotteryResult();
         Debug.Log($"{data.Rarity}： {data.Item.Name}");
     }
 }

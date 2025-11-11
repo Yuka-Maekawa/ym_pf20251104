@@ -100,6 +100,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b2ab266f39b5094a8776ff29bc15b70
+    m_Address: Database/Gacha/LastLottery
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: af60a73c414ba0749adbf4caaec9590e
     m_Address: Scene/Gacha/GachaOneceResult
     m_ReadOnly: 0
@@ -157,6 +162,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f6c0c68c9b77c1345b7bcd5f71050496
     m_Address: Database/Gacha/LineupSpecialSuperRare
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: feb7e84fc802c0e49bcb014e223fbbaa
+    m_Address: Database/Gacha/DefaultLottery
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -13,7 +13,8 @@ namespace MyProject.Database.Gacha
         {
             SkipCharacter = 0,
             Id,
-            LotteryFilePath,
+            DefaultLotteryFilePath,
+            LastLotteryFilePath,
             RareLineupFilePath,
             SuperRareLineupFilePath,
             SpecialSuperRareLineupFilePath
@@ -46,7 +47,8 @@ namespace MyProject.Database.Gacha
         {
             var csvLoader = new CsvLoader();
             GachaInfoConverter(csvLoader, $"GachaInfo");
-            LotteryConverter(csvLoader, $"GachaLottery");
+            LotteryConverter(csvLoader, $"DefaultLottery");
+            LotteryConverter(csvLoader, $"LastLottery");
             LineupConverter(csvLoader, "LineupRare");
             LineupConverter(csvLoader, "LineupSuperRare");
             LineupConverter(csvLoader, "LineupSpecialSuperRare");
@@ -79,7 +81,8 @@ namespace MyProject.Database.Gacha
                     data.Id = id;
                 }
 
-                data.LotteryFilePath = line[(int)GachaInfoIndex.LotteryFilePath];
+                data.LotteryFilePath = line[(int)GachaInfoIndex.DefaultLotteryFilePath];
+                data.LastLotteryFilePath = line[(int)GachaInfoIndex.LastLotteryFilePath];
 
                 data.RareLineupFilePath = line[(int)GachaInfoIndex.RareLineupFilePath];
                 data.SuperRareLineupFilePath = line[(int)GachaInfoIndex.SuperRareLineupFilePath];
