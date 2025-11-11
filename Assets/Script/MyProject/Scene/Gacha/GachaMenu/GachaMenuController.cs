@@ -11,7 +11,6 @@ namespace MyProject.Gacha.Menu
         /// </summary>
         public void Initialize()
         {
-            _uiController.Initialize();
         }
 
         /// <summary>
@@ -19,7 +18,6 @@ namespace MyProject.Gacha.Menu
         /// </summary>
         public void Release()
         {
-            _uiController.Release();
         }
     }
 }

@@ -7,20 +7,6 @@ namespace MyProject.Gacha.Menu
     public class GachaMenuUIController : MonoBehaviour
     {
         /// <summary>
-        /// 初期化
-        /// </summary>
-        public async UniTask Initialize()
-        {
-        }
-
-        /// <summary>
-        /// 解放
-        /// </summary>
-        public void Release()
-        {
-        }
-
-        /// <summary>
         /// 単発ボタンを押下
         /// </summary>
         public void PushOneGachaButton()
