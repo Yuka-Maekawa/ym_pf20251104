@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace MyProject.Database
 {
+#if UNITY_EDITOR
     public class CsvConverterBase
     {
         protected static readonly string _databaseFilePath = "Assets/_Res/Database/";
@@ -34,5 +35,6 @@ namespace MyProject.Database
             Debug.Log($"ScriptableObject '{typeof(T).Name}' を作成しました: {path}");
         }
     }
+#endif
 }
 

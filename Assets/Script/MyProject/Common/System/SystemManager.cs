@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class SystemManager
 {
-    private static readonly string _gameSystemPath = "Assets/_Res/System/Prefab/GameSystem.prefab";
-
-    private static GameSystem _gameSystem = null;
-
     private static bool _isInitialized = false;
     public static bool IsInitialized { get { return _isInitialized; } }
 
@@ -24,22 +20,36 @@ public class SystemManager
     /// </summary>
     private static async UniTask InitializeAsync()
     {
-        var  obj = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(_gameSystemPath));
-        _gameSystem = obj.GetComponent<GameSystem>();
+        await GameSystem.CreateInstance();
 
-        await _gameSystem.InitializeAsync();
+        await GameSystem.Instance.InitializeAsync();
 
+#if UNITY_EDITOR
         EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+#endif
 
         _isInitialized = true;
     }
 
+#if UNITY_EDITOR
     private static void OnPlayModeStateChanged(PlayModeStateChange state)
     {
         // 再生終了直前に呼ばれる
         if (state == PlayModeStateChange.ExitingPlayMode)
         {
-            _gameSystem.Release();
+            GameSystem.DestroyInstance();
         }
     }
+
+#else
+
+    /// <summary>
+    /// ROM終了時の処理
+    /// </summary>
+    private void OnApplicationQuit()
+    {
+        GameSystem.DestroyInstance();
+    }
+#endif
+
 }

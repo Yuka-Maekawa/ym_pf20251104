@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace MyProject.Database.Gacha
 {
+#if UNITY_EDITOR
     public class GachaConverter : CsvConverterBase
     {
         private enum GachaInfoIndex
@@ -82,7 +83,7 @@ namespace MyProject.Database.Gacha
 
                 data.RareLineupFilePath = line[(int)GachaInfoIndex.RareLineupFilePath];
                 data.SuperRareLineupFilePath = line[(int)GachaInfoIndex.SuperRareLineupFilePath];
-                data.SpecialSuperRareLineupFilePath= line[(int)GachaInfoIndex.SpecialSuperRareLineupFilePath];
+                data.SpecialSuperRareLineupFilePath = line[(int)GachaInfoIndex.SpecialSuperRareLineupFilePath];
 
                 database.Table.Add(data);
             }
@@ -129,7 +130,7 @@ namespace MyProject.Database.Gacha
         /// </summary>
         /// <param name="csvLoader">CsvLoader</param>
         /// <param name="fileName">ファイル名</param>
-        private static void LineupConverter(CsvLoader csvLoader,  string fileName)
+        private static void LineupConverter(CsvLoader csvLoader, string fileName)
         {
             var csvLine = csvLoader.LoadCSV(GetCsvFilePath(fileName));
 
@@ -181,9 +182,10 @@ namespace MyProject.Database.Gacha
         /// </summary>
         /// <param name="fileName">ファイル名</param>
         /// <returns>ScriptableObjectのファイルパス</returns>
-        private static string GetScriptableObjectFilePath(string fileName) 
+        private static string GetScriptableObjectFilePath(string fileName)
         {
             return $"{_gachaFilePath}{fileName}{_assetExtension}";
         }
     }
+#endif
 }
