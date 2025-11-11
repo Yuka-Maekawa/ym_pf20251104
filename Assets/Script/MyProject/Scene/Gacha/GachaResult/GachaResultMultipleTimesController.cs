@@ -90,6 +90,7 @@ namespace MyProject.Gacha.Result
         {
             if (_stateMachine.FirstTime)
             {
+                _uIController.Open();
                 _uIController.ViewAllItem();
             }
         }
@@ -107,6 +108,8 @@ namespace MyProject.Gacha.Result
         /// </summary>
         private async UniTask PushBackSceneButtonAsync()
         {
+            _uIController.Close();
+            await UniTask.Yield();
             await _uIController.ReleaseAsync();
             await NextSceneAsync();
         }

@@ -320,9 +320,65 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5862262000888659261, guid: 7d9212879cfb28945b9e4dcc3f2d708b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862262000888659261, guid: 7d9212879cfb28945b9e4dcc3f2d708b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862262000888659261, guid: 7d9212879cfb28945b9e4dcc3f2d708b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2021775063}
+    - target: {fileID: 5862262000888659261, guid: 7d9212879cfb28945b9e4dcc3f2d708b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862262000888659261, guid: 7d9212879cfb28945b9e4dcc3f2d708b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PushBackSceneButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862262000888659261, guid: 7d9212879cfb28945b9e4dcc3f2d708b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MyProject.Gacha.Result.GachaResultMultipleTimesController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862262000888659261, guid: 7d9212879cfb28945b9e4dcc3f2d708b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7499660554682725266, guid: 7d9212879cfb28945b9e4dcc3f2d708b, type: 3}
       propertyPath: m_Name
       value: GachaResultTenTimeUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8123590286179782743, guid: 7d9212879cfb28945b9e4dcc3f2d708b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8123590286179782743, guid: 7d9212879cfb28945b9e4dcc3f2d708b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8123590286179782743, guid: 7d9212879cfb28945b9e4dcc3f2d708b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2021775063}
+    - target: {fileID: 8123590286179782743, guid: 7d9212879cfb28945b9e4dcc3f2d708b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8123590286179782743, guid: 7d9212879cfb28945b9e4dcc3f2d708b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PushBackSceneButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8123590286179782743, guid: 7d9212879cfb28945b9e4dcc3f2d708b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MyProject.Gacha.Result.GachaResultMultipleTimesController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8123590286179782743, guid: 7d9212879cfb28945b9e4dcc3f2d708b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -441,7 +497,6 @@ RectTransform:
   m_Children:
   - {fileID: 881637084}
   - {fileID: 1135313878}
-  - {fileID: 1256529591}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -550,136 +605,6 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7572322297917581916, guid: cbf7f17dcc123d247855bd2303030187, type: 3}
   m_PrefabInstance: {fileID: 1135313877}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1256529590
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 937349443}
-    m_Modifications:
-    - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 320
-      objectReference: {fileID: 0}
-    - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5514546170963781260, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5514546170963781260, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5514546170963781260, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2021775063}
-    - target: {fileID: 5514546170963781260, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5514546170963781260, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PushBackSceneButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 5514546170963781260, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MyProject.Gacha.Result.GachaResultMultipleTimesController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5514546170963781260, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 6816545287024817598, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-      propertyPath: m_Name
-      value: BackSceneButton
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
---- !u!224 &1256529591 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
-  m_PrefabInstance: {fileID: 1256529590}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2021775060
 GameObject:

@@ -26,6 +26,22 @@ namespace MyProject.Gacha.Result
         }
 
         /// <summary>
+        /// ウィンドウを開く
+        /// </summary>
+        public void Open()
+        {
+            _resultMenu.Open();
+        }
+
+        /// <summary>
+        /// ウィンドウを閉じる
+        /// </summary>
+        public void Close()
+        {
+            _resultMenu.Close();
+        }
+
+        /// <summary>
         /// アイテム設定
         /// </summary>
         public async UniTask SetupItemsAsync(GachaLotteryControllerBase.ItemInfo itemInfo, int index)
