@@ -110,6 +110,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cbf7f17dcc123d247855bd2303030187
+    m_Address: UI/Common/ExitButton
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cc09b3c3b66e40f4ea8218d381019329
     m_Address: UI/Test/AddressablesTest
     m_ReadOnly: 0
