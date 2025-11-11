@@ -6,9 +6,13 @@ namespace MyProject.Gacha.Result
 {
     public class GachaResultMenu : MonoBehaviour
     {
+        [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private Transform _baseParent = null;
         [SerializeField] private GameObject _baseItemObj = null;
         [SerializeField] private Color[] _bgColors = null;
+
+        private static readonly float _viewAlpha = 1f;
+        private static readonly float _hideAlpha = 0f;
 
         private GameObject[] _itemObjs = null;
         private GachaResultItem[] _items = null;
@@ -19,6 +23,8 @@ namespace MyProject.Gacha.Result
         /// <param name="itemNum">アイテム数</param>
         public void Initialize(int itemNum)
         {
+            Close();
+
             _baseItemObj.SetActive(false);
 
             _itemObjs = new GameObject[itemNum];
@@ -42,6 +48,22 @@ namespace MyProject.Gacha.Result
         public async UniTask ReleaseAsync()
         {
             await UnloadItemsAsync();
+        }
+
+        /// <summary>
+        /// ウィンドウを開く
+        /// </summary>
+        public void Open()
+        {
+            _canvasGroup.alpha = _viewAlpha;
+        }
+
+        /// <summary>
+        /// ウィンドウを閉じる
+        /// </summary>
+        public void Close()
+        {
+            _canvasGroup.alpha = _hideAlpha;
         }
 
         /// <summary>
