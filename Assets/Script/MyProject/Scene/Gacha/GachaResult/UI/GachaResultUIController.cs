@@ -68,11 +68,11 @@ namespace MyProject.Gacha.Result
         }
 
         /// <summary>
-        /// 全てを表示
+        /// 全てを表示(非同期)
         /// </summary>
-        public void ViewAllItem()
+        public async UniTask ViewAllItemAsync()
         {
-            _resultMenu.ViewAllItem();
+            await _resultMenu.ViewAllItemAsync();
         }
     }
 }

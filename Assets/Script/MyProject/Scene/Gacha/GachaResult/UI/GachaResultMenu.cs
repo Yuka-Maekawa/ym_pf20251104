@@ -138,22 +138,23 @@ namespace MyProject.Gacha.Result
         /// <summary>
         /// アイテムを全て表示
         /// </summary>
-        public void ViewAllItem()
+        public async UniTask ViewAllItemAsync()
         {
             int count = _items.Length;
             for (int i = 0; i < count; ++i)
             {
-                ViewItem(i);
+                await ViewItemAsync(i);
             }
         }
 
         /// <summary>
-        /// アイテム表示
+        /// アイテム表示(非同期)
         /// </summary>
         /// <param name="index">インデックス値</param>
-        private void ViewItem(int index)
+        private async UniTask ViewItemAsync(int index)
         {
             _items[index]?.View();
+            await UniTask.WaitUntil(() => _items[index].IsViewItem());
         }
 
         /// <summary>
@@ -177,7 +178,7 @@ namespace MyProject.Gacha.Result
             if (_scaleSequence != null)
             {
                 _isScaleAnimation = false;
-                _scaleSequence.Kill();
+                _scaleSequence.Kill(true);
                 _scaleSequence = null;
             }
         }
