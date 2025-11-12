@@ -66,7 +66,14 @@ namespace MyProject.Gacha.Result
                 _items[_playCount - 1] = item;
                 Debug.Log($"{item.Rarity}： {item.Item.Name}");
 
+                _uIController.Open();
+
                 StateLotteryAsync().Forget();
+            }
+
+            if (_uIController.IsMenuItemsSetting() && _uIController.IsEndOpenAnimation())
+            {
+                _stateMachine.MoveState(State.ViewUI);
             }
         }
 
@@ -79,8 +86,6 @@ namespace MyProject.Gacha.Result
             {
                 await _uIController.SetupItemsAsync(_items[i], i);
             }
-
-            _stateMachine.MoveState(State.ViewUI);
         }
 
         /// <summary>
@@ -90,9 +95,14 @@ namespace MyProject.Gacha.Result
         {
             if (_stateMachine.FirstTime)
             {
-                _uIController.Open();
-                _uIController.ViewAllItem();
+                StateViewUIAsync().Forget();
             }
+        }
+
+        private async UniTask StateViewUIAsync()
+        {
+            await UniTask.Yield();
+            _uIController.ViewAllItem();
         }
 
         /// <summary>

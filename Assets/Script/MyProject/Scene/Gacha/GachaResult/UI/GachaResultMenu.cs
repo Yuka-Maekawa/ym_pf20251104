@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using MyProject.Gacha.Lottery;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace MyProject.Gacha.Result
     public class GachaResultMenu : MonoBehaviour
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
+        [SerializeField] private CanvasGroup _bgCanvasGroup = null;
         [SerializeField] private Transform _baseParent = null;
         [SerializeField] private GameObject _baseItemObj = null;
         [SerializeField] private Color[] _bgColors = null;
@@ -16,6 +18,12 @@ namespace MyProject.Gacha.Result
 
         private GameObject[] _itemObjs = null;
         private GachaResultItem[] _items = null;
+
+        private Sequence _fadeSequence = null;
+        private Sequence _scaleSequence = null;
+
+        private bool _isFadeAnimation = false;
+        private bool _isScaleAnimation = false;
 
         /// <summary>
         /// 初期化
@@ -47,6 +55,8 @@ namespace MyProject.Gacha.Result
         /// </summary>
         public async UniTask ReleaseAsync()
         {
+            KillFadeSequence();
+            KillScaleSequence();
             await UnloadItemsAsync();
         }
 
@@ -55,7 +65,18 @@ namespace MyProject.Gacha.Result
         /// </summary>
         public void Open()
         {
+            KillFadeSequence();
+            KillScaleSequence();
+
             _canvasGroup.alpha = _viewAlpha;
+
+            _fadeSequence = DOTween.Sequence();
+            _fadeSequence.Append(_bgCanvasGroup.DOFade(_viewAlpha, 0.5f).SetEase(Ease.InOutSine))
+                .OnComplete(() => { _isFadeAnimation = true; });
+
+            _scaleSequence = DOTween.Sequence();
+            _scaleSequence.Append(_bgCanvasGroup.transform.DOScale(new Vector3(1f, 1f, 1f), 0.5f).SetEase(Ease.InOutBack))
+                .OnComplete(() => { _isScaleAnimation = true; });
         }
 
         /// <summary>
@@ -64,6 +85,8 @@ namespace MyProject.Gacha.Result
         public void Close()
         {
             _canvasGroup.alpha = _hideAlpha;
+            _bgCanvasGroup.alpha = _hideAlpha;
+            _bgCanvasGroup.transform.localScale = new Vector3(1f, 0f, 1f);
         }
 
         /// <summary>
@@ -131,6 +154,41 @@ namespace MyProject.Gacha.Result
         private void ViewItem(int index)
         {
             _items[index]?.View();
+        }
+
+        /// <summary>
+        /// フェードのSequenceをKill
+        /// </summary>
+        private void KillFadeSequence()
+        {
+            if (_fadeSequence != null)
+            {
+                _isFadeAnimation = false;
+                _fadeSequence.Kill();
+                _fadeSequence = null;
+            }
+        }
+
+        /// <summary>
+        /// 拡縮のSequenceをKill
+        /// </summary>
+        private void KillScaleSequence()
+        {
+            if (_scaleSequence != null)
+            {
+                _isScaleAnimation = false;
+                _scaleSequence.Kill();
+                _scaleSequence = null;
+            }
+        }
+
+        /// <summary>
+        /// ウィンドウが開くアニメーションが終了しているか？
+        /// </summary>
+        /// <returns>true: 終了, false: 再生中</returns>
+        public bool IsEndOpenAnimation()
+        {
+            return _isFadeAnimation && _isScaleAnimation;
         }
     }
 }
