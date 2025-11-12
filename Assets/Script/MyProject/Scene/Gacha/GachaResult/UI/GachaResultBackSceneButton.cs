@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 namespace MyProject.Gacha.Result
 {
@@ -10,7 +10,7 @@ namespace MyProject.Gacha.Result
         private static readonly float _hideAlpha = 0f;
 
         /// <summary>
-        /// •\¦
+        /// è¡¨ç¤º
         /// </summary>
         public void View()
         {
@@ -18,7 +18,7 @@ namespace MyProject.Gacha.Result
         }
 
         /// <summary>
-        /// ”ñ•\¦
+        /// éè¡¨ç¤º
         /// </summary>
         public void Hide()
         {
@@ -26,9 +26,9 @@ namespace MyProject.Gacha.Result
         }
 
         /// <summary>
-        /// CanvasGroup‚ÌƒAƒ‹ƒtƒ@‚ğ•ÏX
+        /// CanvasGroupã®ã‚¢ãƒ«ãƒ•ã‚¡ã‚’å¤‰æ›´
         /// </summary>
-        /// <param name="alpha">ƒAƒ‹ƒtƒ@’l</param>
+        /// <param name="alpha">ã‚¢ãƒ«ãƒ•ã‚¡å€¤</param>
         public void SetCanvasGroupAlpha(float alpha)
         {
             _canvasGroup.alpha = alpha;
