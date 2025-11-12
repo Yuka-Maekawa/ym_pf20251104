@@ -7,6 +7,9 @@ namespace MyProject.Systems.Resource
         private Loader _sceneLoad = null;
         public static Loader SceneLoad => Instance._sceneLoad;
 
+        /// <summary>
+        /// 初期化（非同期）
+        /// </summary>
         protected override async UniTask Initialize()
         {
             await UniTask.CompletedTask;
