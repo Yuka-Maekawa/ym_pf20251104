@@ -13,7 +13,8 @@ namespace MyProject.Gacha.Result
             Idle,
             Lottery,
             OpenWindow,
-            ViewUI
+            ViewUI,
+            BackWait
         }
 
         [SerializeField] protected GachaResultUIController _uIController = null;
@@ -58,6 +59,42 @@ namespace MyProject.Gacha.Result
         public void UpdateSub()
         {
             _stateMachine?.Update();
+        }
+
+        /// <summary>
+        /// ステート：UIを表示
+        /// </summary>
+        protected void StateViewUI()
+        {
+            if (_stateMachine.FirstTime)
+            {
+                StateViewUIAsync().Forget();
+            }
+        }
+
+        /// <summary>
+        /// UIを表示するステートの非同期処理
+        /// </summary>
+        private async UniTask StateViewUIAsync()
+        {
+            await _uIController.ViewAllItemAsync();
+            _uIController.ViewBackSceneButton();
+            _stateMachine.MoveState(State.BackWait);
+        }
+
+        /// <summary>
+        /// メニューに戻る（非同期）
+        /// </summary>
+        protected async UniTask PushBackSceneButtonAsync()
+        {
+            if (_stateMachine.Current != State.BackWait) { return; }
+
+            _stateMachine.MoveState(State.Idle);
+
+            _uIController.Close();
+            await UniTask.Yield();
+            await _uIController.ReleaseAsync();
+            await NextSceneAsync();
         }
 
         /// <summary>

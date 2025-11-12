@@ -7,6 +7,7 @@ namespace MyProject.Gacha.Result
     public class GachaResultUIController : MonoBehaviour
     {
         [SerializeField] private GachaResultMenu _resultMenu = null;
+        [SerializeField] private GachaResultBackSceneButton _backSceneButton = null;
 
         /// <summary>
         /// 初期化
@@ -15,6 +16,7 @@ namespace MyProject.Gacha.Result
         public void Initialize(int itemNum)
         {
             _resultMenu.Initialize(itemNum);
+            _backSceneButton.Hide();
         }
 
         /// <summary>
@@ -73,6 +75,14 @@ namespace MyProject.Gacha.Result
         public async UniTask ViewAllItemAsync()
         {
             await _resultMenu.ViewAllItemAsync();
+        }
+
+        /// <summary>
+        /// 前のシーンに戻るボタンを表示
+        /// </summary>
+        public void ViewBackSceneButton()
+        {
+            _backSceneButton.View();
         }
     }
 }

@@ -94,33 +94,11 @@ namespace MyProject.Gacha.Result
         }
 
         /// <summary>
-        /// ステート：UIを表示
-        /// </summary>
-        private void StateViewUI()
-        {
-            if (_stateMachine.FirstTime)
-            {
-                _uIController.ViewAllItemAsync().Forget();
-            }
-        }
-
-        /// <summary>
         /// メニューに戻る
         /// </summary>
         public void PushBackSceneButton()
         {
             PushBackSceneButtonAsync().Forget();
-        }
-
-        /// <summary>
-        /// メニューに戻る（非同期）
-        /// </summary>
-        private async UniTask PushBackSceneButtonAsync()
-        {
-            _uIController.Close();
-            await UniTask.Yield();
-            await _uIController.ReleaseAsync();
-            await NextSceneAsync();
         }
     }
 }
