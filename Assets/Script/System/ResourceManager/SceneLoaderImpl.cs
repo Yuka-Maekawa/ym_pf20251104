@@ -11,6 +11,13 @@ namespace MyProject.Systems.Resource
         {
             public async UniTask LoadSceneAsync(string nextScenePath)
             {
+                var defaultSceneSetupObj = GameObject.Find("DefaultSceneSetup");
+                if (defaultSceneSetupObj != null)
+                {
+                    var script = defaultSceneSetupObj.GetComponent<SceneSetupManager>();
+                    script.Release();
+                }
+
                 await Addressables.LoadSceneAsync(nextScenePath, LoadSceneMode.Single);
             }
         }

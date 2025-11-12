@@ -21,11 +21,6 @@ public class SceneSetupManager : MonoBehaviour
         OnInitialize?.Invoke();
     }
 
-    private void OnDestroy()
-    {
-        Release();
-    }
-
     /// <summary>
     /// 解放処理
     /// </summary>

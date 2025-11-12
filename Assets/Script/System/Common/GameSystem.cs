@@ -28,5 +28,6 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
     {
         Destroy(_eventSystemObj);
         ResourceManager.DestroyInstance();
+        SceneLoader.DestroyInstance();
     }
 }
