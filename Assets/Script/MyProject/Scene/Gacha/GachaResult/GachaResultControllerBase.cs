@@ -12,6 +12,7 @@ namespace MyProject.Gacha.Result
         {
             Idle,
             Lottery,
+            OpenWindow,
             ViewUI
         }
 

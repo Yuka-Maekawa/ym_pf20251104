@@ -18,6 +18,7 @@ namespace MyProject.Gacha.Result
             _gachaLottery = new GachaLotteryMultipleTimeController();
 
             _stateMachine.AddState(State.Lottery, StateLottery);
+            _stateMachine.AddState(State.OpenWindow, StateOpenWindow);
             _stateMachine.AddState(State.ViewUI, StateViewUI);
 
             InitializeAsync().Forget();
@@ -58,22 +59,13 @@ namespace MyProject.Gacha.Result
                 int count = (int)_playCount - 1;
                 for (int i = 0; i < count; ++i)
                 {
-                    _items[i] = _gachaLottery.GetDefaultLotteryResult();
-                    Debug.Log($"{_items[i].Rarity}： {_items[i].Item.Name}");
+                    LotteryItem(i);
                 }
 
-                var item = _gachaLottery.GetLastLotteryResult();
-                _items[_playCount - 1] = item;
-                Debug.Log($"{item.Rarity}： {item.Item.Name}");
-
-                _uIController.Open();
+                LotteryItem(_playCount - 1);
 
                 StateLotteryAsync().Forget();
-            }
-
-            if (_uIController.IsMenuItemsSetting() && _uIController.IsEndOpenAnimation())
-            {
-                _stateMachine.MoveState(State.ViewUI);
+                _stateMachine.MoveState(State.OpenWindow);
             }
         }
 
@@ -88,6 +80,19 @@ namespace MyProject.Gacha.Result
             }
         }
 
+        private void StateOpenWindow()
+        {
+            if (_stateMachine.FirstTime)
+            {
+                _uIController.Open();
+            }
+
+            if (!_uIController.IsMenuItemsSetting() && _uIController.IsEndOpenAnimation())
+            {
+                _stateMachine.MoveState(State.ViewUI);
+            }
+        }
+
         /// <summary>
         /// ステート：UIを表示
         /// </summary>
@@ -95,14 +100,8 @@ namespace MyProject.Gacha.Result
         {
             if (_stateMachine.FirstTime)
             {
-                StateViewUIAsync().Forget();
+                _uIController.ViewAllItemAsync().Forget();
             }
-        }
-
-        private async UniTask StateViewUIAsync()
-        {
-            await UniTask.Yield();
-            _uIController.ViewAllItem();
         }
 
         /// <summary>
@@ -122,6 +121,20 @@ namespace MyProject.Gacha.Result
             await UniTask.Yield();
             await _uIController.ReleaseAsync();
             await NextSceneAsync();
+        }
+
+        /// <summary>
+        /// アイテム抽選
+        /// </summary>
+        /// <param name="index">インデックス値</param>
+        private void LotteryItem(int index)
+        {
+            if (index >= _items.Length) { return; }
+
+            var item = index < _playCount - 1 ? _gachaLottery.GetDefaultLotteryResult() : _gachaLottery.GetLastLotteryResult();
+
+            _items[index] = item;
+            Debug.Log($"{item.Rarity}： {item.Item.Name}");
         }
     }
 }

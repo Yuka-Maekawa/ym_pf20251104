@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using MyProject.Systems.Resource;
 using TMPro;
 using UnityEngine;
@@ -16,11 +17,18 @@ namespace MyProject.Gacha.Result
 
         private static readonly string _textureFilePath = "UI/Gacha/GachaResult/Texture/";
 
+        private static readonly Vector3 _defaultScale = new Vector3(0.5f, 0.5f, 1f);
+
         private static readonly float _viewAlpha = 1f;
         private static readonly float _hideAlpha = 0f;
 
+        private static readonly float _animationTime = 0.15f;
+
         private Texture2D _thumbnail = null;
         private string _thumbnailPath = string.Empty;
+
+        private Sequence _sequence = null;
+        private bool _isViewItem = false;
 
         private bool _isSetting = false;
         public bool IsSetting { get { return _isSetting; } }
@@ -65,6 +73,9 @@ namespace MyProject.Gacha.Result
         {
             await UniTask.WaitWhile(() => _isSetting);
 
+            KillSequence();
+            Hide();
+
             SetItemNameText(string.Empty);
             SetThumbnail(null);
             SetBgColor(Color.white);
@@ -94,6 +105,13 @@ namespace MyProject.Gacha.Result
         public void View()
         {
             SetCanvasGroupAlpha(_viewAlpha);
+
+            _isViewItem = false;
+
+            KillSequence();
+            _sequence = DOTween.Sequence();
+            _sequence.Append(_canvasGroup.transform.DOScale(Vector3.one, _animationTime).SetEase(Ease.OutBack))
+            .OnComplete(() => { _isViewItem = true; });
         }
 
         /// <summary>
@@ -102,6 +120,16 @@ namespace MyProject.Gacha.Result
         public void Hide()
         {
             SetCanvasGroupAlpha(_hideAlpha);
+            _canvasGroup.transform.localScale = _defaultScale;
+        }
+
+        /// <summary>
+        /// アイテムを表示
+        /// </summary>
+        /// <returns>true: 表示, false: 非表示</returns>
+        public bool IsViewItem()
+        {
+            return _isViewItem;
         }
 
         /// <summary>
@@ -138,6 +166,18 @@ namespace MyProject.Gacha.Result
         public void SetItemNameText(string name)
         {
             _itemNameText.SetText(name);
+        }
+
+        /// <summary>
+        /// DOTween終了
+        /// </summary>
+        private void KillSequence()
+        {
+            if (_sequence != null)
+            {
+                _sequence.Kill(true);
+                _sequence = null;
+            }
         }
     }
 }
