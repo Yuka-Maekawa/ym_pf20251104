@@ -8,9 +8,8 @@
 
 ▼デモ
 
-![Demo_Once](https://github.com/user-attachments/assets/fdef3098-a807-4fbb-a8b8-0a92cadc824d)
-
-![Demo_TenTime](https://github.com/user-attachments/assets/1e05f761-13ea-4fdb-8378-d22f2660a985)
+![Demo_Once](https://github.com/user-attachments/assets/36cb4e3b-002c-429d-b754-b1eeaf95cab8)
+![Demo_TenTime](https://github.com/user-attachments/assets/3e6e2534-a62a-4984-b725-7f7f0aace4e5)
 
 ---
 
@@ -53,52 +52,76 @@
 ---
 
 ## ディレクトリ構成
+
 ```
 Assets/
-├─ _Res/
-│ ├─ Common/
-│ ├─ Database/
-│ │ └─ Gacha/
-│ ├─ Scene/
-│ │ ├─ Gacha/
-│ │ └─ Test/
-│ ├─ System/
-│ └─ UI/
-│   ├─ Gacha/
-│   │ └─ GachaResult/
-│   │    ├─ Prefab/
-│   │    └─ Texture/
-│   └─ Test/
-├─ AddressableAssetsData/
-├─ File/
-│ └─ Gacha/
-├─ Scripts/
-│ ├─ MyProject/
-│ │ ├─ Common/
-│ │ │ ├─ Lottery/
-│ │ │ ├─ Scene/
-│ │ │ └─ System/
-│ │ ├─ Databse/
-│ │ │ └─ Gacha/
-│ │ └─ Scene/
-│ │   ├─ Gacha/
-│ │   │ ├─ GachaMenu/
-│ │   │ │ └─ UI/
-│ │   │ ├─ GachaResult/
-│ │   │ │ └─ UI/
-│ │   │ └─ Lottery/
-│ │   └─ Test/
-│ │     └─ TestGacha/
-│ └─ System/
-│   ├─ Common/
-│   ├─ Editor/
-│   │ └─ Addressables/
-│   ├─ ObjectBase/
-│   └─ ResourceManager/
-├─ Setting/
-└─ TextMesh Pro/
+├─AddressableAssetsData
+│  ├─AssetGroups
+│  │  └─Schemas
+│  ├─AssetGroupTemplates
+│  ├─DataBuilders
+│  └─Windows
+├─File
+│  └─Gacha
+├─Plugins
+│  └─Demigiant
+│      └─DOTween
+│          ├─Editor
+│          │  └─Imgs
+│          └─Modules
+├─Resources
+├─Script
+│  ├─MyProject
+│  │  ├─Common
+│  │  │  ├─Lottery
+│  │  │  ├─Scene
+│  │  │  └─System
+│  │  ├─Database
+│  │  │  └─Gacha
+│  │  └─Scene
+│  │      ├─Gacha
+│  │      │  ├─GachaMenu
+│  │      │  │  └─UI
+│  │      │  ├─GachaResult
+│  │      │  │  └─UI
+│  │      │  └─Lottery
+│  │      │      ├─Lineup
+│  │      │      └─Rarity
+│  │      └─Test
+│  │          └─TestGacha
+│  └─System
+│      ├─Common
+│      ├─Editor
+│      │  └─Addressables
+│      ├─ObjectBase
+│      └─ResourceManager
+├─Settings
+│  └─Build Profiles
+├─TextMesh Pro
+│  ├─Fonts
+│  ├─Resources
+│  │  ├─Fonts & Materials
+│  │  ├─Sprite Assets
+│  │  └─Style Sheets
+│  ├─Shaders
+│  └─Sprites
+└─_Res
+    ├─Common
+    ├─Database
+    │  └─Gacha
+    ├─Scene
+    │  ├─Gacha
+    │  └─Test
+    ├─System
+    │  └─Prefab
+    └─UI
+        ├─Common
+        ├─Gacha
+        │  └─GachaResult
+        │      ├─Prefab
+        │      └─Texture
+        └─Test
 ```
-
 
 ---
 
