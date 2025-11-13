@@ -11,6 +11,7 @@ namespace MyProject.Gacha.Menu
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private Transform _parentTransform = null;
         [SerializeField] private GameObject _lineupItemObj = null;
+        [SerializeField] private GameObject _rootObj = null;
 
         private static readonly string _gachaInfoFilePath = "Database/Gacha/GachaInfo";
         private static readonly float _viewAlpha = 1f;
@@ -26,7 +27,8 @@ namespace MyProject.Gacha.Menu
         /// </summary>
         public async UniTask InitializeAsync()
         {
-            Close();
+            // ItemGroupのサイズ感が取れなくなるので初期化では最初にアルファを0にする
+            SetCanvasGroupAlpha(_hideAlpha);
 
             _lineupItemObj.SetActive(false);
 
@@ -50,6 +52,8 @@ namespace MyProject.Gacha.Menu
                 _lineupItems[i] = item;
                 _itemObjs[i] = obj;
             }
+
+            SetActive(false);
         }
 
         /// <summary>
@@ -72,10 +76,20 @@ namespace MyProject.Gacha.Menu
         }
 
         /// <summary>
+        /// アクティブ設定
+        /// </summary>
+        /// <param name="isActive">true: 表示, false: 非表示</param>
+        private void SetActive(bool isActive)
+        {
+            _rootObj.SetActive(isActive);
+        }
+
+        /// <summary>
         /// 開く
         /// </summary>
         public void Open()
         {
+            SetActive(true);
             SetCanvasGroupAlpha(_viewAlpha);
         }
 
@@ -84,6 +98,7 @@ namespace MyProject.Gacha.Menu
         /// </summary>
         public void Close()
         {
+            SetActive(false);
             SetCanvasGroupAlpha(_hideAlpha);
         }
 

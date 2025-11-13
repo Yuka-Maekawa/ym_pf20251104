@@ -8,9 +8,15 @@ namespace MyProject.Gacha.Menu
 {
     public class GachaMenuLineupItem : MonoBehaviour
     {
+        [SerializeField] private RectTransform _myObjRectTransform = null;
+        [SerializeField] private RectTransform _titleTextRectTransform = null;
+        [SerializeField] private RectTransform _itemGroupRectTransform = null;
+
         [SerializeField] private GachaMenuLineupTitle _lineupTitle = null;
         [SerializeField] private GachaMenuLineupGroup _lineupGroup = null;
         [SerializeField] private Color[] _rarityColors = null;
+
+        private static readonly float _itemGroupSpece = 15f;
 
         private GachaLineupParameter _lineupParameter = null;
         private string _filePath = string.Empty;
@@ -40,6 +46,10 @@ namespace MyProject.Gacha.Menu
                 var itemInfo = table[i];
                 await _lineupGroup.SetupItemAsync(i, rarityColor, itemInfo.ThumbnailName, itemInfo.Name);
             }
+
+            // ラインナップの数に合わせて、LineupItemのサイズを設定
+            var size = new Vector2(_myObjRectTransform.sizeDelta.x, _titleTextRectTransform.sizeDelta.y + _itemGroupRectTransform.sizeDelta.y  + _itemGroupSpece);
+            _myObjRectTransform.sizeDelta = size;
         }
 
         /// <summary>
