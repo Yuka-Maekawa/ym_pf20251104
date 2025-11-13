@@ -1,6 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
 using MyProject.Gacha.Lottery;
-using UnityEngine;
 
 namespace MyProject.Gacha.Result
 {
@@ -80,6 +79,9 @@ namespace MyProject.Gacha.Result
             }
         }
 
+        /// <summary>
+        /// ステート：ウィンドウを開く
+        /// </summary>
         private void StateOpenWindow()
         {
             if (_stateMachine.FirstTime)
@@ -94,14 +96,6 @@ namespace MyProject.Gacha.Result
         }
 
         /// <summary>
-        /// メニューに戻る
-        /// </summary>
-        public void PushBackSceneButton()
-        {
-            PushBackSceneButtonAsync().Forget();
-        }
-
-        /// <summary>
         /// アイテム抽選
         /// </summary>
         /// <param name="index">インデックス値</param>
@@ -112,7 +106,6 @@ namespace MyProject.Gacha.Result
             var item = index < _playCount - 1 ? _gachaLottery.GetDefaultLotteryResult() : _gachaLottery.GetLastLotteryResult();
 
             _items[index] = item;
-            Debug.Log($"{item.Rarity}： {item.Item.Name}");
         }
     }
 }

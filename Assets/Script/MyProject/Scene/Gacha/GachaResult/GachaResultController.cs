@@ -1,6 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
 using MyProject.Gacha.Lottery;
-using UnityEngine;
 
 namespace MyProject.Gacha.Result
 {
@@ -58,7 +57,6 @@ namespace MyProject.Gacha.Result
                 for (int i = 0; i < _playCount; ++i)
                 {
                     _items[i] = _gachaLottery.GetDefaultLotteryResult();
-                    Debug.Log($"{_items[i].Rarity}： {_items[i].Item.Name}");
                 }
 
                 StateLotteryAsync().Forget();
@@ -91,14 +89,6 @@ namespace MyProject.Gacha.Result
             {
                 _stateMachine.MoveState(State.ViewUI);
             }
-        }
-
-        /// <summary>
-        /// メニューに戻る
-        /// </summary>
-        public void PushBackSceneButton()
-        {
-            PushBackSceneButtonAsync().Forget();
         }
     }
 }

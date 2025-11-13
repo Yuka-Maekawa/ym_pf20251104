@@ -66,7 +66,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 554150c014987cd4eb8bcaacc54bc116
-    m_Address: Scene/Gacha/GachaTenTimeResult
+    m_Address: Scene/Gacha/GachaTenTimesResult
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: af60a73c414ba0749adbf4caaec9590e
-    m_Address: Scene/Gacha/GachaOneceResult
+    m_Address: Scene/Gacha/GachaOnceResult
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -21,6 +21,8 @@ namespace MyProject.Gacha.Result
         [SerializeField] protected int _defaultLotteryId = 1;
         [SerializeField] protected int _playCount = 1;
 
+        private static readonly string _backScenePath = "Scene/Gacha/GachaMenu";
+
         protected GachaLotteryControllerBase.ItemInfo[] _items = null;
 
         protected StateMachine<State> _stateMachine = null;
@@ -33,7 +35,7 @@ namespace MyProject.Gacha.Result
             _stateMachine = new StateMachine<State>(State.Idle);
             _items = new GachaLotteryControllerBase.ItemInfo[_playCount];
 
-            _uIController.Initialize((int)_playCount);
+            _uIController.Initialize(_playCount);
         }
 
         /// <summary>
@@ -83,9 +85,17 @@ namespace MyProject.Gacha.Result
         }
 
         /// <summary>
+        /// メニューに戻る
+        /// </summary>
+        public void PushBackSceneButton()
+        {
+            PushBackSceneButtonAsync().Forget();
+        }
+
+        /// <summary>
         /// メニューに戻る（非同期）
         /// </summary>
-        protected async UniTask PushBackSceneButtonAsync()
+        private async UniTask PushBackSceneButtonAsync()
         {
             if (_stateMachine.Current != State.BackWait) { return; }
 
@@ -103,7 +113,7 @@ namespace MyProject.Gacha.Result
         /// <param name="nextScenePath">シーンのファイルパス</param>
         protected async UniTask NextSceneAsync()
         {
-            await SceneLoader.SceneLoad.LoadSceneAsync("Scene/Gacha/GachaMenu");
+            await SceneLoader.SceneLoad.LoadSceneAsync(_backScenePath);
         }
     }
 }

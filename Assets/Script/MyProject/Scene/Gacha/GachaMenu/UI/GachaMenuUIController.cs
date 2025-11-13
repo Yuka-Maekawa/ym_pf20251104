@@ -6,12 +6,15 @@ namespace MyProject.Gacha.Menu
 {
     public class GachaMenuUIController : MonoBehaviour
     {
+        private static readonly string _onceResultScenePath = "Scene/Gacha/GachaOnceResult";
+        private static readonly string _tenTimesResultScenePath = "Scene/Gacha/GachaTenTimesResult";
+
         /// <summary>
         /// 単発ボタンを押下
         /// </summary>
         public void PushOneGachaButton()
         {
-            NextSceneAsync("Scene/Gacha/GachaOneceResult").Forget();
+            NextSceneAsync(_onceResultScenePath).Forget();
         }
 
         /// <summary>
@@ -19,7 +22,7 @@ namespace MyProject.Gacha.Menu
         /// </summary>
         public void PushTenTimeGachaButton()
         {
-            NextSceneAsync("Scene/Gacha/GachaTenTimeResult").Forget();
+            NextSceneAsync(_tenTimesResultScenePath).Forget();
         }
 
         /// <summary>

@@ -15,8 +15,6 @@ namespace MyProject.Database.Gacha
         public int Id = 0;
         public string LotteryFilePath = string.Empty;
         public string LastLotteryFilePath = string.Empty;
-        public string RareLineupFilePath = string.Empty;
-        public string SuperRareLineupFilePath = string.Empty;
-        public string SpecialSuperRareLineupFilePath = string.Empty;
+        public string[] RarityLineupFilePaths = null;
     }
 }
