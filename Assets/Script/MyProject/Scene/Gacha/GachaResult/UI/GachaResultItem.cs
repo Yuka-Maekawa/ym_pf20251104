@@ -14,10 +14,9 @@ namespace MyProject.Gacha.Result
         [SerializeField] private Image _bgImage = null;
         [SerializeField] private RawImage _thumbnailImage = null;
         [SerializeField] private TextMeshProUGUI _itemNameText = null;
+        [SerializeField] private Vector3 _defaultScale = new Vector3(0.5f, 0.5f, 1f);
 
         private static readonly string _textureFilePath = "UI/Gacha/GachaResult/Texture/";
-
-        private static readonly Vector3 _defaultScale = new Vector3(0.5f, 0.5f, 1f);
 
         private static readonly float _viewAlpha = 1f;
         private static readonly float _hideAlpha = 0f;
@@ -136,7 +135,7 @@ namespace MyProject.Gacha.Result
         /// CanvasGroupのアルファ設定
         /// </summary>
         /// <param name="alpha">アルファ値</param>
-        private void SetCanvasGroupAlpha(float alpha)
+        public void SetCanvasGroupAlpha(float alpha)
         {
             _canvasGroup.alpha = alpha;
         }
