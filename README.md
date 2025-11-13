@@ -8,7 +8,9 @@
 
 ▼デモ
 
-![demo](https://github.com/user-attachments/assets/1fa1d2db-006f-4050-8e4e-576b34ee982f)
+![Demo_Once](https://github.com/user-attachments/assets/fdef3098-a807-4fbb-a8b8-0a92cadc824d)
+
+![Demo_TenTime](https://github.com/user-attachments/assets/1e05f761-13ea-4fdb-8378-d22f2660a985)
 
 ---
 
