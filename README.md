@@ -8,7 +8,8 @@
 
 ▼デモ
 
-![demo](https://github.com/user-attachments/assets/1fa1d2db-006f-4050-8e4e-576b34ee982f)
+![Demo_Once](https://github.com/user-attachments/assets/36cb4e3b-002c-429d-b754-b1eeaf95cab8)
+![Demo_TenTime](https://github.com/user-attachments/assets/3e6e2534-a62a-4984-b725-7f7f0aace4e5)
 
 ---
 
@@ -51,52 +52,76 @@
 ---
 
 ## ディレクトリ構成
+
 ```
 Assets/
-├─ _Res/
-│ ├─ Common/
-│ ├─ Database/
-│ │ └─ Gacha/
-│ ├─ Scene/
-│ │ ├─ Gacha/
-│ │ └─ Test/
-│ ├─ System/
-│ └─ UI/
-│   ├─ Gacha/
-│   │ └─ GachaResult/
-│   │    ├─ Prefab/
-│   │    └─ Texture/
-│   └─ Test/
-├─ AddressableAssetsData/
-├─ File/
-│ └─ Gacha/
-├─ Scripts/
-│ ├─ MyProject/
-│ │ ├─ Common/
-│ │ │ ├─ Lottery/
-│ │ │ ├─ Scene/
-│ │ │ └─ System/
-│ │ ├─ Databse/
-│ │ │ └─ Gacha/
-│ │ └─ Scene/
-│ │   ├─ Gacha/
-│ │   │ ├─ GachaMenu/
-│ │   │ │ └─ UI/
-│ │   │ ├─ GachaResult/
-│ │   │ │ └─ UI/
-│ │   │ └─ Lottery/
-│ │   └─ Test/
-│ │     └─ TestGacha/
-│ └─ System/
-│   ├─ Common/
-│   ├─ Editor/
-│   │ └─ Addressables/
-│   ├─ ObjectBase/
-│   └─ ResourceManager/
-├─ Setting/
-└─ TextMesh Pro/
+├─AddressableAssetsData
+│  ├─AssetGroups
+│  │  └─Schemas
+│  ├─AssetGroupTemplates
+│  ├─DataBuilders
+│  └─Windows
+├─File
+│  └─Gacha
+├─Plugins
+│  └─Demigiant
+│      └─DOTween
+│          ├─Editor
+│          │  └─Imgs
+│          └─Modules
+├─Resources
+├─Script
+│  ├─MyProject
+│  │  ├─Common
+│  │  │  ├─Lottery
+│  │  │  ├─Scene
+│  │  │  └─System
+│  │  ├─Database
+│  │  │  └─Gacha
+│  │  └─Scene
+│  │      ├─Gacha
+│  │      │  ├─GachaMenu
+│  │      │  │  └─UI
+│  │      │  ├─GachaResult
+│  │      │  │  └─UI
+│  │      │  └─Lottery
+│  │      │      ├─Lineup
+│  │      │      └─Rarity
+│  │      └─Test
+│  │          └─TestGacha
+│  └─System
+│      ├─Common
+│      ├─Editor
+│      │  └─Addressables
+│      ├─ObjectBase
+│      └─ResourceManager
+├─Settings
+│  └─Build Profiles
+├─TextMesh Pro
+│  ├─Fonts
+│  ├─Resources
+│  │  ├─Fonts & Materials
+│  │  ├─Sprite Assets
+│  │  └─Style Sheets
+│  ├─Shaders
+│  └─Sprites
+└─_Res
+    ├─Common
+    ├─Database
+    │  └─Gacha
+    ├─Scene
+    │  ├─Gacha
+    │  └─Test
+    ├─System
+    │  └─Prefab
+    └─UI
+        ├─Common
+        ├─Gacha
+        │  └─GachaResult
+        │      ├─Prefab
+        │      └─Texture
+        └─Test
 ```
-
 
 ---
 
@@ -109,7 +134,6 @@ Assets/
 ---
 
 ## 今後の拡張予定
-- 複数ガチャタイプ（10連・別バージョン）対応
 - ラインナップ一覧
 - 獲得履歴・ログ機能の追加
 
