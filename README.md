@@ -45,8 +45,8 @@
 
 
 ## 工夫した点
-- Addressableを用いた **軽量なアセット管理** により、ビルドサイズ削減と柔軟なリソース更新を実現  
-- 実務同様に **開発環境を再現**（Git運用、SourceTreeフロー）  
+- Addressableを用いた 軽量なアセット管理により、ビルドサイズ削減と柔軟なリソース更新を実現  
+- 実務同様に 開発環境を再現（Git運用、SourceTreeフロー）  
 - 短期間でも読みやすいコード設計を意識し、可読性と保守性を重視  
 
 ---
@@ -129,16 +129,12 @@ Assets/
 1. Unity 6000.0.62f1 でPortfolioProjectを開く
 2. UnityEditorメニューにある MyProject → Build → Resource → Addressable(○○) を選択
 3. 2.完了後、同様にUnityEditorメニューにある MyProject → Build → ROM → Release を選択
-4.  個人のプロジェクトフォルダ\Builds\Releaseにある「Portfolio_○○_Release」を実行
+4.  個人のプロジェクトフォルダ\Builds\Releaseにある「Portfolio_○○_Release.exe」を実行
 
 ---
 
 ## 今後の拡張予定
+- リファクタリング
 - ラインナップ一覧
 - 獲得履歴・ログ機能の追加
-
 ---
-
-## 補足
-本プロジェクトは、**短期間での開発を通じてコード設計力・実装力を確認できるデモ**として制作しました。  
-業務経験で得た知見を反映しつつ、シンプルな構成で基礎技術を整理しています。
