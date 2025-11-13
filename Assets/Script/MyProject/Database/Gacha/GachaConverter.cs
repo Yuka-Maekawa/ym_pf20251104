@@ -67,6 +67,8 @@ namespace MyProject.Database.Gacha
 
             int count = csvLine.Count;
 
+            int rarityNum = System.Enum.GetValues(typeof(GachaRarityLottery.Rarity)).Length;
+
             var database = ScriptableObject.CreateInstance<GachaInfoParameter>();
             database.Table = new List<GachaInfo>(count);
 
@@ -84,9 +86,10 @@ namespace MyProject.Database.Gacha
                 data.LotteryFilePath = line[(int)GachaInfoIndex.DefaultLotteryFilePath];
                 data.LastLotteryFilePath = line[(int)GachaInfoIndex.LastLotteryFilePath];
 
-                data.RareLineupFilePath = line[(int)GachaInfoIndex.RareLineupFilePath];
-                data.SuperRareLineupFilePath = line[(int)GachaInfoIndex.SuperRareLineupFilePath];
-                data.SpecialSuperRareLineupFilePath = line[(int)GachaInfoIndex.SpecialSuperRareLineupFilePath];
+                data.RarityLineupFilePaths = new string[rarityNum];
+                data.RarityLineupFilePaths[(int)GachaRarityLottery.Rarity.Rare] = line[(int)GachaInfoIndex.RareLineupFilePath];
+                data.RarityLineupFilePaths[(int)GachaRarityLottery.Rarity.SuperRare] = line[(int)GachaInfoIndex.SuperRareLineupFilePath];
+                data.RarityLineupFilePaths[(int)GachaRarityLottery.Rarity.SpecialSuperRare] = line[(int)GachaInfoIndex.SpecialSuperRareLineupFilePath];
 
                 database.Table.Add(data);
             }

@@ -16,6 +16,7 @@ MonoBehaviour:
   - Id: 1
     LotteryFilePath: Database/Gacha/DefaultLottery
     LastLotteryFilePath: Database/Gacha/LastLottery
-    RareLineupFilePath: Database/Gacha/LineupRare
-    SuperRareLineupFilePath: Database/Gacha/LineupSuperRare
-    SpecialSuperRareLineupFilePath: Database/Gacha/LineupSpecialSuperRare
+    RarityLineupFilePaths:
+    - Database/Gacha/LineupRare
+    - Database/Gacha/LineupSuperRare
+    - Database/Gacha/LineupSpecialSuperRare

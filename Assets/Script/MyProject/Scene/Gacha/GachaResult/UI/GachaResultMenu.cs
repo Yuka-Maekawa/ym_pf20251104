@@ -13,6 +13,10 @@ namespace MyProject.Gacha.Result
         [SerializeField] private GameObject _baseItemObj = null;
         [SerializeField] private Color[] _bgColors = null;
 
+        private static readonly Vector3 _defaultScale = new Vector3(1f, 0f, 1f);
+        private static readonly Vector3 _animationScale = new Vector3(1f, 1f, 1f);
+        private static readonly float _animationTime = 0.5f;
+
         private static readonly float _viewAlpha = 1f;
         private static readonly float _hideAlpha = 0f;
 
@@ -71,11 +75,11 @@ namespace MyProject.Gacha.Result
             _canvasGroup.alpha = _viewAlpha;
 
             _fadeSequence = DOTween.Sequence();
-            _fadeSequence.Append(_bgCanvasGroup.DOFade(_viewAlpha, 0.5f).SetEase(Ease.InOutSine))
+            _fadeSequence.Append(_bgCanvasGroup.DOFade(_viewAlpha, _animationTime).SetEase(Ease.InOutSine))
                 .OnComplete(() => { _isFadeAnimation = true; });
 
             _scaleSequence = DOTween.Sequence();
-            _scaleSequence.Append(_bgCanvasGroup.transform.DOScale(new Vector3(1f, 1f, 1f), 0.5f).SetEase(Ease.InOutBack))
+            _scaleSequence.Append(_bgCanvasGroup.transform.DOScale(_animationScale, _animationTime).SetEase(Ease.InOutBack))
                 .OnComplete(() => { _isScaleAnimation = true; });
         }
 
@@ -86,7 +90,7 @@ namespace MyProject.Gacha.Result
         {
             _canvasGroup.alpha = _hideAlpha;
             _bgCanvasGroup.alpha = _hideAlpha;
-            _bgCanvasGroup.transform.localScale = new Vector3(1f, 0f, 1f);
+            _bgCanvasGroup.transform.localScale = _defaultScale;
         }
 
         /// <summary>

@@ -18,21 +18,18 @@ namespace MyProject.Gacha.Lottery
         /// 初期化(非同期)
         /// </summary>
         /// <param name="gachaInfo">ガチャ情報</param>
-        public  async UniTask InitializeAsync(GachaInfo gachaInfo)
+        public async UniTask InitializeAsync(GachaInfo gachaInfo)
         {
             base.Initialize();
 
             int rarityNum = System.Enum.GetValues(typeof(GachaRarityLottery.Rarity)).Length;
             _lineupParameters = new LineupInfoSummary[rarityNum];
 
-            for(int i = 0; i < rarityNum; i++)
+            for (int i = 0; i < rarityNum; i++)
             {
                 _lineupParameters[i] = new LineupInfoSummary();
+                _lineupParameters[i].FilePath = gachaInfo.RarityLineupFilePaths[i];
             }
-
-            _lineupParameters[(int)GachaRarityLottery.Rarity.Rare].FilePath = gachaInfo.RareLineupFilePath;
-            _lineupParameters[(int)GachaRarityLottery.Rarity.SuperRare].FilePath = gachaInfo.SuperRareLineupFilePath;
-            _lineupParameters[(int)GachaRarityLottery.Rarity.SpecialSuperRare].FilePath = gachaInfo.SpecialSuperRareLineupFilePath;
 
             await LoadDatabaseAsync(gachaInfo);
         }
