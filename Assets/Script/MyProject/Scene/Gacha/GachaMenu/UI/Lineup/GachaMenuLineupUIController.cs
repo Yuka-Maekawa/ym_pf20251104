@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using MyProject.Common.UI;
 using MyProject.Database.Gacha;
 using MyProject.Gacha.Lottery;
 using MyProject.Systems.Resource;
@@ -8,14 +9,12 @@ namespace MyProject.Gacha.Menu
 {
     public class GachaMenuLineupUIController : MonoBehaviour
     {
-        [SerializeField] private CanvasGroup _canvasGroup = null;
+        [SerializeField] private CanvasGroupSetter _canvasGroupSetter = null;
         [SerializeField] private Transform _parentTransform = null;
         [SerializeField] private GameObject _lineupItemObj = null;
         [SerializeField] private GameObject _rootObj = null;
 
         private static readonly string _gachaInfoFilePath = "Database/Gacha/GachaInfo";
-        private static readonly float _viewAlpha = 1f;
-        private static readonly float _hideAlpha = 0f;
 
         private GameObject[] _itemObjs = null;
         private GachaMenuLineupItem[] _lineupItems = null;
@@ -28,7 +27,7 @@ namespace MyProject.Gacha.Menu
         public async UniTask InitializeAsync()
         {
             // ItemGroupのサイズ感が取れなくなるので初期化では最初にアルファを0にする
-            SetCanvasGroupAlpha(_hideAlpha);
+            _canvasGroupSetter.Hide();
 
             _lineupItemObj.SetActive(false);
 
@@ -90,7 +89,7 @@ namespace MyProject.Gacha.Menu
         public void Open()
         {
             SetActive(true);
-            SetCanvasGroupAlpha(_viewAlpha);
+            _canvasGroupSetter.View();
         }
 
         /// <summary>
@@ -99,16 +98,7 @@ namespace MyProject.Gacha.Menu
         public void Close()
         {
             SetActive(false);
-            SetCanvasGroupAlpha(_hideAlpha);
-        }
-
-        /// <summary>
-        /// CanvasGroupのアルファ設定
-        /// </summary>
-        /// <param name="alpha">アルファ値</param>
-        private void SetCanvasGroupAlpha(float alpha)
-        {
-            _canvasGroup.alpha = alpha;
+            _canvasGroupSetter.Hide();
         }
     }
 }

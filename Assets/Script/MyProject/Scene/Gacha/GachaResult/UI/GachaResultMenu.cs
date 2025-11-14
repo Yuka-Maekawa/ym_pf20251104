@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using MyProject.Common.UI;
 using MyProject.Gacha.Lottery;
 using UnityEngine;
 
@@ -7,8 +8,8 @@ namespace MyProject.Gacha.Result
 {
     public class GachaResultMenu : MonoBehaviour
     {
-        [SerializeField] private CanvasGroup _canvasGroup = null;
-        [SerializeField] private CanvasGroup _bgCanvasGroup = null;
+        [SerializeField] private CanvasGroupSetter _canvasGroupSetter = null;
+        [SerializeField] private CanvasGroupSetter _bgCanvasGroupSetter = null;
         [SerializeField] private Transform _baseParent = null;
         [SerializeField] private GameObject _baseItemObj = null;
         [SerializeField] private Color[] _bgColors = null;
@@ -18,16 +19,9 @@ namespace MyProject.Gacha.Result
         private static readonly float _animationTime = 0.5f;
 
         private static readonly float _viewAlpha = 1f;
-        private static readonly float _hideAlpha = 0f;
 
         private GameObject[] _itemObjs = null;
         private GachaResultItem[] _items = null;
-
-        private Sequence _fadeSequence = null;
-        private Sequence _scaleSequence = null;
-
-        private bool _isFadeAnimation = false;
-        private bool _isScaleAnimation = false;
 
         /// <summary>
         /// 初期化
@@ -59,8 +53,7 @@ namespace MyProject.Gacha.Result
         /// </summary>
         public async UniTask ReleaseAsync()
         {
-            KillFadeSequence();
-            KillScaleSequence();
+            _bgCanvasGroupSetter.KillAllSequence();
             await UnloadItemsAsync();
         }
 
@@ -69,18 +62,12 @@ namespace MyProject.Gacha.Result
         /// </summary>
         public void Open()
         {
-            KillFadeSequence();
-            KillScaleSequence();
+            _bgCanvasGroupSetter.KillAllSequence();
 
-            _canvasGroup.alpha = _viewAlpha;
+            _canvasGroupSetter.View();
 
-            _fadeSequence = DOTween.Sequence();
-            _fadeSequence.Append(_bgCanvasGroup.DOFade(_viewAlpha, _animationTime).SetEase(Ease.InOutSine))
-                .OnComplete(() => { _isFadeAnimation = true; });
-
-            _scaleSequence = DOTween.Sequence();
-            _scaleSequence.Append(_bgCanvasGroup.transform.DOScale(_animationScale, _animationTime).SetEase(Ease.InOutBack))
-                .OnComplete(() => { _isScaleAnimation = true; });
+            _bgCanvasGroupSetter.PlayFadeAnimation(_animationTime, Ease.InOutSine);
+            _bgCanvasGroupSetter.PlayScaleAnimation(_animationScale, _animationTime, Ease.InOutBack);
         }
 
         /// <summary>
@@ -88,9 +75,9 @@ namespace MyProject.Gacha.Result
         /// </summary>
         public void Close()
         {
-            _canvasGroup.alpha = _hideAlpha;
-            _bgCanvasGroup.alpha = _hideAlpha;
-            _bgCanvasGroup.transform.localScale = _defaultScale;
+            _canvasGroupSetter.Hide();
+            _bgCanvasGroupSetter.Hide();
+            _bgCanvasGroupSetter.SetLocalScale(_defaultScale);
         }
 
         /// <summary>
@@ -158,33 +145,7 @@ namespace MyProject.Gacha.Result
         private async UniTask ViewItemAsync(int index)
         {
             _items[index]?.View();
-            await UniTask.WaitUntil(() => _items[index].IsViewItem());
-        }
-
-        /// <summary>
-        /// フェードのSequenceをKill
-        /// </summary>
-        private void KillFadeSequence()
-        {
-            if (_fadeSequence != null)
-            {
-                _isFadeAnimation = false;
-                _fadeSequence.Kill();
-                _fadeSequence = null;
-            }
-        }
-
-        /// <summary>
-        /// 拡縮のSequenceをKill
-        /// </summary>
-        private void KillScaleSequence()
-        {
-            if (_scaleSequence != null)
-            {
-                _isScaleAnimation = false;
-                _scaleSequence.Kill(true);
-                _scaleSequence = null;
-            }
+            await UniTask.WaitWhile(() => _items[index].IsPlayingScaleAnimation());
         }
 
         /// <summary>
@@ -193,7 +154,7 @@ namespace MyProject.Gacha.Result
         /// <returns>true: 終了, false: 再生中</returns>
         public bool IsEndOpenAnimation()
         {
-            return _isFadeAnimation && _isScaleAnimation;
+            return !_bgCanvasGroupSetter.IsPlayingFadeAnimation() && !_bgCanvasGroupSetter.IsPlayingScaleAnimation();
         }
     }
 }
