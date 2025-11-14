@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using MyProject.Common.UI;
 using MyProject.Systems.Resource;
 using TMPro;
 using UnityEngine;
@@ -10,25 +11,18 @@ namespace MyProject.Gacha.Result
     public class GachaResultItem : MonoBehaviour
     {
         [SerializeField] private GameObject _rootObj = null;
-        [SerializeField] private CanvasGroup _canvasGroup = null;
+        [SerializeField] private CanvasGroupSetter _canvasGroupSetter = null;
         [SerializeField] private Image _bgImage = null;
         [SerializeField] private RawImage _thumbnailImage = null;
         [SerializeField] private TextMeshProUGUI _itemNameText = null;
+        [SerializeField] private Vector3 _defaultScale = new Vector3(0.5f, 0.5f, 1f);
 
         private static readonly string _textureFilePath = "UI/Gacha/GachaResult/Texture/";
-
-        private static readonly Vector3 _defaultScale = new Vector3(0.5f, 0.5f, 1f);
-
-        private static readonly float _viewAlpha = 1f;
-        private static readonly float _hideAlpha = 0f;
 
         private static readonly float _animationTime = 0.15f;
 
         private Texture2D _thumbnail = null;
         private string _thumbnailPath = string.Empty;
-
-        private Sequence _sequence = null;
-        private bool _isViewItem = false;
 
         private bool _isSetting = false;
         public bool IsSetting { get { return _isSetting; } }
@@ -73,7 +67,7 @@ namespace MyProject.Gacha.Result
         {
             await UniTask.WaitWhile(() => _isSetting);
 
-            KillSequence();
+            _canvasGroupSetter.KillScaleSequence();
             Hide();
 
             SetItemNameText(string.Empty);
@@ -104,14 +98,10 @@ namespace MyProject.Gacha.Result
         /// </summary>
         public void View()
         {
-            SetCanvasGroupAlpha(_viewAlpha);
+            _canvasGroupSetter.View();
 
-            _isViewItem = false;
-
-            KillSequence();
-            _sequence = DOTween.Sequence();
-            _sequence.Append(_canvasGroup.transform.DOScale(Vector3.one, _animationTime).SetEase(Ease.OutBack))
-            .OnComplete(() => { _isViewItem = true; });
+            _canvasGroupSetter.KillScaleSequence();
+            _canvasGroupSetter.PlayScaleAnimation(Vector3.one, _animationTime, Ease.OutBack);
         }
 
         /// <summary>
@@ -119,26 +109,25 @@ namespace MyProject.Gacha.Result
         /// </summary>
         public void Hide()
         {
-            SetCanvasGroupAlpha(_hideAlpha);
-            _canvasGroup.transform.localScale = _defaultScale;
+            _canvasGroupSetter.Hide();
+            _canvasGroupSetter.SetLocalScale(_defaultScale);
         }
 
         /// <summary>
-        /// アイテムを表示
+        /// アイテムのアニメーションを再生中？
         /// </summary>
-        /// <returns>true: 表示, false: 非表示</returns>
-        public bool IsViewItem()
+        /// <returns>true: 再生中, false: 停止</returns>
+        public bool IsPlayingScaleAnimation()
         {
-            return _isViewItem;
+            return _canvasGroupSetter.IsPlayingScaleAnimation();
         }
 
         /// <summary>
-        /// CanvasGroupのアルファ設定
+        /// CanvasGroupを表示
         /// </summary>
-        /// <param name="alpha">アルファ値</param>
-        private void SetCanvasGroupAlpha(float alpha)
+        public void ViewCanvasGroup()
         {
-            _canvasGroup.alpha = alpha;
+            _canvasGroupSetter.View();
         }
 
         /// <summary>
@@ -166,18 +155,6 @@ namespace MyProject.Gacha.Result
         public void SetItemNameText(string name)
         {
             _itemNameText.SetText(name);
-        }
-
-        /// <summary>
-        /// DOTween終了
-        /// </summary>
-        private void KillSequence()
-        {
-            if (_sequence != null)
-            {
-                _sequence.Kill(true);
-                _sequence = null;
-            }
         }
     }
 }

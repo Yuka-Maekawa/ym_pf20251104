@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using MyProject.Common.UI;
 using MyProject.Gacha.Lottery;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace MyProject.Gacha.Result
     public class GachaResultUIController : MonoBehaviour
     {
         [SerializeField] private GachaResultMenu _resultMenu = null;
-        [SerializeField] private GachaResultBackSceneButton _backSceneButton = null;
+        [SerializeField] private CanvasGroupSetter _buttonCanvasGroupSetter = null;
 
         /// <summary>
         /// 初期化
@@ -16,7 +17,7 @@ namespace MyProject.Gacha.Result
         public void Initialize(int itemNum)
         {
             _resultMenu.Initialize(itemNum);
-            _backSceneButton.Hide();
+            _buttonCanvasGroupSetter.Hide();
         }
 
         /// <summary>
@@ -36,20 +37,21 @@ namespace MyProject.Gacha.Result
         }
 
         /// <summary>
-        /// ウィンドウを閉じる
+        /// ウィンドウを閉じる（非同期）
         /// </summary>
-        public void Close()
+        public async UniTask CloseAsync()
         {
-            _resultMenu.Close();
+            _buttonCanvasGroupSetter.Hide();
+            await _resultMenu.CloseAsync();
         }
 
         /// <summary>
-        /// ウィンドウが開くアニメーションが終了しているか？
+        /// ウィンドウアニメーションを再生中
         /// </summary>
-        /// <returns>true: 終了, false: 再生中</returns>
-        public bool IsEndOpenAnimation()
+        /// <returns>true: 再生中, false: 停止</returns>
+        public bool IsPlayingWindowAnimation()
         {
-            return _resultMenu.IsEndOpenAnimation();
+            return _resultMenu.IsPlayingWindowAnimation();
         }
 
         /// <summary>
@@ -82,7 +84,7 @@ namespace MyProject.Gacha.Result
         /// </summary>
         public void ViewBackSceneButton()
         {
-            _backSceneButton.View();
+            _buttonCanvasGroupSetter.View();
         }
     }
 }

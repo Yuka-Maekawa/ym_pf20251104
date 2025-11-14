@@ -35,6 +35,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 327d822f13381c045a5bc12b493a645f
+    m_Address: UI/Gacha/GachaMenu/Prefab/Lineup
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 34b944733aba3904e8c16315b18cd6e9
     m_Address: UI/Gacha/GachaResult/Prefab/GachaResultUI
     m_ReadOnly: 0
@@ -105,6 +110,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab5791af4a2860445ba94c389091f514
+    m_Address: UI/Gacha/GachaMenu/Prefab/TitleText
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: af60a73c414ba0749adbf4caaec9590e
     m_Address: Scene/Gacha/GachaOnceResult
     m_ReadOnly: 0
@@ -127,6 +137,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cc09b3c3b66e40f4ea8218d381019329
     m_Address: UI/Test/AddressablesTest
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ced4bb4e0484c884ea69fb88d4af834b
+    m_Address: UI/Gacha/GachaMenu/Prefab/LineupItem
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -162,6 +177,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f6c0c68c9b77c1345b7bcd5f71050496
     m_Address: Database/Gacha/LineupSpecialSuperRare
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fbf9a709a81d6fd4b8fa00aad6da0b75
+    m_Address: UI/Gacha/GachaMenu/Prefab/LineupMenuWindow
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
