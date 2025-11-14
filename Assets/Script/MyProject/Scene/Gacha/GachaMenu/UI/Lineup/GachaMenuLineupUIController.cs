@@ -1,9 +1,11 @@
 ﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using MyProject.Common.UI;
 using MyProject.Database.Gacha;
 using MyProject.Gacha.Lottery;
 using MyProject.Systems.Resource;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MyProject.Gacha.Menu
 {
@@ -13,8 +15,10 @@ namespace MyProject.Gacha.Menu
         [SerializeField] private Transform _parentTransform = null;
         [SerializeField] private GameObject _lineupItemObj = null;
         [SerializeField] private GameObject _rootObj = null;
+        [SerializeField] private Scrollbar _scrollbar = null;
 
         private static readonly string _gachaInfoFilePath = "Database/Gacha/GachaInfo";
+        private static readonly float _animationTime = 0.25f;
 
         private GameObject[] _itemObjs = null;
         private GachaMenuLineupItem[] _lineupItems = null;
@@ -60,6 +64,8 @@ namespace MyProject.Gacha.Menu
         /// </summary>
         public async UniTask ReleaseAsync()
         {
+            _canvasGroupSetter.KillAllSequence();
+
             int count = _lineupItems.Length;
             for (int i = 0; i < count; ++i)
             {
@@ -84,21 +90,26 @@ namespace MyProject.Gacha.Menu
         }
 
         /// <summary>
-        /// 開く
+        /// 開く（非同期）
         /// </summary>
-        public void Open()
+        public async UniTask OpenAsync()
         {
             SetActive(true);
-            _canvasGroupSetter.View();
+
+            _scrollbar.value = 1f;
+            _canvasGroupSetter.PlayFadeInAnimation(_animationTime, Ease.InOutSine);
+
+            await UniTask.WaitWhile(() => _canvasGroupSetter.IsPlayingFadeAnimation());
         }
 
         /// <summary>
-        /// 閉じる
+        /// 閉じる（非同期）
         /// </summary>
-        public void Close()
+        public async UniTask CloseAsync()
         {
+            _canvasGroupSetter.PlayFadeOutAnimation(_animationTime, Ease.InOutSine);
+            await UniTask.WaitWhile(() => _canvasGroupSetter.IsPlayingFadeAnimation());
             SetActive(false);
-            _canvasGroupSetter.Hide();
         }
     }
 }

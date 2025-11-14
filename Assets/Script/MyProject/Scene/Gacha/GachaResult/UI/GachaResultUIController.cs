@@ -45,12 +45,12 @@ namespace MyProject.Gacha.Result
         }
 
         /// <summary>
-        /// ウィンドウが開くアニメーションが終了しているか？
+        /// ウィンドウが開くアニメーションを再生中
         /// </summary>
-        /// <returns>true: 終了, false: 再生中</returns>
-        public bool IsEndOpenAnimation()
+        /// <returns>true: 再生中, false: 停止</returns>
+        public bool IsPlayingOpenAnimation()
         {
-            return _resultMenu.IsEndOpenAnimation();
+            return _resultMenu.IsPlayingOpenAnimation();
         }
 
         /// <summary>

@@ -89,7 +89,7 @@ namespace MyProject.Gacha.Result
                 _uIController.Open();
             }
 
-            if (!_uIController.IsMenuItemsSetting() && _uIController.IsEndOpenAnimation())
+            if (!_uIController.IsMenuItemsSetting() && !_uIController.IsPlayingOpenAnimation())
             {
                 _stateMachine.MoveState(State.ViewUI);
             }

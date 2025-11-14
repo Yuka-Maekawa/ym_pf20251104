@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using MyProject.Common;
 using UnityEngine;
 
@@ -19,7 +19,7 @@ namespace MyProject.Gacha.Menu
         private StateMachine<State> _stateMachine = null;
 
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
         public void Initialize()
         {
@@ -31,7 +31,7 @@ namespace MyProject.Gacha.Menu
         }
 
         /// <summary>
-        /// ‰Šú‰»i”ñ“¯Šúj
+        /// åˆæœŸåŒ–ï¼ˆéåŒæœŸï¼‰
         /// </summary>
         public async UniTask InitializeAsync()
         {
@@ -41,7 +41,7 @@ namespace MyProject.Gacha.Menu
         }
 
         /// <summary>
-        /// ‰ğ•ú
+        /// è§£æ”¾
         /// </summary>
         public void Release()
         {
@@ -54,31 +54,49 @@ namespace MyProject.Gacha.Menu
         }
 
         /// <summary>
-        /// ƒ‰ƒCƒ“ƒiƒbƒv‚ğŠJ‚­
+        /// ãƒ©ã‚¤ãƒ³ãƒŠãƒƒãƒ—ã‚’é–‹ã
         /// </summary>
         public void PushLineupOpenButton()
         {
             if (_stateMachine.Current == State.Home)
             {
-                _lineupUIController.Open();
-                _stateMachine.MoveState(State.Lineup);
+                PushLineupOpenButtonAsync().Forget();
             }
         }
 
         /// <summary>
-        /// ƒ‰ƒCƒ“ƒiƒbƒv‚ğ•Â‚¶‚é
+        /// ãƒ©ã‚¤ãƒ³ãƒŠãƒƒãƒ—ã‚’é–‹ãå‹•ä½œã®éåŒæœŸå‡¦ç†
+        /// </summary>
+        private async UniTask PushLineupOpenButtonAsync()
+        {
+            _stateMachine.MoveState(State.Idle);
+            await _lineupUIController.OpenAsync();
+            _stateMachine.MoveState(State.Lineup);
+        }
+
+        /// <summary>
+        /// ãƒ©ã‚¤ãƒ³ãƒŠãƒƒãƒ—ã‚’é–‰ã˜ã‚‹
         /// </summary>
         public void PushLineupCloseButton()
         {
             if (_stateMachine.Current == State.Lineup)
             {
-                _lineupUIController.Close();
-                _stateMachine.MoveState(State.Home);
+                PushLineupCloseButtonAsync().Forget();
             }
         }
 
         /// <summary>
-        /// ’P”­ƒ{ƒ^ƒ“‚ğ‰Ÿ‰º
+        /// ãƒ©ã‚¤ãƒ³ãƒŠãƒƒãƒ—ã‚’é–‰ã˜ã‚‹å‹•ä½œã®éåŒæœŸå‡¦ç†
+        /// </summary>
+        private async UniTask PushLineupCloseButtonAsync()
+        {
+            _stateMachine.MoveState(State.Idle);
+            await _lineupUIController.CloseAsync();
+            _stateMachine.MoveState(State.Home);
+        }
+
+        /// <summary>
+        /// å˜ç™ºãƒœã‚¿ãƒ³ã‚’æŠ¼ä¸‹
         /// </summary>
         public void PushOneGachaButton()
         {
@@ -89,7 +107,7 @@ namespace MyProject.Gacha.Menu
         }
 
         /// <summary>
-        /// ’P”­ƒ{ƒ^ƒ“‚ğ‰Ÿ‰º‚Ì”ñ“¯Šúˆ—
+        /// å˜ç™ºãƒœã‚¿ãƒ³ã‚’æŠ¼ä¸‹ã®éåŒæœŸå‡¦ç†
         /// </summary>
         public async UniTask PushOneGachaButtonAsync()
         {
@@ -99,7 +117,7 @@ namespace MyProject.Gacha.Menu
         }
 
         /// <summary>
-        /// 10‰ñƒ{ƒ^ƒ“‚ğ‰Ÿ‰º
+        /// 10å›ãƒœã‚¿ãƒ³ã‚’æŠ¼ä¸‹
         /// </summary>
         public void PushTenTimeGachaButton()
         {
@@ -110,7 +128,7 @@ namespace MyProject.Gacha.Menu
         }
 
         /// <summary>
-        /// 10‰ñƒ{ƒ^ƒ“‚ğ‰Ÿ‰º‚Ì”ñ“¯Šúˆ—
+        /// 10å›ãƒœã‚¿ãƒ³ã‚’æŠ¼ä¸‹ã®éåŒæœŸå‡¦ç†
         /// </summary>
         public async UniTask PushTenTimeGachaButtonAsync()
         {
