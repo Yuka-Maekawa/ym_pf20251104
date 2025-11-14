@@ -41,14 +41,17 @@ namespace MyProject.Gacha.Menu
             int tableNum = table.Count;
             _lineupGroup.Initialize(tableNum);
 
+            var task = new UniTask[tableNum];
             for (int i = 0; i < tableNum; ++i)
             {
                 var itemInfo = table[i];
-                await _lineupGroup.SetupItemAsync(i, rarityColor, itemInfo.ThumbnailName, itemInfo.Name);
+                task[i] = _lineupGroup.SetupItemAsync(i, rarityColor, itemInfo.ThumbnailName, itemInfo.Name);
             }
 
+            await UniTask.WhenAll(task);
+
             // ラインナップの数に合わせて、LineupItemのサイズを設定
-            var size = new Vector2(_myObjRectTransform.sizeDelta.x, _titleTextRectTransform.sizeDelta.y + _itemGroupRectTransform.sizeDelta.y  + _itemGroupSpece);
+            var size = new Vector2(_myObjRectTransform.sizeDelta.x, _titleTextRectTransform.sizeDelta.y + _itemGroupRectTransform.sizeDelta.y + _itemGroupSpece);
             _myObjRectTransform.sizeDelta = size;
         }
 
