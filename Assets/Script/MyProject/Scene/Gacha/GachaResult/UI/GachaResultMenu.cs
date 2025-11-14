@@ -66,7 +66,7 @@ namespace MyProject.Gacha.Result
 
             _canvasGroupSetter.View();
 
-            _bgCanvasGroupSetter.PlayFadeInAnimation(_animationTime, Ease.InOutSine);
+            _bgCanvasGroupSetter.PlayFadeOutAnimation(_animationTime, Ease.InOutSine);
             _bgCanvasGroupSetter.PlayScaleAnimation(_animationScale, _animationTime, Ease.InOutBack);
         }
 
@@ -75,7 +75,7 @@ namespace MyProject.Gacha.Result
         /// </summary>
         public async UniTask CloseAsync()
         {
-            _bgCanvasGroupSetter.PlayFadeOutAnimation(_animationTime, Ease.InOutSine);
+            _bgCanvasGroupSetter.PlayFadeInAnimation(_animationTime, Ease.InOutSine);
             _bgCanvasGroupSetter.PlayScaleAnimation(_defaultScale, _animationTime, Ease.InOutBack);
 
             await UniTask.WaitWhile(() => IsPlayingWindowAnimation());

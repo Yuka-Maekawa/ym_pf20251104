@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using MyProject.Common;
+using MyProject.Common.UI;
 using MyProject.Gacha.Lottery;
 using MyProject.Systems.Resource;
 using UnityEngine;
@@ -102,6 +103,7 @@ namespace MyProject.Gacha.Result
             _stateMachine.MoveState(State.Idle);
 
             await _uIController.CloseAsync();
+            await FadeManager.Fade.PlayFadeOutAsync();
             await _uIController.ReleaseAsync();
             await NextSceneAsync();
         }

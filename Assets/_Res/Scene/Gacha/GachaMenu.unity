@@ -215,6 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _menuUIController: {fileID: 229247921}
   _lineupUIController: {fileID: 1493396105}
+  _fadeController: {fileID: 0}
 --- !u!1 &442432858
 GameObject:
   m_ObjectHideFlags: 0

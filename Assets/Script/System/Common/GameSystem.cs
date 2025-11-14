@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using MyProject.Common.UI;
 using MyProject.Systems.Resource;
 using UnityEngine;
 
@@ -16,7 +17,9 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
         DontDestroyOnLoad(this.gameObject);
 
         await ResourceManager.CreateInstance(this.gameObject);
+        await FadeManager.CreateInstance(this.gameObject);
         await SceneLoader.CreateInstance(this.gameObject);
+
         await ResourceManager.Global.LoadAssetAsync<GameObject>(_eventSystemFilePath);
         _eventSystemObj = ResourceManager.Global.GetAsset<GameObject>(_eventSystemFilePath, this.gameObject.transform);
     }
@@ -27,7 +30,8 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
     protected override void Release()
     {
         Destroy(_eventSystemObj);
-        ResourceManager.DestroyInstance();
         SceneLoader.DestroyInstance();
+        FadeManager.DestroyInstance();
+        ResourceManager.DestroyInstance();
     }
 }

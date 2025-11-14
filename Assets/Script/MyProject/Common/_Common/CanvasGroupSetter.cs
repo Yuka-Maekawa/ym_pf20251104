@@ -119,7 +119,7 @@ namespace MyProject.Common.UI
         public void PlayFadeInAnimation(float animationTime, Ease ease)
         {
             KillFadeSequence();
-            PlayFadeAnimation(_viewAlpha, animationTime, ease);
+            PlayFadeAnimation(_hideAlpha, animationTime, ease);
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace MyProject.Common.UI
         public void PlayFadeOutAnimation(float animationTime, Ease ease)
         {
             KillFadeSequence();
-            PlayFadeAnimation(_hideAlpha, animationTime, ease);
+            PlayFadeAnimation(_viewAlpha, animationTime, ease);
         }
 
         /// <summary>
