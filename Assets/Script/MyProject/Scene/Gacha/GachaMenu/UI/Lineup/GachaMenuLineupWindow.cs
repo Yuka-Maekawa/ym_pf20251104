@@ -115,7 +115,7 @@ namespace MyProject.Gacha.Menu
         /// </summary>
         public async UniTask OpenWindowAsync()
         {
-            _menuCanvasGroupSetter.PlayFadeInAnimation(_animationTime, Ease.InOutSine);
+            _menuCanvasGroupSetter.PlayFadeOutAnimation(_animationTime, Ease.InOutSine);
             _menuCanvasGroupSetter.PlayScaleAnimation(_animationScale, _animationTime, Ease.InOutSine);
 
             await UniTask.WaitWhile(() => _menuCanvasGroupSetter.IsPlayingAnimation());
@@ -127,8 +127,8 @@ namespace MyProject.Gacha.Menu
         public async UniTask OpenLineupAsync()
         {
             _scrollbar.value = _scrollbarMaxValue;
-            _scrollbarCanvasGroupSetter.PlayFadeInAnimation(_menuAnimationTime, Ease.InOutSine);
-            _parentCanvasGroupSetter.PlayFadeInAnimation(_menuAnimationTime, Ease.InOutSine);
+            _scrollbarCanvasGroupSetter.PlayFadeOutAnimation(_menuAnimationTime, Ease.InOutSine);
+            _parentCanvasGroupSetter.PlayFadeOutAnimation(_menuAnimationTime, Ease.InOutSine);
 
             await UniTask.WaitWhile(() => _parentCanvasGroupSetter.IsPlayingFadeAnimation());
         }
@@ -138,7 +138,7 @@ namespace MyProject.Gacha.Menu
         /// </summary>
         public async UniTask CloseAsync()
         {
-            _menuCanvasGroupSetter.PlayFadeOutAnimation(_animationTime, Ease.InOutSine);
+            _menuCanvasGroupSetter.PlayFadeInAnimation(_animationTime, Ease.InOutSine);
             _menuCanvasGroupSetter.PlayScaleAnimation(_defaultScale, _animationTime, Ease.InOutSine);
 
             await UniTask.WaitWhile(() => _menuCanvasGroupSetter.IsPlayingAnimation());

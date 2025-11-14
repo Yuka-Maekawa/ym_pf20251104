@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using MyProject.Common;
+using MyProject.Common.UI;
 using UnityEngine;
 
 namespace MyProject.Gacha.Menu
@@ -37,6 +38,9 @@ namespace MyProject.Gacha.Menu
         {
             await _lineupUIController.InitializeAsync();
             _menuUIController.Open();
+
+            await FadeManager.Fade.PlayFadeInAsync();
+
             _stateMachine.MoveState(State.Home);
         }
 
