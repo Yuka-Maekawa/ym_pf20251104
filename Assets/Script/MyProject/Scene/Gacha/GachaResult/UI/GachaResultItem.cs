@@ -24,9 +24,6 @@ namespace MyProject.Gacha.Result
         private Texture2D _thumbnail = null;
         private string _thumbnailPath = string.Empty;
 
-        private Sequence _sequence = null;
-        private bool _isViewItem = false;
-
         private bool _isSetting = false;
         public bool IsSetting { get { return _isSetting; } }
 
@@ -70,7 +67,7 @@ namespace MyProject.Gacha.Result
         {
             await UniTask.WaitWhile(() => _isSetting);
 
-            KillSequence();
+            _canvasGroupSetter.KillScaleSequence();
             Hide();
 
             SetItemNameText(string.Empty);
@@ -103,14 +100,8 @@ namespace MyProject.Gacha.Result
         {
             _canvasGroupSetter.View();
 
-            _isViewItem = false;
-
-            KillSequence();
-            _sequence = DOTween.Sequence();
-
-            var transform = _canvasGroupSetter.GetTransform();
-            _sequence.Append(transform.DOScale(Vector3.one, _animationTime).SetEase(Ease.OutBack))
-            .OnComplete(() => { _isViewItem = true; });
+            _canvasGroupSetter.KillScaleSequence();
+            _canvasGroupSetter.PlayScaleAnimation(Vector3.one, _animationTime, Ease.OutBack);
         }
 
         /// <summary>
@@ -123,12 +114,12 @@ namespace MyProject.Gacha.Result
         }
 
         /// <summary>
-        /// アイテムを表示
+        /// アイテムのアニメーションを再生中？
         /// </summary>
-        /// <returns>true: 表示, false: 非表示</returns>
-        public bool IsViewItem()
+        /// <returns>true: 再生中, false: 停止</returns>
+        public bool IsPlayingScaleAnimation()
         {
-            return _isViewItem;
+            return _canvasGroupSetter.IsPlayingScaleAnimation();
         }
 
         /// <summary>
@@ -164,18 +155,6 @@ namespace MyProject.Gacha.Result
         public void SetItemNameText(string name)
         {
             _itemNameText.SetText(name);
-        }
-
-        /// <summary>
-        /// DOTween終了
-        /// </summary>
-        private void KillSequence()
-        {
-            if (_sequence != null)
-            {
-                _sequence.Kill(true);
-                _sequence = null;
-            }
         }
     }
 }
