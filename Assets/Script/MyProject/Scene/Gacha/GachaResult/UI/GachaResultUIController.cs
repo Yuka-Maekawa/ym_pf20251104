@@ -8,7 +8,7 @@ namespace MyProject.Gacha.Result
     public class GachaResultUIController : MonoBehaviour
     {
         [SerializeField] private GachaResultMenu _resultMenu = null;
-        [SerializeField] private CanvasGroupSetter _canvasGroupSetter = null;
+        [SerializeField] private CanvasGroupSetter _buttonCanvasGroupSetter = null;
 
         /// <summary>
         /// 初期化
@@ -17,7 +17,7 @@ namespace MyProject.Gacha.Result
         public void Initialize(int itemNum)
         {
             _resultMenu.Initialize(itemNum);
-            _canvasGroupSetter.Hide();
+            _buttonCanvasGroupSetter.Hide();
         }
 
         /// <summary>
@@ -37,20 +37,21 @@ namespace MyProject.Gacha.Result
         }
 
         /// <summary>
-        /// ウィンドウを閉じる
+        /// ウィンドウを閉じる（非同期）
         /// </summary>
-        public void Close()
+        public async UniTask CloseAsync()
         {
-            _resultMenu.Close();
+            _buttonCanvasGroupSetter.Hide();
+            await _resultMenu.CloseAsync();
         }
 
         /// <summary>
-        /// ウィンドウが開くアニメーションを再生中
+        /// ウィンドウアニメーションを再生中
         /// </summary>
         /// <returns>true: 再生中, false: 停止</returns>
-        public bool IsPlayingOpenAnimation()
+        public bool IsPlayingWindowAnimation()
         {
-            return _resultMenu.IsPlayingOpenAnimation();
+            return _resultMenu.IsPlayingWindowAnimation();
         }
 
         /// <summary>
@@ -83,7 +84,7 @@ namespace MyProject.Gacha.Result
         /// </summary>
         public void ViewBackSceneButton()
         {
-            _canvasGroupSetter.View();
+            _buttonCanvasGroupSetter.View();
         }
     }
 }

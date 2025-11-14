@@ -180,6 +180,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fbf9a709a81d6fd4b8fa00aad6da0b75
+    m_Address: UI/Gacha/GachaMenu/Prefab/LineupMenuWindow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: feb7e84fc802c0e49bcb014e223fbbaa
     m_Address: Database/Gacha/DefaultLottery
     m_ReadOnly: 0

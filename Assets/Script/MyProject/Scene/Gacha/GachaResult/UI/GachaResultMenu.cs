@@ -27,7 +27,9 @@ namespace MyProject.Gacha.Result
         /// <param name="itemNum">アイテム数</param>
         public void Initialize(int itemNum)
         {
-            Close();
+            _canvasGroupSetter.Hide();
+            _bgCanvasGroupSetter.Hide();
+            _bgCanvasGroupSetter.SetLocalScale(_defaultScale);
 
             _baseItemObj.SetActive(false);
 
@@ -69,13 +71,16 @@ namespace MyProject.Gacha.Result
         }
 
         /// <summary>
-        /// ウィンドウを閉じる
+        /// ウィンドウを閉じる（非同期）
         /// </summary>
-        public void Close()
+        public async UniTask CloseAsync()
         {
+            _bgCanvasGroupSetter.PlayFadeOutAnimation(_animationTime, Ease.InOutSine);
+            _bgCanvasGroupSetter.PlayScaleAnimation(_defaultScale, _animationTime, Ease.InOutBack);
+
+            await UniTask.WaitWhile(() => IsPlayingWindowAnimation());
+
             _canvasGroupSetter.Hide();
-            _bgCanvasGroupSetter.Hide();
-            _bgCanvasGroupSetter.SetLocalScale(_defaultScale);
         }
 
         /// <summary>
@@ -150,7 +155,7 @@ namespace MyProject.Gacha.Result
         /// ウィンドウが開くアニメーションを再生中
         /// </summary>
         /// <returns>true: 再生中, false: 停止</returns>
-        public bool IsPlayingOpenAnimation()
+        public bool IsPlayingWindowAnimation()
         {
             return _bgCanvasGroupSetter.IsPlayingAnimation();
         }

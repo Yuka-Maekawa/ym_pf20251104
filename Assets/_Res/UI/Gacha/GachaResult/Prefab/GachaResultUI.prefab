@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _resultMenu: {fileID: 7478311316636554019}
-  _canvasGroupSetter: {fileID: 709110930610096396}
+  _buttonCanvasGroupSetter: {fileID: 709110930610096396}
 --- !u!1001 &538504564807820624
 PrefabInstance:
   m_ObjectHideFlags: 0
