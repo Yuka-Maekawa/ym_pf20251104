@@ -8,8 +8,6 @@ namespace MyProject.Gacha.Menu
     {
         [SerializeField] private GameObject _baseItemObj = null;
 
-        private static readonly float _viewAlpha = 1f;
-
         private GameObject[] _itemObjs = null;
         private GachaResultItem[] _resultItems = null;
 
@@ -67,7 +65,7 @@ namespace MyProject.Gacha.Menu
             if (index < _resultItems.Length)
             {
                 var item = _resultItems[index];
-                item.SetCanvasGroupAlpha(_viewAlpha);
+                item.ViewCanvasGroup();
                 await item.SetupItemAsync(bgColor, textureName, name);
             }
         }

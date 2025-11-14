@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using MyProject.Common.UI;
 using MyProject.Systems.Resource;
 using UnityEngine;
 
@@ -6,12 +7,10 @@ namespace MyProject.Gacha.Menu
 {
     public class GachaMenuUIController : MonoBehaviour
     {
-        [SerializeField] private CanvasGroup _canvasGroup = null;
+        [SerializeField] private CanvasGroupSetter _canvasGroupSetter = null;
 
         private static readonly string _onceResultScenePath = "Scene/Gacha/GachaOnceResult";
         private static readonly string _tenTimesResultScenePath = "Scene/Gacha/GachaTenTimesResult";
-        private static readonly float _viewAlpha = 1f;
-        private static readonly float _hideAlpha = 0f;
 
         /// <summary>
         /// 初期化
@@ -26,7 +25,7 @@ namespace MyProject.Gacha.Menu
         /// </summary>
         public void Open()
         {
-            _canvasGroup.alpha = _viewAlpha;
+            _canvasGroupSetter.View();
         }
 
         /// <summary>
@@ -34,7 +33,7 @@ namespace MyProject.Gacha.Menu
         /// </summary>
         public void Close()
         {
-            _canvasGroup.alpha = _hideAlpha;
+            _canvasGroupSetter.Hide();
         }
 
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using MyProject.Common.UI;
 using MyProject.Systems.Resource;
 using TMPro;
 using UnityEngine;
@@ -10,16 +11,13 @@ namespace MyProject.Gacha.Result
     public class GachaResultItem : MonoBehaviour
     {
         [SerializeField] private GameObject _rootObj = null;
-        [SerializeField] private CanvasGroup _canvasGroup = null;
+        [SerializeField] private CanvasGroupSetter _canvasGroupSetter = null;
         [SerializeField] private Image _bgImage = null;
         [SerializeField] private RawImage _thumbnailImage = null;
         [SerializeField] private TextMeshProUGUI _itemNameText = null;
         [SerializeField] private Vector3 _defaultScale = new Vector3(0.5f, 0.5f, 1f);
 
         private static readonly string _textureFilePath = "UI/Gacha/GachaResult/Texture/";
-
-        private static readonly float _viewAlpha = 1f;
-        private static readonly float _hideAlpha = 0f;
 
         private static readonly float _animationTime = 0.15f;
 
@@ -103,13 +101,15 @@ namespace MyProject.Gacha.Result
         /// </summary>
         public void View()
         {
-            SetCanvasGroupAlpha(_viewAlpha);
+            _canvasGroupSetter.View();
 
             _isViewItem = false;
 
             KillSequence();
             _sequence = DOTween.Sequence();
-            _sequence.Append(_canvasGroup.transform.DOScale(Vector3.one, _animationTime).SetEase(Ease.OutBack))
+
+            var transform = _canvasGroupSetter.GetTransform();
+            _sequence.Append(transform.DOScale(Vector3.one, _animationTime).SetEase(Ease.OutBack))
             .OnComplete(() => { _isViewItem = true; });
         }
 
@@ -118,8 +118,8 @@ namespace MyProject.Gacha.Result
         /// </summary>
         public void Hide()
         {
-            SetCanvasGroupAlpha(_hideAlpha);
-            _canvasGroup.transform.localScale = _defaultScale;
+            _canvasGroupSetter.Hide();
+            _canvasGroupSetter.SetLocalScale(_defaultScale);
         }
 
         /// <summary>
@@ -132,12 +132,11 @@ namespace MyProject.Gacha.Result
         }
 
         /// <summary>
-        /// CanvasGroupのアルファ設定
+        /// CanvasGroupを表示
         /// </summary>
-        /// <param name="alpha">アルファ値</param>
-        public void SetCanvasGroupAlpha(float alpha)
+        public void ViewCanvasGroup()
         {
-            _canvasGroup.alpha = alpha;
+            _canvasGroupSetter.View();
         }
 
         /// <summary>

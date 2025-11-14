@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using MyProject.Common.UI;
 using MyProject.Gacha.Lottery;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace MyProject.Gacha.Result
     public class GachaResultUIController : MonoBehaviour
     {
         [SerializeField] private GachaResultMenu _resultMenu = null;
-        [SerializeField] private GachaResultBackSceneButton _backSceneButton = null;
+        [SerializeField] private CanvasGroupSetter _canvasGroupSetter = null;
 
         /// <summary>
         /// 初期化
@@ -16,7 +17,7 @@ namespace MyProject.Gacha.Result
         public void Initialize(int itemNum)
         {
             _resultMenu.Initialize(itemNum);
-            _backSceneButton.Hide();
+            _canvasGroupSetter.Hide();
         }
 
         /// <summary>
@@ -82,7 +83,7 @@ namespace MyProject.Gacha.Result
         /// </summary>
         public void ViewBackSceneButton()
         {
-            _backSceneButton.View();
+            _canvasGroupSetter.View();
         }
     }
 }

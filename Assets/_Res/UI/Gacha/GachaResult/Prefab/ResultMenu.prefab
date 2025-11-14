@@ -93,8 +93,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfe8fa9694f7cfe47a5807a0a3054073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvasGroup: {fileID: 5989051580843054949}
-  _bgCanvasGroup: {fileID: 7792937737105810643}
+  _canvasGroupSetter: {fileID: 8546804348100180478}
+  _bgCanvasGroupSetter: {fileID: 952417883669556257}
   _baseParent: {fileID: 1485595471989827099}
   _baseItemObj: {fileID: 4594914200871491886}
   _bgColors:
@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 7574058838842849377}
   - component: {fileID: 7792937737105810643}
   - component: {fileID: 3777621283056645956}
+  - component: {fileID: 952417883669556257}
   m_Layer: 5
   m_Name: BG
   m_TagString: Untagged
@@ -190,6 +191,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &952417883669556257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4126359218743387920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f47a0244ab86442aecd0acfc8eb7b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 7792937737105810643}
 --- !u!1 &6792520444338971006
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,6 +215,7 @@ GameObject:
   - component: {fileID: 184344341733368499}
   - component: {fileID: 7799031711246410515}
   - component: {fileID: 5989051580843054949}
+  - component: {fileID: 8546804348100180478}
   m_Layer: 5
   m_Name: Root
   m_TagString: Untagged
@@ -249,6 +264,19 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &8546804348100180478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6792520444338971006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f47a0244ab86442aecd0acfc8eb7b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 5989051580843054949}
 --- !u!1 &7257660299182325823
 GameObject:
   m_ObjectHideFlags: 0

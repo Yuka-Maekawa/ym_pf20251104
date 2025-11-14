@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using MyProject.Common.UI;
 using MyProject.Gacha.Lottery;
 using UnityEngine;
 
@@ -7,8 +8,8 @@ namespace MyProject.Gacha.Result
 {
     public class GachaResultMenu : MonoBehaviour
     {
-        [SerializeField] private CanvasGroup _canvasGroup = null;
-        [SerializeField] private CanvasGroup _bgCanvasGroup = null;
+        [SerializeField] private CanvasGroupSetter _canvasGroupSetter = null;
+        [SerializeField] private CanvasGroupSetter _bgCanvasGroupSetter = null;
         [SerializeField] private Transform _baseParent = null;
         [SerializeField] private GameObject _baseItemObj = null;
         [SerializeField] private Color[] _bgColors = null;
@@ -18,7 +19,6 @@ namespace MyProject.Gacha.Result
         private static readonly float _animationTime = 0.5f;
 
         private static readonly float _viewAlpha = 1f;
-        private static readonly float _hideAlpha = 0f;
 
         private GameObject[] _itemObjs = null;
         private GachaResultItem[] _items = null;
@@ -72,14 +72,16 @@ namespace MyProject.Gacha.Result
             KillFadeSequence();
             KillScaleSequence();
 
-            _canvasGroup.alpha = _viewAlpha;
+            _canvasGroupSetter.View();
 
             _fadeSequence = DOTween.Sequence();
-            _fadeSequence.Append(_bgCanvasGroup.DOFade(_viewAlpha, _animationTime).SetEase(Ease.InOutSine))
+            var bgCanvasGroup = _bgCanvasGroupSetter.GetCanvasGroup();
+            _fadeSequence.Append(bgCanvasGroup.DOFade(_viewAlpha, _animationTime).SetEase(Ease.InOutSine))
                 .OnComplete(() => { _isFadeAnimation = true; });
 
             _scaleSequence = DOTween.Sequence();
-            _scaleSequence.Append(_bgCanvasGroup.transform.DOScale(_animationScale, _animationTime).SetEase(Ease.InOutBack))
+            var bgCanvasGroupTransform = _bgCanvasGroupSetter.GetTransform();
+            _scaleSequence.Append(bgCanvasGroupTransform.DOScale(_animationScale, _animationTime).SetEase(Ease.InOutBack))
                 .OnComplete(() => { _isScaleAnimation = true; });
         }
 
@@ -88,9 +90,9 @@ namespace MyProject.Gacha.Result
         /// </summary>
         public void Close()
         {
-            _canvasGroup.alpha = _hideAlpha;
-            _bgCanvasGroup.alpha = _hideAlpha;
-            _bgCanvasGroup.transform.localScale = _defaultScale;
+            _canvasGroupSetter.Hide();
+            _bgCanvasGroupSetter.Hide();
+            _bgCanvasGroupSetter.SetLocalScale(_defaultScale);
         }
 
         /// <summary>
