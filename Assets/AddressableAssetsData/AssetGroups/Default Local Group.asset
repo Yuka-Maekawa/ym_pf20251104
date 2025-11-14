@@ -75,6 +75,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 53b3e15a131db054c8f80c2734624130
+    m_Address: Scene/Launcher
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 554150c014987cd4eb8bcaacc54bc116
     m_Address: Scene/Gacha/GachaTenTimesResult
     m_ReadOnly: 0
