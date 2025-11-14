@@ -143,6 +143,7 @@ MonoBehaviour:
   _parentTransform: {fileID: 3961651631765829536}
   _lineupItemObj: {fileID: 3461717658857852694}
   _rootObj: {fileID: 6042371068364456777}
+  _scrollbar: {fileID: 8661007751228926263}
 --- !u!1 &5774603338364490702
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,15 +769,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -784,7 +785,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -70
+      value: -80
       objectReference: {fileID: 0}
     - target: {fileID: 976977618701748964, guid: 4cd9fd1c068dc3a43950709eb67f8df0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

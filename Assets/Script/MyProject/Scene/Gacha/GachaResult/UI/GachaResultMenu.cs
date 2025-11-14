@@ -18,8 +18,6 @@ namespace MyProject.Gacha.Result
         private static readonly Vector3 _animationScale = new Vector3(1f, 1f, 1f);
         private static readonly float _animationTime = 0.5f;
 
-        private static readonly float _viewAlpha = 1f;
-
         private GameObject[] _itemObjs = null;
         private GachaResultItem[] _items = null;
 
@@ -66,7 +64,7 @@ namespace MyProject.Gacha.Result
 
             _canvasGroupSetter.View();
 
-            _bgCanvasGroupSetter.PlayFadeAnimation(_animationTime, Ease.InOutSine);
+            _bgCanvasGroupSetter.PlayFadeInAnimation(_animationTime, Ease.InOutSine);
             _bgCanvasGroupSetter.PlayScaleAnimation(_animationScale, _animationTime, Ease.InOutBack);
         }
 
@@ -149,12 +147,12 @@ namespace MyProject.Gacha.Result
         }
 
         /// <summary>
-        /// ウィンドウが開くアニメーションが終了しているか？
+        /// ウィンドウが開くアニメーションを再生中
         /// </summary>
-        /// <returns>true: 終了, false: 再生中</returns>
-        public bool IsEndOpenAnimation()
+        /// <returns>true: 再生中, false: 停止</returns>
+        public bool IsPlayingOpenAnimation()
         {
-            return !_bgCanvasGroupSetter.IsPlayingFadeAnimation() && !_bgCanvasGroupSetter.IsPlayingScaleAnimation();
+            return _bgCanvasGroupSetter.IsPlayingAnimation();
         }
     }
 }

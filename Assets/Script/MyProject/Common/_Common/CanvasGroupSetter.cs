@@ -112,17 +112,38 @@ namespace MyProject.Common.UI
         }
 
         /// <summary>
-        /// フェードアニメーションを再生
+        /// フェードインアニメーションを再生
         /// </summary>
         /// <param name="animationTime">アニメーションの時間</param>
         /// <param name="ease">Ease</param>
-        public void PlayFadeAnimation(float animationTime, Ease ease)
+        public void PlayFadeInAnimation(float animationTime, Ease ease)
         {
             KillFadeSequence();
+            PlayFadeAnimation(_viewAlpha, animationTime, ease);
+        }
 
-            _isPlayingScaleAnimation = true;
+        /// <summary>
+        /// フェードアウトアニメーションを再生
+        /// </summary>
+        /// <param name="animationTime">アニメーションの時間</param>
+        /// <param name="ease">Ease</param>
+        public void PlayFadeOutAnimation(float animationTime, Ease ease)
+        {
+            KillFadeSequence();
+            PlayFadeAnimation(_hideAlpha, animationTime, ease);
+        }
+
+        /// <summary>
+        /// フェードアニメーションを再生
+        /// </summary>
+        /// <param name="alpha">アルファ値</param>
+        /// <param name="animationTime">アニメーションの時間</param>
+        /// <param name="ease">Ease</param>
+        public void PlayFadeAnimation(float alpha, float animationTime, Ease ease)
+        {
+            _isPlayingFadeAnimation = true;
             _fadeSequence = DOTween.Sequence();
-            _fadeSequence.Append(_canvasGroup.DOFade(_viewAlpha, animationTime).SetEase(Ease.InOutSine))
+            _fadeSequence.Append(_canvasGroup.DOFade(alpha, animationTime).SetEase(ease))
                 .OnComplete(() => { _isPlayingFadeAnimation = false; });
         }
 
@@ -140,6 +161,15 @@ namespace MyProject.Common.UI
             _scaleSequence = DOTween.Sequence();
             _scaleSequence.Append(transform.DOScale(scale, animationTime).SetEase(ease))
                 .OnComplete(() => { _isPlayingScaleAnimation = false; });
+        }
+
+        /// <summary>
+        /// アニメーションを再生中？
+        /// </summary>
+        /// <returns>true: 再生中, false: 停止</returns>
+        public bool IsPlayingAnimation()
+        {
+            return _isPlayingFadeAnimation || _isPlayingScaleAnimation;
         }
 
         /// <summary>
