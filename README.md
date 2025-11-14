@@ -75,18 +75,22 @@ Assets/
 │  │  ├─Common
 │  │  │  ├─Lottery
 │  │  │  ├─Scene
-│  │  │  └─System
+│  │  │  ├─System
+│  │  │  └─_Common
+│  │  │      └─Fade
 │  │  ├─Database
 │  │  │  └─Gacha
 │  │  └─Scene
 │  │      ├─Gacha
 │  │      │  ├─GachaMenu
 │  │      │  │  └─UI
+│  │      │  │      └─Lineup
 │  │      │  ├─GachaResult
 │  │      │  │  └─UI
 │  │      │  └─Lottery
 │  │      │      ├─Lineup
 │  │      │      └─Rarity
+│  │      ├─Launcher
 │  │      └─Test
 │  │          └─TestGacha
 │  └─System
@@ -117,6 +121,8 @@ Assets/
     └─UI
         ├─Common
         ├─Gacha
+        │  ├─GachaMenu
+        │  │  └─Prefab
         │  └─GachaResult
         │      ├─Prefab
         │      └─Texture
