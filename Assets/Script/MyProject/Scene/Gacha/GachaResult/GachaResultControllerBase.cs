@@ -101,8 +101,7 @@ namespace MyProject.Gacha.Result
 
             _stateMachine.MoveState(State.Idle);
 
-            _uIController.Close();
-            await UniTask.Yield();
+            await _uIController.CloseAsync();
             await _uIController.ReleaseAsync();
             await NextSceneAsync();
         }
