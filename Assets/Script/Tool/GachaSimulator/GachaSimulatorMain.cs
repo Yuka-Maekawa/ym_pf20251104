@@ -26,6 +26,22 @@ namespace MyProject.Tool.GachaSimulator
             SROrHigher, // SR以上
         }
 
+        public class SimulationInfo
+        {
+            public GachaRarityLottery.Rarity Rarity = GachaRarityLottery.Rarity.Rare;
+            public int Count = 0;
+
+            /// <summary>
+            /// コンストラクタ
+            /// </summary>
+            /// <param name="rarity">レアリティ</param>
+            public SimulationInfo(GachaRarityLottery.Rarity rarity)
+            {
+                Rarity = rarity;
+                Count = 1;
+            }
+        }
+
         // 今は定数ですが、今後UIから情報を取得する予定
         private static readonly int _id = 1;
         private static readonly int _playCount = 1000;
@@ -37,7 +53,8 @@ namespace MyProject.Tool.GachaSimulator
 
         private GachaLotteryControllerBase.ItemInfo[] _items = null;
 
-        private Dictionary<string, int> _history = new Dictionary<string, int>();
+        private Dictionary<string, SimulationInfo> _itemHistory = null;
+        private Dictionary<GachaRarityLottery.Rarity, int> _rarityHistory = null;
 
         private StateMachine<State> _stateMachine = null;
 
@@ -82,6 +99,22 @@ namespace MyProject.Tool.GachaSimulator
             _gachaOnceLottery = null;
         }
 
+        /// <summary>
+        /// シミュレーションをリセット
+        /// </summary>
+        private void ResetSimulation()
+        {
+            _simulationCount = 0;
+
+            _itemHistory?.Clear();
+            _itemHistory = null;
+
+            _rarityHistory?.Clear();
+            _rarityHistory = null;
+
+            _items = null;
+        }
+
         public void Update()
         {
             _stateMachine?.Update();
@@ -102,19 +135,20 @@ namespace MyProject.Tool.GachaSimulator
         {
             if(_stateMachine.FirstTime)
             {
-                ResetSimulation();
+                StartupSimulation();
             }
 
-            var item = _gachaOnceLottery.GetDefaultLotteryResult();
+            var resultItem = _gachaOnceLottery.GetDefaultLotteryResult();
 
-            CountupGachaHistory(item);
-            _items[_simulationCount] = item;
+            CountupGachaItemHistory(resultItem);
+            CountupGachaItemHistory(resultItem.Rarity);
+            _items[_simulationCount] = resultItem;
 
             ++_simulationCount;
 
             if (_simulationCount >= _playCount)
             {
-                Debug.Log("シミュレーションが完了しました");
+                ResultLottery();
                 _stateMachine.MoveState(State.Home);
             }
         }
@@ -126,12 +160,13 @@ namespace MyProject.Tool.GachaSimulator
         {
             if (_stateMachine.FirstTime)
             {
-                ResetSimulation();
+                StartupSimulation();
             }
 
             var item = _gachaTenTimesLottery.GetDefaultLotteryResult();
             
-            CountupGachaHistory(item);
+            CountupGachaItemHistory(item);
+            CountupGachaItemHistory(item.Rarity);
             _items[_simulationCount] = item;
 
             ++_simulationCount;
@@ -139,39 +174,76 @@ namespace MyProject.Tool.GachaSimulator
             if (_simulationCount >= _playCount)
             {
                 Debug.Log("シミュレーションが完了しました");
+                ResultLottery();
                 _stateMachine.MoveState(State.Home);
             }
         }
 
         /// <summary>
-        /// シミュレーションをリセット
+        /// シミュレーションの開始準備
         /// </summary>
-        private void ResetSimulation()
+        private void StartupSimulation()
         {
-            _simulationCount = 0;
+            ResetSimulation();
 
-            _history?.Clear();
-            _history = null;
-            _history = new Dictionary<string, int>(_playCount);
-
-            _items = null;
+            _rarityHistory = new Dictionary<GachaRarityLottery.Rarity, int>(_playCount);
+            _itemHistory = new Dictionary<string, SimulationInfo>(_playCount);
             _items = new GachaLotteryControllerBase.ItemInfo[_playCount];
         }
 
         /// <summary>
-        /// ガチャの抽選結果を記録
+        /// アイテムの抽選結果を記録
         /// </summary>
         /// <param name="itemInfo">抽選結果</param>
-        private void CountupGachaHistory(GachaLotteryControllerBase.ItemInfo itemInfo)
+        private void CountupGachaItemHistory(GachaLotteryControllerBase.ItemInfo itemInfo)
         {
             string name = itemInfo.Item.Name;
-            if(_history != null && _history.ContainsKey(name))
+
+            if (_itemHistory != null && _itemHistory.ContainsKey(name))
             {
-                ++_history[name];
+                ++_itemHistory[name].Count;
                 return;
             }
 
-            _history.Add(name, 1);
+            _itemHistory.Add(name, new SimulationInfo(itemInfo.Rarity));
+        }
+
+        /// <summary>
+        /// レアリティの抽選結果を記録
+        /// </summary>
+        /// <param name="itemInfo">抽選結果</param>
+        private void CountupGachaItemHistory(GachaRarityLottery.Rarity rarity)
+        {
+            if (_rarityHistory != null && _rarityHistory.ContainsKey(rarity))
+            {
+                ++_rarityHistory[rarity];
+                return;
+            }
+
+            _rarityHistory.Add(rarity, 1);
+        }
+
+        /// <summary>
+        ///  抽選結果
+        /// </summary>
+        private void ResultLottery()
+        {
+            Debug.Log("シミュレーションが完了しました");
+            Debug.Log("-- シミュレーション結果 --");
+
+            foreach (var item in _rarityHistory)
+            {
+                var lotteryCount = item.Value;
+                Debug.Log($"{item.Key}：{(float)(lotteryCount / (float)_playCount) * 100}");
+            }
+
+            foreach (var item in _itemHistory)
+            {
+                var lotteryCount = item.Value.Count;
+                Debug.Log($"{item.Key}：{(float)(lotteryCount / (float)_rarityHistory[item.Value.Rarity]) * 100}");
+            }
+
+            Debug.Log("---------------------------------");
         }
 
         /// <summary>
