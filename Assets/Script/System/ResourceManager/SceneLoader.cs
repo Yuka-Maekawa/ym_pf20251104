@@ -10,7 +10,7 @@ namespace MyProject.Systems.Resource
         /// <summary>
         /// 初期化（非同期）
         /// </summary>
-        protected override async UniTask Initialize()
+        protected override async UniTask InitializeAsync()
         {
             await UniTask.CompletedTask;
             _sceneLoad = new Loader();

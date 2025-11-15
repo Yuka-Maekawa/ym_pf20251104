@@ -20,7 +20,7 @@ public class SystemManager
     /// </summary>
     private static async UniTask InitializeAsync()
     {
-        await GameSystem.CreateInstance();
+        await GameSystem.CreateInstanceAsync();
 
         await GameSystem.Instance.InitializeAsync();
 

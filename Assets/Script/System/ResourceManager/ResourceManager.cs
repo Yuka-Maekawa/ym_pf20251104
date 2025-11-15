@@ -18,7 +18,7 @@ namespace MyProject.Systems.Resource
         /// <summary>
         /// 初期化
         /// </summary>
-        protected override async UniTask Initialize()
+        protected override async UniTask InitializeAsync()
         {
             await Addressables.InitializeAsync(true).ToUniTask();
 
