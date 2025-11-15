@@ -8,8 +8,13 @@
 
 ▼デモ
 
-![Demo_Once](https://github.com/user-attachments/assets/36cb4e3b-002c-429d-b754-b1eeaf95cab8)
-![Demo_TenTime](https://github.com/user-attachments/assets/3e6e2534-a62a-4984-b725-7f7f0aace4e5)
+・ガチャ
+
+![Gacha](https://github.com/user-attachments/assets/d68c3f44-4b86-473f-9ce1-c1c7c3ac91fc)
+
+・ガチャシミュレーター
+
+![GachaSimulator](https://github.com/user-attachments/assets/76cb50da-294a-4d9f-ad9c-bbef593c08b7)
 
 ---
 
@@ -21,32 +26,25 @@
 | **バージョン管理** | Git / GitHub |
 | **Gitクライアント** | SourceTree |
 | **アセット管理** | Addressable Asset System |
+| **アニメーション** | DOTween |
 
-**使用理由：**  
-実務環境で使用しているツール構成に合わせ、業務との親和性を意識しました。
-
----
-
-## 開発体制
-| 項目 | 内容 |
-|------|------|
-| **開発人数** | 1人（個人開発） |
-| **担当範囲** | 企画 / 設計 / 実装 / デザイン調整 / テスト |
+**使用理由：**
+業務で使用している環境に近い形になるよう、
+バージョン管理やアセット管理などを行っております。
 
 ---
 
 ## 主な機能
-- ガチャ抽選ロジック（確率制御・レアリティ設定対応）  
+- ガチャ抽選ロジック
 - Addressableによる動的アセット読み込み  
-- ガチャ結果演出（簡易アニメーション付き）  
-- データ定義ファイルによる拡張性確保（ScriptableObject使用）  
+- DOTweenを使用したアニメーション  
+- CSVからScriptableObjectを生成
 
 ---
 
-
 ## 工夫した点
-- Addressableを用いた 軽量なアセット管理により、ビルドサイズ削減と柔軟なリソース更新を実現  
-- 実務同様に 開発環境を再現（Git運用、SourceTreeフロー）  
+- 実務同様に 開発環境を再現（Git運用、SourceTreeフロー）
+- Addressableを用いて軽量なアセット管理
 - 短期間でも読みやすいコード設計を意識し、可読性と保守性を重視  
 
 ---
@@ -93,12 +91,14 @@ Assets/
 │  │      ├─Launcher
 │  │      └─Test
 │  │          └─TestGacha
-│  └─System
-│      ├─Common
-│      ├─Editor
-│      │  └─Addressables
-│      ├─ObjectBase
-│      └─ResourceManager
+│  ├─System
+│  │  ├─Common
+│  │  ├─Editor
+│  │  │  └─Addressables
+│  │  ├─ObjectBase
+│  │  └─ResourceManager
+│  └─Tool
+│      └─GachaSimulator
 ├─Settings
 │  └─Build Profiles
 ├─TextMesh Pro
@@ -115,7 +115,9 @@ Assets/
     │  └─Gacha
     ├─Scene
     │  ├─Gacha
-    │  └─Test
+    │  ├─Test
+    │  └─Tool
+    │      └─GachaSimulator
     ├─System
     │  └─Prefab
     └─UI
@@ -126,21 +128,31 @@ Assets/
         │  └─GachaResult
         │      ├─Prefab
         │      └─Texture
-        └─Test
+        ├─Test
+        └─Tool
+            └─GachaSimulator
 ```
 
 ---
 
 ## 実行方法
+
+▼ガチャ
 1. Unity 6000.0.62f1 でPortfolioProjectを開く
 2. UnityEditorメニューにある MyProject → Build → Resource → Addressable(○○) を選択
 3. 2.完了後、同様にUnityEditorメニューにある MyProject → Build → ROM → Release を選択
 4.  個人のプロジェクトフォルダ\Builds\Releaseにある「Portfolio_○○_Release.exe」を実行
 
+▼ガチャシミュレーター
+1. Unity 6000.0.62f1 でPortfolioProjectを開く
+2. Assets/_Res/Scene/Tool/GachaSimulator/GachaSimulator.unity を起動
+3. UnityEditorを実行
+4. シミュレーションの設定を行い、スタートボタンを押す
+5. D:\"プロジェクト保存先"\Tool\GachaSimulator にシミュレーション結果が保存されています。
+
 ---
 
 ## 今後の拡張予定
 - リファクタリング
-- ラインナップ一覧
-- 獲得履歴・ログ機能の追加
+- Excelからデータベースを作成
 ---
