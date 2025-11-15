@@ -60,6 +60,7 @@ namespace MyProject.Tool.GachaSimulator
 
         private LotteryType _simulationLotteryType = LotteryType.Default;
 
+        private int _gachaInfoId = 0;
         private int _simulationNum = 0;
         private int _simulationCount = 0;
 
@@ -159,9 +160,9 @@ namespace MyProject.Tool.GachaSimulator
         /// </summary>
         private async UniTask StateSetupSimulationAsync()
         {
-            var id = _menuController.GetSimulationId();
+            _gachaInfoId = _menuController.GetSimulationId();
 
-            if(id < 0)
+            if(_gachaInfoId < 0)
             {
                 Debug.LogError("正しい数値が入力されていません");
                 _stateMachine.MoveState(State.Home);
@@ -172,12 +173,12 @@ namespace MyProject.Tool.GachaSimulator
 
             if (_simulationLotteryType == LotteryType.Default)
             {
-                await _gachaOnceLottery.InitializeAsync(id);
+                await _gachaOnceLottery.InitializeAsync(_gachaInfoId);
                 _stateMachine.MoveState(State.DefaultSimulation);
                 return;
             }
 
-            await _gachaTenTimesLottery.InitializeAsync(id);
+            await _gachaTenTimesLottery.InitializeAsync(_gachaInfoId);
             _stateMachine.MoveState(State.TenTimesSimulation);
         }
 
@@ -245,7 +246,7 @@ namespace MyProject.Tool.GachaSimulator
         {
             if(_stateMachine.FirstTime)
             {
-                _fileController.WriteSimulationResult(_rarityHistory, _itemHistory, _simulationNum);
+                _fileController.WriteSimulationResult(_rarityHistory, _itemHistory, _simulationLotteryType, _simulationNum, _gachaInfoId);
                 _progressGage.Hide();
 
                 _stateMachine.MoveState(State.Home);
