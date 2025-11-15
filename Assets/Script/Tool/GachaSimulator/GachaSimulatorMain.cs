@@ -16,6 +16,7 @@ namespace MyProject.Tool.GachaSimulator
             SetupSimulation,
             DefaultSimulation,
             TenTimesSimulation,
+            WriteCsv,
         }
 
         public enum LotteryType
@@ -27,15 +28,18 @@ namespace MyProject.Tool.GachaSimulator
         public class SimulationInfo
         {
             public GachaRarityLottery.Rarity Rarity = GachaRarityLottery.Rarity.Rare;
+            public int Id;
             public int Count = 0;
 
             /// <summary>
             /// コンストラクタ
             /// </summary>
             /// <param name="rarity">レアリティ</param>
-            public SimulationInfo(GachaRarityLottery.Rarity rarity)
+            /// <param name="id">Id</param>
+            public SimulationInfo(GachaRarityLottery.Rarity rarity, int id)
             {
                 Rarity = rarity;
+                Id = id;
                 Count = 1;
             }
         }
@@ -44,6 +48,7 @@ namespace MyProject.Tool.GachaSimulator
 
         private GachaLotteryControllerBase _gachaOnceLottery = null;
         private GachaLotteryMultipleTimeController _gachaTenTimesLottery = null;
+        private GachaSimulatiorFileController _fileController = null;
 
         private GachaLotteryControllerBase.ItemInfo[] _items = null;
 
@@ -66,11 +71,13 @@ namespace MyProject.Tool.GachaSimulator
 
             _gachaOnceLottery = new GachaLotteryControllerBase();
             _gachaTenTimesLottery = new GachaLotteryMultipleTimeController();
+            _fileController = new GachaSimulatiorFileController();
 
             _stateMachine = new StateMachine<State>(State.Idle);
             _stateMachine.AddState(State.SetupSimulation, StateSetupSimulation);
             _stateMachine.AddState(State.DefaultSimulation, StateDefaultSimulation);
             _stateMachine.AddState(State.TenTimesSimulation, StateTenTimeSimulation);
+            _stateMachine.AddState(State.WriteCsv, StateWriteCsv);
 
             InitializeAsync().Forget();
         }
@@ -98,6 +105,8 @@ namespace MyProject.Tool.GachaSimulator
 
             _gachaOnceLottery.Release();
             _gachaOnceLottery = null;
+
+            _fileController = null;
 
             _menuController.Release();
         }
@@ -220,8 +229,18 @@ namespace MyProject.Tool.GachaSimulator
                     _gachaTenTimesLottery.Release();
                 }
 
-                ResultLottery();
+                _stateMachine.MoveState(State.WriteCsv);
+            }
+        }
 
+        /// <summary>
+        /// ステート：シミュレーション結果をCSV出力
+        /// </summary>
+        private void StateWriteCsv()
+        {
+            if(_stateMachine.FirstTime)
+            {
+                _fileController.WriteSimulationResult(_rarityHistory, _itemHistory, _simulationNum);
                 _stateMachine.MoveState(State.Home);
             }
         }
@@ -234,6 +253,12 @@ namespace MyProject.Tool.GachaSimulator
             ResetSimulation();
 
             _rarityHistory = new Dictionary<GachaRarityLottery.Rarity, int>(_simulationNum);
+            int num = System.Enum.GetValues(typeof(GachaRarityLottery.Rarity)).Length;
+            for (int i = 0; i < num; ++i)
+            {
+                _rarityHistory.Add((GachaRarityLottery.Rarity)i, 0);
+            }
+
             _itemHistory = new Dictionary<string, SimulationInfo>(_simulationNum);
             _items = new GachaLotteryControllerBase.ItemInfo[_simulationNum];
         }
@@ -252,7 +277,7 @@ namespace MyProject.Tool.GachaSimulator
                 return;
             }
 
-            _itemHistory.Add(name, new SimulationInfo(itemInfo.Rarity));
+            _itemHistory.Add(name, new SimulationInfo(itemInfo.Rarity, itemInfo.Item.Id));
         }
 
         /// <summary>
@@ -268,29 +293,6 @@ namespace MyProject.Tool.GachaSimulator
             }
 
             _rarityHistory.Add(rarity, 1);
-        }
-
-        /// <summary>
-        ///  抽選結果
-        /// </summary>
-        private void ResultLottery()
-        {
-            Debug.Log("シミュレーションが完了しました");
-            Debug.Log("-- シミュレーション結果 --");
-
-            foreach (var item in _rarityHistory)
-            {
-                var lotteryCount = item.Value;
-                Debug.Log($"{item.Key}：{(float)(lotteryCount / (float)_simulationNum) * 100}");
-            }
-
-            foreach (var item in _itemHistory)
-            {
-                var lotteryCount = item.Value.Count;
-                Debug.Log($"{item.Key}：{(float)(lotteryCount / (float)_rarityHistory[item.Value.Rarity]) * 100}");
-            }
-
-            Debug.Log("---------------------------------");
         }
 
         /// <summary>
