@@ -13,11 +13,9 @@ namespace MyProject.Tool.GachaSimulator
         {
             Idle,
             Home,
-            InputPlayCount,
-            InputGachaType,
+            SetupSimulation,
             DefaultSimulation,
             TenTimesSimulation,
-            WriteFile
         }
 
         public enum LotteryType
@@ -42,11 +40,7 @@ namespace MyProject.Tool.GachaSimulator
             }
         }
 
-        // 今は定数ですが、今後UIから情報を取得する予定
-        private static readonly int _id = 1;
-        private static readonly int _playCount = 1000;
-        private static LotteryType _lotteryType = LotteryType.Default;
-        //
+        [SerializeField] private GachaSimulatorMenuController _menuController = null;
 
         private GachaLotteryControllerBase _gachaOnceLottery = null;
         private GachaLotteryMultipleTimeController _gachaTenTimesLottery = null;
@@ -58,6 +52,9 @@ namespace MyProject.Tool.GachaSimulator
 
         private StateMachine<State> _stateMachine = null;
 
+        private LotteryType _simulationLotteryType = LotteryType.Default;
+
+        private int _simulationNum = 0;
         private int _simulationCount = 0;
 
         /// <summary>
@@ -65,10 +62,13 @@ namespace MyProject.Tool.GachaSimulator
         /// </summary>
         public void Initialize()
         {
+            _menuController.Initialize();
+
             _gachaOnceLottery = new GachaLotteryControllerBase();
+            _gachaTenTimesLottery = new GachaLotteryMultipleTimeController();
 
             _stateMachine = new StateMachine<State>(State.Idle);
-            _stateMachine.AddState(State.Home, StateHome);
+            _stateMachine.AddState(State.SetupSimulation, StateSetupSimulation);
             _stateMachine.AddState(State.DefaultSimulation, StateDefaultSimulation);
             _stateMachine.AddState(State.TenTimesSimulation, StateTenTimeSimulation);
 
@@ -80,8 +80,6 @@ namespace MyProject.Tool.GachaSimulator
         /// </summary>
         public async UniTask InitializeAsync()
         {
-            await _gachaOnceLottery.InitializeAsync(_id);
-
             await FadeManager.Fade.PlayFadeInAsync();
             _stateMachine.MoveState(State.Home);
         }
@@ -95,8 +93,13 @@ namespace MyProject.Tool.GachaSimulator
 
             _stateMachine = null;
 
+            _gachaTenTimesLottery.Release();
+            _gachaTenTimesLottery = null;
+
             _gachaOnceLottery.Release();
             _gachaOnceLottery = null;
+
+            _menuController.Release();
         }
 
         /// <summary>
@@ -121,11 +124,49 @@ namespace MyProject.Tool.GachaSimulator
         }
 
         /// <summary>
-        /// ステート：ホーム
+        /// ステート：シミュレーションの準備
         /// </summary>
-        private void StateHome()
+        private void StateSetupSimulation()
         {
+            if(_stateMachine.FirstTime)
+            {
+                _simulationNum = _menuController.GetSimulationCount();
+                if(_simulationNum <= 0)
+                {
+                    Debug.LogError("回数は1以上を登録してください");
+                    _stateMachine.MoveState(State.Home);
+                    return;
+                }
 
+                StateSetupSimulationAsync().Forget();
+            }
+        }
+
+        /// <summary>
+        /// シミュレーションの準備の非同期処理
+        /// </summary>
+        private async UniTask StateSetupSimulationAsync()
+        {
+            var id = _menuController.GetSimulationId();
+
+            if(id < 0)
+            {
+                Debug.LogError("正しい数値が入力されていません");
+                _stateMachine.MoveState(State.Home);
+                return;
+            }
+
+            _simulationLotteryType = _menuController.GetSelectLotteryType();
+
+            if (_simulationLotteryType == LotteryType.Default)
+            {
+                await _gachaOnceLottery.InitializeAsync(id);
+                _stateMachine.MoveState(State.DefaultSimulation);
+                return;
+            }
+
+            await _gachaTenTimesLottery.InitializeAsync(id);
+            _stateMachine.MoveState(State.TenTimesSimulation);
         }
 
         /// <summary>
@@ -138,19 +179,7 @@ namespace MyProject.Tool.GachaSimulator
                 StartupSimulation();
             }
 
-            var resultItem = _gachaOnceLottery.GetDefaultLotteryResult();
-
-            CountupGachaItemHistory(resultItem);
-            CountupGachaItemHistory(resultItem.Rarity);
-            _items[_simulationCount] = resultItem;
-
-            ++_simulationCount;
-
-            if (_simulationCount >= _playCount)
-            {
-                ResultLottery();
-                _stateMachine.MoveState(State.Home);
-            }
+            Simulation(_gachaOnceLottery.GetDefaultLotteryResult());
         }
 
         /// <summary>
@@ -163,18 +192,36 @@ namespace MyProject.Tool.GachaSimulator
                 StartupSimulation();
             }
 
-            var item = _gachaTenTimesLottery.GetDefaultLotteryResult();
-            
-            CountupGachaItemHistory(item);
-            CountupGachaItemHistory(item.Rarity);
-            _items[_simulationCount] = item;
+            Simulation(_gachaTenTimesLottery.GetLastLotteryResult());
+        }
+
+        /// <summary>
+        /// シミュレーション
+        /// </summary>
+        /// <param name="itemInfo">抽選結果</param>
+        private void Simulation(GachaLotteryControllerBase.ItemInfo itemInfo)
+        {
+            CountupGachaItemHistory(itemInfo);
+            CountupGachaItemHistory(itemInfo.Rarity);
+            _items[_simulationCount] = itemInfo;
 
             ++_simulationCount;
 
-            if (_simulationCount >= _playCount)
+            if (_simulationCount >= _simulationNum)
             {
                 Debug.Log("シミュレーションが完了しました");
+
+                if(_simulationLotteryType == LotteryType.Default)
+                {
+                    _gachaOnceLottery.Release();
+                }
+                else
+                {
+                    _gachaTenTimesLottery.Release();
+                }
+
                 ResultLottery();
+
                 _stateMachine.MoveState(State.Home);
             }
         }
@@ -186,9 +233,9 @@ namespace MyProject.Tool.GachaSimulator
         {
             ResetSimulation();
 
-            _rarityHistory = new Dictionary<GachaRarityLottery.Rarity, int>(_playCount);
-            _itemHistory = new Dictionary<string, SimulationInfo>(_playCount);
-            _items = new GachaLotteryControllerBase.ItemInfo[_playCount];
+            _rarityHistory = new Dictionary<GachaRarityLottery.Rarity, int>(_simulationNum);
+            _itemHistory = new Dictionary<string, SimulationInfo>(_simulationNum);
+            _items = new GachaLotteryControllerBase.ItemInfo[_simulationNum];
         }
 
         /// <summary>
@@ -234,7 +281,7 @@ namespace MyProject.Tool.GachaSimulator
             foreach (var item in _rarityHistory)
             {
                 var lotteryCount = item.Value;
-                Debug.Log($"{item.Key}：{(float)(lotteryCount / (float)_playCount) * 100}");
+                Debug.Log($"{item.Key}：{(float)(lotteryCount / (float)_simulationNum) * 100}");
             }
 
             foreach (var item in _itemHistory)
@@ -253,7 +300,29 @@ namespace MyProject.Tool.GachaSimulator
         {
             if(_stateMachine.Current == State.Home)
             {
-                _stateMachine.MoveState(_lotteryType == LotteryType.Default ? State.DefaultSimulation : State.TenTimesSimulation);
+                _stateMachine.MoveState(State.SetupSimulation);
+            }
+        }
+
+        /// <summary>
+        /// 抽選の種類を選択するボタンを押下(左)
+        /// </summary>
+        public void PushLotteryTypeSelectLeftButton()
+        {
+            if (_stateMachine.Current == State.Home)
+            {
+                _menuController.PushSimulationTypeLeftButton();
+            }
+        }
+
+        /// <summary>
+        /// 抽選の種類を選択するボタンを押下(右)
+        /// </summary>
+        public void PushLotteryTypeSelectRightButton()
+        {
+            if (_stateMachine.Current == State.Home)
+            {
+                _menuController.PushSimulationTypeRightButton();
             }
         }
     }
