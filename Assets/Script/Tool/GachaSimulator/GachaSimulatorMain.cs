@@ -45,6 +45,7 @@ namespace MyProject.Tool.GachaSimulator
         }
 
         [SerializeField] private GachaSimulatorMenuController _menuController = null;
+        [SerializeField] private GachaSimulatiorProgressGage _progressGage = null;
 
         private GachaLotteryControllerBase _gachaOnceLottery = null;
         private GachaLotteryMultipleTimeController _gachaTenTimesLottery = null;
@@ -68,6 +69,7 @@ namespace MyProject.Tool.GachaSimulator
         public void Initialize()
         {
             _menuController.Initialize();
+            _progressGage.Initialize();
 
             _gachaOnceLottery = new GachaLotteryControllerBase();
             _gachaTenTimesLottery = new GachaLotteryMultipleTimeController();
@@ -147,6 +149,7 @@ namespace MyProject.Tool.GachaSimulator
                     return;
                 }
 
+                _progressGage.View(_simulationNum);
                 StateSetupSimulationAsync().Forget();
             }
         }
@@ -216,9 +219,11 @@ namespace MyProject.Tool.GachaSimulator
 
             ++_simulationCount;
 
+            // ゲージ更新
+            _progressGage.UpdateProgress(_simulationCount);
+
             if (_simulationCount >= _simulationNum)
             {
-                Debug.Log("シミュレーションが完了しました");
 
                 if(_simulationLotteryType == LotteryType.Default)
                 {
@@ -241,7 +246,11 @@ namespace MyProject.Tool.GachaSimulator
             if(_stateMachine.FirstTime)
             {
                 _fileController.WriteSimulationResult(_rarityHistory, _itemHistory, _simulationNum);
+                _progressGage.Hide();
+
                 _stateMachine.MoveState(State.Home);
+
+                Debug.Log("シミュレーションが完了しました");
             }
         }
 
