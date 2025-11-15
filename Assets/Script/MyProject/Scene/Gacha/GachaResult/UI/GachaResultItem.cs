@@ -142,7 +142,7 @@ namespace MyProject.Gacha.Result
         /// <summary>
         /// サムネイル設定
         /// </summary>
-        /// <param name="texture"></param>
+        /// <param name="texture">テクスチャー</param>
         public void SetThumbnail(Texture texture)
         {
             _thumbnailImage.texture = texture;

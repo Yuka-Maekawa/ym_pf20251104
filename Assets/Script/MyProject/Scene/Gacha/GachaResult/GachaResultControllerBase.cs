@@ -116,5 +116,16 @@ namespace MyProject.Gacha.Result
         {
             await SceneLoader.SceneLoad.LoadSceneAsync(_backScenePath);
         }
+
+        /// <summary>
+        /// 抽選ステートの非同期処理
+        /// </summary>
+        protected async UniTask StateLotteryAsync()
+        {
+            for (int i = 0; i < _playCount; ++i)
+            {
+                await _uIController.SetupItemsAsync(_items[i], i);
+            }
+        }
     }
 }

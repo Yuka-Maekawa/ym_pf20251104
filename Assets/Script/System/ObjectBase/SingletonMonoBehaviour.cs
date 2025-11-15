@@ -16,13 +16,13 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : SingletonMonoBe
         }
     }
 
-    protected virtual UniTask Initialize() => UniTask.CompletedTask;
+    protected virtual UniTask InitializeAsync() => UniTask.CompletedTask;
 
     /// <summary>
     /// インスタンスを作成
     /// </summary>
     /// <param name="parent">親オブジェクト</param>
-    public static async UniTask<T> CreateInstance(GameObject parent = null)
+    public static async UniTask<T> CreateInstanceAsync(GameObject parent = null)
     {
         Instance = new GameObject(typeof(T).Name).AddComponent<T>();
 
@@ -31,7 +31,7 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : SingletonMonoBe
             Instance.transform.SetParent(parent.transform, false);
         }
 
-        await Instance.Initialize();
+        await Instance.InitializeAsync();
 
         return Instance;
     }

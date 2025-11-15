@@ -115,7 +115,7 @@ public class BuildHelper
     /// <summary>
     /// 全てのログの記録方法を設定
     /// </summary>
-    /// <param name="logType"></param>
+    /// <param name="logType">StackTraceLogType</param>
     public static void SetPlayerSettingLoggingAll(StackTraceLogType logType)
     {
         PlayerSettings.SetStackTraceLogType(LogType.Error, logType);

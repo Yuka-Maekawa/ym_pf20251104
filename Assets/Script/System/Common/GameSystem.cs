@@ -16,9 +16,9 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
     {
         DontDestroyOnLoad(this.gameObject);
 
-        await ResourceManager.CreateInstance(this.gameObject);
-        await FadeManager.CreateInstance(this.gameObject);
-        await SceneLoader.CreateInstance(this.gameObject);
+        await ResourceManager.CreateInstanceAsync(this.gameObject);
+        await FadeManager.CreateInstanceAsync(this.gameObject);
+        await SceneLoader.CreateInstanceAsync(this.gameObject);
 
         await ResourceManager.Global.LoadAssetAsync<GameObject>(_eventSystemFilePath);
         _eventSystemObj = ResourceManager.Global.GetAsset<GameObject>(_eventSystemFilePath, this.gameObject.transform);
