@@ -1,13 +1,13 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class ExitButton : MonoBehaviour
 {
     /// <summary>
-    /// ƒQ[ƒ€I—¹ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½
+    /// ã‚²ãƒ¼ãƒ çµ‚äº†ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸ
     /// </summary>
     public void PushExitButton()
     {
-        //ƒQ[ƒ€I—¹
+        //ã‚²ãƒ¼ãƒ çµ‚äº†
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else

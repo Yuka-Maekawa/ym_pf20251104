@@ -65,7 +65,7 @@ namespace MyProject.Tool.GachaSimulator
         /// <summary>
         /// テキスト設定
         /// </summary>
-        /// <param name="text"></param>
+        /// <param name="text">テキスト</param>
         private void SetText(string text)
         {
             _progressText.SetText(text);

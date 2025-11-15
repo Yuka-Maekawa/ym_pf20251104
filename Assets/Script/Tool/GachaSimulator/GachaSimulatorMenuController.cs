@@ -69,7 +69,7 @@ namespace MyProject.Tool.GachaSimulator
         /// <summary>
         /// すべてのテキストをリセット
         /// </summary>
-        /// <param name="text"></param>
+        /// <param name="text">テキスト</param>
         private void ResetAllText(string text)
         {
             _simulationIdText.SetText(text);

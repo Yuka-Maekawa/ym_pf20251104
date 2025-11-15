@@ -40,12 +40,14 @@ namespace MyProject.Tool.GachaSimulator
             {
                 Rarity = rarity;
                 Id = id;
-                Count = 1;
+                Count = _startCount;
             }
         }
 
         [SerializeField] private GachaSimulatorMenuController _menuController = null;
         [SerializeField] private GachaSimulatiorProgressGage _progressGage = null;
+
+        private static readonly int _startCount = 1;
 
         private GachaLotteryControllerBase _gachaOnceLottery = null;
         private GachaLotteryMultipleTimeController _gachaTenTimesLottery = null;
@@ -225,7 +227,6 @@ namespace MyProject.Tool.GachaSimulator
 
             if (_simulationCount >= _simulationNum)
             {
-
                 if(_simulationLotteryType == LotteryType.Default)
                 {
                     _gachaOnceLottery.Release();
@@ -302,7 +303,7 @@ namespace MyProject.Tool.GachaSimulator
                 return;
             }
 
-            _rarityHistory.Add(rarity, 1);
+            _rarityHistory.Add(rarity, _startCount);
         }
 
         /// <summary>
